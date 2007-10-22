@@ -8,6 +8,7 @@ package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.plot.FunctionPlot;
+import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 
 /**
  * A friendly wrapper of GNUPlot, able to set common plot parameters. If easy of use
@@ -23,7 +24,12 @@ public class JavaPlot extends GNUPlot {
     public JavaPlot(String gnuplotpath) throws GNUPlotException {
         super(gnuplotpath);
     }
-    
+    public JavaPlot(GNUPlotParameters par) throws GNUPlotException {
+        super(par);
+    }
+    public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term) throws GNUPlotException {
+        super(par, gnuplotpath, term);
+    }
     /**
      * Set the graph Title
      * @param title Title of the graph
@@ -60,7 +66,7 @@ public class JavaPlot extends GNUPlot {
         set("pointsize", String.valueOf(size));
     }
     
-    public void setKey (Key position) {
+    public void setKey(Key position) {
         set("key", position.name().replace('_',' ').toLowerCase());
     }
     

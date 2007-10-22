@@ -17,8 +17,25 @@ public class PostscriptTerminal extends FileTerminal {
     
     public PostscriptTerminal(String filename) {
         super("postscript", filename);
-        set("color");
-        set("eps");
+        setColor(true);
+        setEPS(true);
+    }
+    
+    public void setEPS(boolean eps) {
+        if (eps)
+            set("eps");
+        else
+            unset("eps");
+    }
+    
+    public void setColor(boolean color) {
+        if (color)  {
+            set("color");
+            unset("monochrome");
+        } else {
+            set("monochrome");
+            unset("color");
+        }
     }
        
 }

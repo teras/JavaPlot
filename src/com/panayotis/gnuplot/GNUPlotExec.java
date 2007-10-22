@@ -49,20 +49,13 @@ class GNUPlotExec {
     }
     
     
-    String message = null;
-    String error = "";
-    public void setM(String g) {
-        if (message==null) message = g;
-        else message +='\n'+g;
-    }
-    public void setE(String e) {
-        error = e;
-    }
-    synchronized void plot(GNUPlotParameters par, GNUPlotTerminal terminal) throws GNUPlotException {
+    void plot(GNUPlotParameters par, GNUPlotTerminal terminal) throws GNUPlotException {
         try {
             final GNUPlotTerminal term = terminal;  // Use this thread-aware variable instead of "terminal"
-            final String comms = par.getPlotCommands(term);
+            final String comms = par.getPlotCommands(term); // Get the commands to send to gnuplot
+            final Messages msg = new Messages();    // Where to store messages from output threads
             
+            /* Display plot commands to send to gnuplot */
             GNUPlot.getDebugger().msg("** Start of plot commands **", Debug.INFO);
             GNUPlot.getDebugger().msg(comms, Debug.INFO);
             GNUPlot.getDebugger().msg("** End of plot commands **", Debug.INFO);
@@ -71,46 +64,47 @@ class GNUPlotExec {
             String [] command = { getGNUPlotPath() };
             final Process proc = Runtime.getRuntime().exec(command);
             
-            
-            
-            final StringBuffer er = new StringBuffer();
-            final StringBuffer ou = new StringBuffer();
-            
             /* Windows buffers DEMAND asynchronus read & write */
+            
+            /* Thread to process the STDERR of gnuplot */
             Thread err_thread = new Thread() {
                 public void run() {
                     BufferedReader err = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+                    StringBuffer buf = new StringBuffer();
                     String line;
                     try {
                         while ( (line=err.readLine())!=null ) {
-                            if (line.indexOf("gnuplot>")>=0)
-                                line="";
-                            line = line.replace("input data ('e' ends) >","").trim();
-                            if (!line.equals("")) {
-                                er.append(line).append('\n');
+                            if (line.indexOf("gnuplot>")>=0) line="";   // Remove lines containing the "gnuplot>" prompt
+                            line = line.replace("input data ('e' ends) >","").trim();   // Remove entries having the "input data" prompt
+                            if (line.equals("^")) line="";  // Ignore line with error pointer
+                            if (!line.equals("")) {     // Only take care of not empty lines
                                 if (line.indexOf(GNUPlotParameters.ERRORTAG)>=0) {
-                                    setE(er.toString());
-                                    setM("Error while parsing \'plot\' arguments.");
+                                    msg.error = "Error while parsing \'plot\' arguments.";    // Error was found in plot command
                                     break;
                                 }
-                                if (line.indexOf(GNUPlotParameters.SUCCESSTAG)>=0)
-                                    break;
+                                if (line.indexOf(GNUPlotParameters.SUCCESSTAG)>=0) {
+                                    break;               // Everything ok
+                                }
+                                buf.append(line).append('\n');
                             }
                         }
                         err.close();
+                        msg.output = buf.toString(); // Store output stream
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                 }
             };
+            /* Thread to process the STDOUT of gnuplot */
             err_thread.start();
             Thread out_thread = new Thread() {
                 public void run() {
-                    setM(term.processOutput(proc.getInputStream()));
+                    msg.process = term.processOutput(proc.getInputStream());    // Execute terminal specific output parsing
                 }
             };
             out_thread.start();
-            /* We utilize the current thread */
+            
+            /* We utilize the current thread for gnuplot execution */
             OutputStreamWriter out = new OutputStreamWriter(proc.getOutputStream());
             out.write(comms);
             out.flush();
@@ -118,20 +112,26 @@ class GNUPlotExec {
             
             
             try {
-                proc.waitFor();
-                err_thread.join();
-                out_thread.join();
+                proc.waitFor(); // wait for process to finish
+                err_thread.join();  // wait for error (messages) output to finish
+                out_thread.join();  // wait for output (terminal related) thread to finish
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
+                throw new GNUPlotException ("Interrupted execution of gnuplot");
             }
             
+            /* Find the error message, if any, with precendence to the error thread */
+            String message = null;
+            if (msg.error!=null) message = msg.error;
+            else message = msg.process;
+            
+            /* Determine if error stream should be dumbed or not */
             int level = Debug.VERBOSE;
-            if (message!=null && message.equals("")) message = null;
             if (message!=null) level = Debug.ERROR;
             GNUPlot.getDebugger().msg("** Start of error stream **", level);
-            GNUPlot.getDebugger().msg(error, level);
+            GNUPlot.getDebugger().msg(msg.output, level);
             GNUPlot.getDebugger().msg("** End of error stream **", level);
             
+            /* Throw an exception if an error occured */
             if (message!=null) throw new GNUPlotException(message);
             
         } catch (IOException ex) {
@@ -140,4 +140,9 @@ class GNUPlotExec {
         
     }
     
+    private class Messages {
+        String output = "";
+        String error = null;
+        String process = null;
+    }
 }

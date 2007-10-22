@@ -49,19 +49,21 @@ public class test extends JFrame {
         fp.set("with", "points");
         p.addPlot(fp);
         
-     //   png.set("large");
+        //   png.set("large");
         
         //   p.plot();
-        p.setTerminal(png);
+        p.setTerminal(eps);
+        eps.setColor(true);
+        eps.setEPS(false);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
-   //     try {
-             p.addPlot("sin(x*x)-cos(sqrt(x))");
-            p.plot();
-    //    } catch (GNUPlotException ex) {
-      //      System.out.println("Unable to create image file. Exiting.");
-      //      System.exit(1);
-      //  }
+        //     try {
+        p.addPlot("sin(x*x)-cos(sqrt(x))");
+        p.plot();
+        //    } catch (GNUPlotException ex) {
+        //      System.out.println("Unable to create image file. Exiting.");
+        //      System.exit(1);
+        //  }
         
         BufferedImage img = png.getImage();
         test f = new test(img);

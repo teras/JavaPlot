@@ -30,15 +30,15 @@ public class Debug {
     /**
      * Only errors and critical information is presented
      */
-    public final static int ERROR = 40;
+    public final static int ERROR = 20;
     /**
      * Warnings, as well as errors and critical information is presented
      */
-    public final static int WARNING = 20;
+    public final static int WARNING = 30;
     /**
      * All messages except verbose messages are presented
      */
-    public final static int INFO = 30;
+    public final static int INFO = 40;
     /**
      * All messages are presented
      */
