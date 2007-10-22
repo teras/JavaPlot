@@ -30,13 +30,13 @@ public class Axis extends PropertiesHolder {
     }
     
     public void setLogScale(boolean log) {
-        if (log) 
+        if (log)
             set("logscale", getName());
         else
             unset("logscale");
     }
     
-   
+    
     public void setLabel(String label) {
         setLabel(label, null, -1);
     }
@@ -54,5 +54,26 @@ public class Axis extends PropertiesHolder {
         }
         set(getName()+"label", "'"+label+"'"+fontname);
     }
+    
+    /**
+     * Define the area to plot.
+     * <br>
+     * Note that if we have choosed log scale, then the values should be guaranteed to be
+     * larger than zero. If the axis is in log scale, do not set a value less than zero
+     * or else a plot error will occure.
+     * @param from The minimum value
+     * @param to The maximum value
+     */
+    public void setBoundaries(double from, double to) {
+        if (from==Double.POSITIVE_INFINITY || from==Double.NEGATIVE_INFINITY || from==Double.MAX_VALUE || from==Double.MIN_VALUE) return;
+        if (to==Double.POSITIVE_INFINITY || to==Double.NEGATIVE_INFINITY || to==Double.MAX_VALUE || to==Double.MIN_VALUE) return;
+        if (to<from) {
+            double swap = to;
+            to = from;
+            from = swap;
+        }
+        set(getName()+"range", "["+from+":"+to+"]");
+    }
+    
     
 }

@@ -39,20 +39,21 @@ public class test extends JFrame {
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
         
-        p.setBoundaries(1, 100);
+        p.getAxis("x").setBoundaries(1, 100);
+        //   p.getAxis("y").setBoundaries(1, 2);
         p.setKey(JavaPlot.Key.TOP_RIGHT);
         
         double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         p.addPlot(plot);
         
-        FunctionPlot fp = new FunctionPlot("0");
-        fp.set("with", "points");
+        FunctionPlot fp = new FunctionPlot("x");
+        fp.set("with", "linespoints");
         p.addPlot(fp);
         
         //   png.set("large");
         
         //   p.plot();
-        p.setTerminal(eps);
+        p.setTerminal(png);
         eps.setColor(true);
         eps.setEPS(false);
         //      p.setPointSize(4);

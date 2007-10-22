@@ -39,26 +39,6 @@ public class JavaPlot extends GNUPlot {
     }
     
     /**
-     * Define the area to plot.
-     * <br>
-     * Note that if we have choosed log scale, then the X axis will be guaranteed to be
-     * larger than zero. If the X axis is in log scale, do not set a value less than zero
-     * or else a plot error will occure.
-     * @param from The minimum X value
-     * @param to The maximum X value
-     */
-    public void setBoundaries(double from, double to) {
-        if (from==Double.POSITIVE_INFINITY || from==Double.NEGATIVE_INFINITY || from==Double.MAX_VALUE || from==Double.MIN_VALUE) return;
-        if (to==Double.POSITIVE_INFINITY || to==Double.NEGATIVE_INFINITY || to==Double.MAX_VALUE || to==Double.MIN_VALUE) return;
-        if (to<from) {
-            double swap = to;
-            to = from;
-            from = swap;
-        }
-        set("xran", "["+from+":"+to+"]");
-    }
-    
-    /**
      * Set the size of the drawing points
      * @param size Size of the point
      */
