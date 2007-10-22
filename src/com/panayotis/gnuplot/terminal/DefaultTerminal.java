@@ -37,7 +37,8 @@ public class DefaultTerminal implements GNUPlotTerminal {
      * No processing is performed. The plot is displayed in the default output.
      * @param stdout The output of GNUPlot. Not processed.
      */
-    public void processOutput(InputStream stdout) {
+    public String processOutput(InputStream stdout) {
+        return null;
     }
 
 }

@@ -47,6 +47,6 @@ public class FileTerminal extends ExpandableTerminal {
      *
      * @param stdout
      */
-    public void processOutput(InputStream stdout) { }
+    public String processOutput(InputStream stdout) { return null; }
     
 }

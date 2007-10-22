@@ -26,15 +26,14 @@ public class ImageTerminal extends FileTerminal {
         super("png");
     }
     
-    public void processOutput(InputStream stdout) throws GNUPlotException {
+    public String processOutput(InputStream stdout) {
         try {
             img = ImageIO.read(stdout);
         } catch (IOException ex) {
             throw new GNUPlotException ("Unable to create PNG image: "+ex.getMessage());
         }
-        if (img==null) {
-            throw new GNUPlotException("Unable to create image from the gnuplot output. Null image created.");
-        }
+        if (img==null) return "Unable to create image from the gnuplot output. Null image created.";
+        return null;
     }
     
     public BufferedImage getImage() {

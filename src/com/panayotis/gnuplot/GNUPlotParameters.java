@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 public class GNUPlotParameters extends PropertiesHolder implements Serializable {
     
     final static String ERRORTAG = "_ERROR_";
+    final static String SUCCESSTAG = "_SUCCESS_";
     
     private ArrayList<Plot> plots;
     private HashMap<String,Axis> axis;
@@ -114,6 +115,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         
         /* Print error check */
         bf.append("if (_gnuplot_error == 1) print '").append(ERRORTAG).append('\'').append(NL);
+        bf.append("if (_gnuplot_error == 0) print '").append(SUCCESSTAG).append('\'').append(NL);
         
         /* Finish! */
         bf.append("quit").append(NL);

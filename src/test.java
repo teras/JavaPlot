@@ -45,24 +45,23 @@ public class test extends JFrame {
         double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         p.addPlot(plot);
         
-        // p.addPlot("sin(x*x)-cos(sqrt(x))");
         FunctionPlot fp = new FunctionPlot("0");
         fp.set("with", "points");
         p.addPlot(fp);
         
-        png.set("large");
+     //   png.set("large");
         
-        //   p.setTerminal(png);
         //   p.plot();
-        p.setTerminal(eps);
+        p.setTerminal(png);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
-        try {
+   //     try {
+             p.addPlot("sin(x*x)-cos(sqrt(x))");
             p.plot();
-        } catch (GNUPlotException ex) {
-            System.out.println("Unable to create image file. Exiting.");
-            System.exit(1);
-        }
+    //    } catch (GNUPlotException ex) {
+      //      System.out.println("Unable to create image file. Exiting.");
+      //      System.exit(1);
+      //  }
         
         BufferedImage img = png.getImage();
         test f = new test(img);

@@ -74,6 +74,8 @@ public class Debug {
      * the message is not displayed.
      */
     public void msg(String message, int level) {
+        if (message==null||message.equals(""))
+            return;
         if (level>QUIET && level<=this.level) {
             try {
                 out.write(message);

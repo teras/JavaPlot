@@ -36,6 +36,7 @@ public interface GNUPlotTerminal {
      * filename is given, then by default the plot will be dumped to output.
      * @param stdout The output stream of GNUPlot. Note that since it is required to read from this stream, 
      * it is given as InputStream.
+     * @return The definition of the error, if something went wrong. If everything is OK, it is necessary to return null.
      */
-    public void processOutput(InputStream stdout) throws GNUPlotException ;
+    public String processOutput(InputStream stdout);
 }
