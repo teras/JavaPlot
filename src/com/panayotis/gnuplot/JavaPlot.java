@@ -17,6 +17,12 @@ import com.panayotis.gnuplot.plot.FunctionPlot;
 public class JavaPlot extends GNUPlot {
     
     
+    public JavaPlot() throws GNUPlotException {
+        super();
+    }
+    public JavaPlot(String gnuplotpath) throws GNUPlotException {
+        super(gnuplotpath);
+    }
     
     /**
      * Set the graph Title

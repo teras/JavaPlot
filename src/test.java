@@ -22,13 +22,16 @@ public class test extends JFrame {
     
     public static void main(String [] args) {
         
+        String gnuplotpath = null;
+        if (args.length>0) gnuplotpath = args[0];
+        
         ImageTerminal png = new ImageTerminal();
         PostscriptTerminal eps = new PostscriptTerminal(System.getProperty("user.home")+
                 System.getProperty("file.separator")+"output.eps");
         FileTerminal svg = new FileTerminal("svg", System.getProperty("user.home")+
                 System.getProperty("file.separator")+"output.svg");
         
-        JavaPlot p = new JavaPlot();
+        JavaPlot p = new JavaPlot(gnuplotpath);
         p.getDebugger().setLevel(Debug.VERBOSE);
         
         p.setTitle("Big Fat Title");
@@ -51,7 +54,7 @@ public class test extends JFrame {
         
         //   p.setTerminal(png);
         //   p.plot();
-        p.setTerminal(png);
+        p.setTerminal(eps);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
         try {

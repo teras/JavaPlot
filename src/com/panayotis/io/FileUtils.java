@@ -26,6 +26,8 @@ public class FileUtils {
     public final static File getExec(String path) {
         File file = new File(path);
         if (file.isFile() && file.canRead()) return file;
+        file = new File(path+".exe");
+        if (file.isFile() && file.canRead()) return file;
         return null;
     }
     
@@ -42,7 +44,7 @@ public class FileUtils {
         "/sbin", "/usr/sbin", "/usr/local/sbin",
         "/opt/bin", "/opt/local/bin",
         "/opt/sbin", "/opt/local/sbin",
-        "/sw/bin", "."};
+        "/sw/bin", "c:\\cygwin\\bin", "."};
         
         String pathsep = System.getProperty("path.separator");
         String fileexec = System.getProperty("file.separator") + prog;
