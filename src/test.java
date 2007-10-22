@@ -1,5 +1,8 @@
+import com.panayotis.debug.Debug;
+import com.panayotis.gnuplot.GNUPlotException;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.plot.FunctionPlot;
+import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import java.awt.image.BufferedImage;
@@ -22,13 +25,15 @@ public class test extends JFrame {
         ImageTerminal png = new ImageTerminal();
         PostscriptTerminal eps = new PostscriptTerminal(System.getProperty("user.home")+
                 System.getProperty("file.separator")+"output.eps");
+        FileTerminal svg = new FileTerminal("svg", System.getProperty("user.home")+
+                System.getProperty("file.separator")+"output.svg");
         
         JavaPlot p = new JavaPlot();
-        //    p.getDebugger().setLevel(Debug.WARNING);
+        p.getDebugger().setLevel(Debug.VERBOSE);
         
         p.setTitle("Big Fat Title");
         p.getAxis("x").setLogScale(true);
-        p.getAxis("x").setLabel("X axis", "Arial", 30);
+        p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
         
         p.setBoundaries(1, 100);
@@ -37,19 +42,24 @@ public class test extends JFrame {
         double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         p.addPlot(plot);
         
-       // p.addPlot("sin(x*x)-cos(sqrt(x))");
+        // p.addPlot("sin(x*x)-cos(sqrt(x))");
         FunctionPlot fp = new FunctionPlot("0");
         fp.set("with", "points");
         p.addPlot(fp);
-
+        
         png.set("large");
         
+        //   p.setTerminal(png);
+        //   p.plot();
         p.setTerminal(png);
-     //   p.plot();
-//        p.setTerminal(eps);
-  //      p.setPointSize(4);  
-        p.getPreInit().add("plot x");
-          p.plot();
+        //      p.setPointSize(4);
+        //  p.getPreInit().add("plot x");
+        try {
+            p.plot();
+        } catch (GNUPlotException ex) {
+            System.out.println("Unable to create image file. Exiting.");
+            System.exit(1);
+        }
         
         BufferedImage img = png.getImage();
         test f = new test(img);
@@ -63,7 +73,8 @@ public class test extends JFrame {
      */
     public test(BufferedImage img) {
         initComponents();
-        if (img==null) return;
+        if (img==null) System.exit(0);
+        
         pic.setIcon(new ImageIcon(img));
         pic.setSize(img.getWidth(), img.getHeight());
         pack();

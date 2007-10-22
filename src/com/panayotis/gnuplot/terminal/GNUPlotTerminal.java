@@ -9,6 +9,7 @@
 
 package com.panayotis.gnuplot.terminal;
 
+import com.panayotis.gnuplot.GNUPlotException;
 import java.io.InputStream;
 
 /**
@@ -36,5 +37,5 @@ public interface GNUPlotTerminal {
      * @param stdout The output stream of GNUPlot. Note that since it is required to read from this stream, 
      * it is given as InputStream.
      */
-    public void processOutput(InputStream stdout) ;
+    public void processOutput(InputStream stdout) throws GNUPlotException ;
 }

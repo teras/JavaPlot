@@ -9,6 +9,7 @@
 
 package com.panayotis.gnuplot.terminal;
 
+import com.panayotis.gnuplot.GNUPlotException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,10 +26,15 @@ public class ImageTerminal extends FileTerminal {
         super("png");
     }
     
-    public void processOutput(InputStream stdout) {
+    public void processOutput(InputStream stdout) throws GNUPlotException {
         try {
             img = ImageIO.read(stdout);
-        } catch (IOException ex) { }
+        } catch (IOException ex) {
+            throw new GNUPlotException ("Unable to create PNG image: "+ex.getMessage());
+        }
+        if (img==null) {
+            throw new GNUPlotException("Unable to create image from the gnuplot output. Null image created.");
+        }
     }
     
     public BufferedImage getImage() {
