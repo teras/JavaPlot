@@ -61,7 +61,7 @@ class GNUPlotExec {
             GNUPlot.getDebugger().msg("** End of plot commands **", Debug.INFO);
             
             /* It's time now to start the actual gnuplot application */
-            String [] command = { getGNUPlotPath() };
+            String [] command = { getGNUPlotPath(), "-persist" };
             final Process proc = Runtime.getRuntime().exec(command);
             
             /* Windows buffers DEMAND asynchronus read & write */
