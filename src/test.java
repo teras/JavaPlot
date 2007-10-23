@@ -26,8 +26,9 @@ public class test extends JFrame {
         if (args.length>0) gnuplotpath = args[0];
         
         ImageTerminal png = new ImageTerminal();
-        PostscriptTerminal eps = new PostscriptTerminal(System.getProperty("user.home")+
+        PostscriptTerminal epsf = new PostscriptTerminal(System.getProperty("user.home")+
                 System.getProperty("file.separator")+"output.eps");
+        PostscriptTerminal eps =  new PostscriptTerminal();
         FileTerminal svg = new FileTerminal("svg", System.getProperty("user.home")+
                 System.getProperty("file.separator")+"output.svg");
         
@@ -58,13 +59,10 @@ public class test extends JFrame {
         eps.setEPS(false);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
-        //     try {
         p.addPlot("sin(x*x)-cos(sqrt(x))");
         p.plot();
-        //    } catch (GNUPlotException ex) {
-        //      System.out.println("Unable to create image file. Exiting.");
-        //      System.exit(1);
-        //  }
+        System.out.println(eps.getTextOutput());
+      //  System.exit(0);
         
         BufferedImage img = png.getImage();
         test f = new test(img);

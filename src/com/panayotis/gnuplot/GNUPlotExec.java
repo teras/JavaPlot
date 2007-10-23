@@ -113,8 +113,8 @@ class GNUPlotExec {
             
             try {
                 proc.waitFor(); // wait for process to finish
-                err_thread.join();  // wait for error (messages) output to finish
                 out_thread.join();  // wait for output (terminal related) thread to finish
+                err_thread.join();  // wait for error (messages) output to finish
             } catch (InterruptedException ex) {
                 throw new GNUPlotException ("Interrupted execution of gnuplot");
             }

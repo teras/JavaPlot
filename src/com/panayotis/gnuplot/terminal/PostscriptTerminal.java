@@ -13,8 +13,11 @@ package com.panayotis.gnuplot.terminal;
  *
  * @author teras
  */
-public class PostscriptTerminal extends FileTerminal {
+public class PostscriptTerminal extends TextFileTerminal {
     
+    public PostscriptTerminal() {
+        this("");
+    }
     public PostscriptTerminal(String filename) {
         super("postscript", filename);
         setColor(true);
@@ -37,5 +40,5 @@ public class PostscriptTerminal extends FileTerminal {
             unset("color");
         }
     }
-       
+    
 }

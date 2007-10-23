@@ -14,7 +14,7 @@ import java.io.InputStream;
  */
 public class FileTerminal extends ExpandableTerminal {
     
-    protected String filename;
+    private String filename;
     /**
      * Creates a new instance of FileTerminal and output to STDOUT
      * @param type
@@ -33,8 +33,6 @@ public class FileTerminal extends ExpandableTerminal {
         this.filename = filename;
     }
     
-    
-    
     /**
      *
      * @return The output filename
@@ -42,11 +40,5 @@ public class FileTerminal extends ExpandableTerminal {
     public String getOutputFile() {
         return filename;
     }
-    
-    /**
-     *
-     * @param stdout
-     */
-    public String processOutput(InputStream stdout) { return null; }
     
 }

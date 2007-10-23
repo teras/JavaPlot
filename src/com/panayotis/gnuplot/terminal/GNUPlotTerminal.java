@@ -32,8 +32,9 @@ public interface GNUPlotTerminal {
     public String getOutputFile();
     /**
      * This method is executed bu GNUPlot, when the plot has been performed. It actually 
-     * transforms the GNUPlot output to this method, if parsing is required. If no output
-     * filename is given, then by default the plot will be dumped to output.
+     * transfers GNUPlot output to this method, if parsing is required.
+     * <p>Note that if no output filename is given, then it <b>is</b> necessary to "consume"
+     * this stream, or else a thread lockup might happen.
      * @param stdout The output stream of GNUPlot. Note that since it is required to read from this stream, 
      * it is given as InputStream.
      * @return The definition of the error, if something went wrong. If everything is OK, it is necessary to return null.
