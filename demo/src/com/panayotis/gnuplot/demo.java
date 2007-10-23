@@ -1,26 +1,26 @@
+/*
+ * demo.java
+ *
+ * Created on October 23, 2007, 4:51 PM
+ */
+
+package com.panayotis.gnuplot;
+
 import com.panayotis.debug.Debug;
-import com.panayotis.gnuplot.GNUPlotException;
-import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.plot.FunctionPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-/*
- * test.java
- *
- * Created on October 17, 2007, 3:15 AM
- */
 
 /**
  *
  * @author  teras
  */
-public class test extends JFrame {
+public class demo extends javax.swing.JFrame {
     
-    public static void main(String [] args) {
+      public static void main(String [] args) {
         
         String gnuplotpath = null;
         if (args.length>0) gnuplotpath = args[0];
@@ -65,7 +65,7 @@ public class test extends JFrame {
       //  System.exit(0);
         
         BufferedImage img = png.getImage();
-        test f = new test(img);
+        demo f = new demo(img);
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
@@ -74,7 +74,7 @@ public class test extends JFrame {
     /**
      * Creates new form test
      */
-    public test(BufferedImage img) {
+    public demo (BufferedImage img) {
         initComponents();
         if (img==null) System.exit(0);
         
@@ -82,6 +82,7 @@ public class test extends JFrame {
         pic.setSize(img.getWidth(), img.getHeight());
         pack();
     }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
