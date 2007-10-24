@@ -4,9 +4,8 @@
  * Created on October 23, 2007, 4:51 PM
  */
 
-package com.panayotis.gnuplot;
-
 import com.panayotis.debug.Debug;
+import com.panayotis.gnuplot.*;
 import com.panayotis.gnuplot.dataset.FileDataSet;
 import com.panayotis.gnuplot.plot.FunctionPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
@@ -65,7 +64,7 @@ public class demo extends javax.swing.JFrame {
         //   png.set("large");
         
         //   p.plot();
-        p.setTerminal(png);
+     //   p.setTerminal(png);
         eps.setColor(true);
         eps.setEPS(false);
         //      p.setPointSize(4);
@@ -73,7 +72,7 @@ public class demo extends javax.swing.JFrame {
         p.addPlot("sin(x*x)-cos(sqrt(x))");
         p.plot();
         // System.out.println(eps.getTextOutput());
-        //  System.exit(0);
+          System.exit(0);
         
         BufferedImage img = png.getImage();
         demo f = new demo(img);
