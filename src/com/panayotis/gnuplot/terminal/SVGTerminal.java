@@ -41,7 +41,7 @@ public class SVGTerminal extends TextFileTerminal {
     }
     
     /* Use reflection API to create the representation in SVG format */
-    public JPanel getPanel(int width, int height) {
+    public JPanel getPanel(int width, int height) throws ClassNotFoundException {
         Object svgDisplayPanel = null;
         try {
             svgDisplayPanel = Class.forName("com.kitfox.svg.SVGDisplayPanel").newInstance();
@@ -53,15 +53,13 @@ public class SVGTerminal extends TextFileTerminal {
             diagram = universe.getClass().getMethod("getDiagram", URI.class).invoke(universe, uri);
             svgDisplayPanel.getClass().getMethod("setDiagram", Class.forName("com.kitfox.svg.SVGDiagram")).invoke(svgDisplayPanel, diagram);
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new ClassNotFoundException(e.getMessage());
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            throw new ClassNotFoundException(e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            throw new ClassNotFoundException(e.getMessage());
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            throw new ClassNotFoundException(e.getMessage());
         }
         
         return (JPanel)svgDisplayPanel;

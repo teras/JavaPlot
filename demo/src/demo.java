@@ -83,7 +83,11 @@ public class demo extends javax.swing.JFrame {
         SVGTerminal term = new SVGTerminal();
         jp.setTerminal(term);
         jp.plot();
-        getContentPane().add(term.getPanel(1000, 800));
+        try {
+            getContentPane().add(term.getPanel(1000, 800));
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
         
         
 //        JPlot p = new JPlot(jp);
