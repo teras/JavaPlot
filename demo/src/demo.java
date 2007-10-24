@@ -7,7 +7,6 @@
 import com.panayotis.debug.Debug;
 import com.panayotis.gnuplot.*;
 import com.panayotis.gnuplot.dataset.FileDataSet;
-import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
@@ -23,13 +22,13 @@ public class demo extends javax.swing.JFrame {
     
     public static void main(String [] args) {
         
-        FileDataSet q = null;
-        try {
-            q = new FileDataSet(new File(System.getProperty("user.home")+
-                    System.getProperty("file.separator")+"ko"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+//        FileDataSet q = null;
+//        try {
+//            q = new FileDataSet(new File(System.getProperty("user.home")+
+//                    System.getProperty("file.separator")+"ko"));
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
         
         String gnuplotpath = null;
         if (args.length>0) gnuplotpath = args[0];
@@ -56,7 +55,7 @@ public class demo extends javax.swing.JFrame {
         double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         p.addPlot(plot);
         
-        p.addPlot(q);
+      //  p.addPlot(q);
         //   png.set("large");
         
         //   p.plot();
@@ -69,8 +68,10 @@ public class demo extends javax.swing.JFrame {
         // System.out.println(eps.getTextOutput());
         //     System.exit(0);
         
-
-        new demo(p);
+        p.plot();
+        System.exit(0);
+        
+        // new demo(p);
     }
     
     
