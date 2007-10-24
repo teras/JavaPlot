@@ -8,13 +8,13 @@ import com.panayotis.debug.Debug;
 import com.panayotis.gnuplot.*;
 import com.panayotis.gnuplot.dataset.FileDataSet;
 import com.panayotis.gnuplot.plot.FunctionPlot;
+import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -46,36 +46,32 @@ public class demo extends javax.swing.JFrame {
         p.getDebugger().setLevel(Debug.VERBOSE);
         
         p.setTitle("Big Fat Title");
-        p.getAxis("x").setLogScale(true);
+    //    p.getAxis("x").setLogScale(true);
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
         
-        //    p.getAxis("x").setBoundaries(1, 100);
+        p.getAxis("x").setBoundaries(-30, 20);
         //   p.getAxis("y").setBoundaries(1, 2);
         p.setKey(JavaPlot.Key.TOP_RIGHT);
         
         double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         p.addPlot(plot);
         
-        FunctionPlot fp = new FunctionPlot("x");
-        fp.set("with", "linespoints");
-        p.addPlot(fp);
         p.addPlot(q);
         //   png.set("large");
         
         //   p.plot();
-     //   p.setTerminal(png);
+        //   p.setTerminal(png);
         eps.setColor(true);
         eps.setEPS(false);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
-        p.addPlot("sin(x*x)-cos(sqrt(x))");
-        p.plot();
+        p.addPlot("besj0(x)*0.12e1");
         // System.out.println(eps.getTextOutput());
-          System.exit(0);
+        //     System.exit(0);
         
         BufferedImage img = png.getImage();
-        demo f = new demo(img);
+        demo f = new demo(p);
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
@@ -84,12 +80,11 @@ public class demo extends javax.swing.JFrame {
     /**
      * Creates new form test
      */
-    public demo(BufferedImage img) {
+    public demo(JavaPlot jp) {
         initComponents();
-        if (img==null) System.exit(0);
-        
-        pic.setIcon(new ImageIcon(img));
-        pic.setSize(img.getWidth(), img.getHeight());
+        JPlot p = new JPlot(jp);
+        getContentPane().add(p);
+        p.plot();
         pack();
     }
     
@@ -101,18 +96,13 @@ public class demo extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        pic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        pic.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        getContentPane().add(pic, java.awt.BorderLayout.CENTER);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel pic;
     // End of variables declaration//GEN-END:variables
     
 }
