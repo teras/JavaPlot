@@ -7,12 +7,11 @@
 import com.panayotis.debug.Debug;
 import com.panayotis.gnuplot.*;
 import com.panayotis.gnuplot.dataset.FileDataSet;
-import com.panayotis.gnuplot.plot.FunctionPlot;
 import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
-import java.awt.image.BufferedImage;
+import com.panayotis.gnuplot.terminal.SVGTerminal;
 import java.io.File;
 import java.io.IOException;
 
@@ -70,10 +69,8 @@ public class demo extends javax.swing.JFrame {
         // System.out.println(eps.getTextOutput());
         //     System.exit(0);
         
-        BufferedImage img = png.getImage();
-        demo f = new demo(p);
-        f.setLocationRelativeTo(null);
-        f.setVisible(true);
+
+        new demo(p);
     }
     
     
@@ -82,10 +79,20 @@ public class demo extends javax.swing.JFrame {
      */
     public demo(JavaPlot jp) {
         initComponents();
-        JPlot p = new JPlot(jp);
-        getContentPane().add(p);
-        p.plot();
+        
+        SVGTerminal term = new SVGTerminal();
+        jp.setTerminal(term);
+        jp.plot();
+        getContentPane().add(term.getPanel(1000, 800));
+        
+        
+//        JPlot p = new JPlot(jp);
+//        getContentPane().add(p);
+//        p.plot();
+        
         pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
     
     

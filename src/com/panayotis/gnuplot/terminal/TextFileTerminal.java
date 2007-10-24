@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
  * @author teras
  */
 public class TextFileTerminal extends FileTerminal {
-    private StringBuffer output;
+    protected String output;
     
     /** Creates a new instance of TextFileTerminal */
     public TextFileTerminal(String type) {
@@ -35,21 +35,21 @@ public class TextFileTerminal extends FileTerminal {
     }
     
     public String processOutput(InputStream stdout) {
-        output = new StringBuffer();
+        StringBuffer out = new StringBuffer();
         BufferedReader in = new BufferedReader(new InputStreamReader(stdout));
         String line;
         try {
             while ((line=in.readLine())!=null)
-                output.append(line);
+                out.append(line);
             in.close();
         } catch (IOException ex) {
             return "I/O error while processing gnuplot output: "+ex.getMessage();
         }
+        output = out.toString();
         return null;
     }
     
     public String getTextOutput() {
-        if (output==null) return null;
-        return output.toString();
+        return output;
     }
 }
