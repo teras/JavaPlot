@@ -7,11 +7,14 @@
 package com.panayotis.gnuplot;
 
 import com.panayotis.debug.Debug;
+import com.panayotis.gnuplot.dataset.FileDataSet;
 import com.panayotis.gnuplot.plot.FunctionPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 
 /**
@@ -20,7 +23,15 @@ import javax.swing.ImageIcon;
  */
 public class demo extends javax.swing.JFrame {
     
-      public static void main(String [] args) {
+    public static void main(String [] args) {
+        
+        FileDataSet q = null;
+        try {
+            q = new FileDataSet(new File(System.getProperty("user.home")+
+                    System.getProperty("file.separator")+"ko"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         
         String gnuplotpath = null;
         if (args.length>0) gnuplotpath = args[0];
@@ -40,7 +51,7 @@ public class demo extends javax.swing.JFrame {
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
         
-        p.getAxis("x").setBoundaries(1, 100);
+        //    p.getAxis("x").setBoundaries(1, 100);
         //   p.getAxis("y").setBoundaries(1, 2);
         p.setKey(JavaPlot.Key.TOP_RIGHT);
         
@@ -50,7 +61,7 @@ public class demo extends javax.swing.JFrame {
         FunctionPlot fp = new FunctionPlot("x");
         fp.set("with", "linespoints");
         p.addPlot(fp);
-        
+        p.addPlot(q);
         //   png.set("large");
         
         //   p.plot();
@@ -61,8 +72,8 @@ public class demo extends javax.swing.JFrame {
         //  p.getPreInit().add("plot x");
         p.addPlot("sin(x*x)-cos(sqrt(x))");
         p.plot();
-        System.out.println(eps.getTextOutput());
-      //  System.exit(0);
+        // System.out.println(eps.getTextOutput());
+        //  System.exit(0);
         
         BufferedImage img = png.getImage();
         demo f = new demo(img);
@@ -74,7 +85,7 @@ public class demo extends javax.swing.JFrame {
     /**
      * Creates new form test
      */
-    public demo (BufferedImage img) {
+    public demo(BufferedImage img) {
         initComponents();
         if (img==null) System.exit(0);
         

@@ -53,20 +53,21 @@ public class DataSetPlot extends AbstractPlot {
         int i, j;
         int isize, jsize;
         
-        isize = dataset.size();
-        jsize = dataset.getDimensions();
-        for ( i = 0 ; i < isize ; i++) {
-            for( j = 0 ; j < jsize ; j++) {
-                bf.append(dataset.getPointValue(i, j)).append(' ');
+        if (dataset!=null) {
+            isize = dataset.size();
+            jsize = dataset.getDimensions();
+            for ( i = 0 ; i < isize ; i++) {
+                for( j = 0 ; j < jsize ; j++) {
+                    bf.append(dataset.getPointValue(i, j)).append(' ');
+                }
+                bf.append(NL);
             }
-            bf.append(NL);
         }
         bf.append("e").append(NL);
         return bf.toString();
     }
     
     public void setDataSet(DataSet set) {
-        if (set==null) return;
         dataset = set;
     }
     public DataSet getDataSet() {

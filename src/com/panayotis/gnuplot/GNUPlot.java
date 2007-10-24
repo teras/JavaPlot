@@ -117,6 +117,7 @@ public class GNUPlot {
     }
     
     public void addPlot(Plot plot) {
+        if (plot==null) return;
         par.addPlot(plot);
     }
     

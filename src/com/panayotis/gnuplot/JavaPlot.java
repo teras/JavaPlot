@@ -6,6 +6,7 @@
  */
 package com.panayotis.gnuplot;
 
+import com.panayotis.gnuplot.dataset.DataSet;
 import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.plot.FunctionPlot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
@@ -58,5 +59,5 @@ public class JavaPlot extends GNUPlot {
     public void addPlot(int[][] points) { addPlot(new DataSetPlot(points)); }
     public void addPlot(long[][] points) { addPlot(new DataSetPlot(points)); }
     public void addPlot(String function) { addPlot(new FunctionPlot(function)); }
-    
+    public void addPlot(DataSet set) { addPlot(new DataSetPlot(set)); }
 }
