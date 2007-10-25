@@ -14,6 +14,7 @@ import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -28,10 +29,10 @@ public class GNUPlot {
     
     protected GNUPlotParameters par;
     
-    protected volatile GNUPlotTerminal term;
-    protected volatile GNUPlotExec exec;
+    protected transient GNUPlotTerminal term;
+    protected transient GNUPlotExec exec;
     
-    private static volatile Debug dbg = new Debug();
+    private static transient Debug dbg = new Debug();
     
     /**
      * Create a new instance of gnuplot, using the default parameters

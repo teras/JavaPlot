@@ -6,13 +6,11 @@
 
 import com.panayotis.debug.Debug;
 import com.panayotis.gnuplot.*;
-import com.panayotis.gnuplot.dataset.FileDataSet;
+import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import com.panayotis.gnuplot.terminal.SVGTerminal;
-import java.io.File;
-import java.io.IOException;
 
 /**
  *
@@ -52,22 +50,23 @@ public class demo extends javax.swing.JFrame {
         //   p.getAxis("y").setBoundaries(1, 2);
         p.setKey(JavaPlot.Key.TOP_RIGHT);
         
-        double [][] plot = { {1, 1.1}, {2, 2.2}, {3, 3.3}, {4, 4.3} };
-        p.addPlot(plot);
-        
+        double [][] plot = { {1, 1.1 }, {2, 2.2}, {3, 3.3}, {4, 4.3} };
+        DataSetPlot s = new DataSetPlot(plot);
+        p.addPlot(s);
       //  p.addPlot(q);
         //   png.set("large");
         
         //   p.plot();
         //   p.setTerminal(png);
         eps.setColor(true);
-        eps.setEPS(false);
+        // eps.setEPS(false);
         //      p.setPointSize(4);
         //  p.getPreInit().add("plot x");
         p.addPlot("besj0(x)*0.12e1");
         // System.out.println(eps.getTextOutput());
         //     System.exit(0);
         
+        //p.setTerminal(eps);
         p.plot();
         System.exit(0);
         

@@ -9,6 +9,7 @@
 
 package com.panayotis.gnuplot.dataset;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,7 +18,7 @@ import java.util.Collection;
  *
  * @author teras
  */
-public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  implements DataSet {
+public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  implements DataSet, Serializable {
     
     public PointDataSet() {
         super();

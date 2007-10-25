@@ -9,11 +9,13 @@
 
 package com.panayotis.gnuplot.dataset;
 
+import java.io.Serializable;
+
 /**
  *
  * @author teras
  */
-public class ArrayDataSet implements DataSet {
+public class ArrayDataSet implements DataSet, Serializable {
     double[][] val; 
     
     /** Creates a new instance of ArrayDataSet */
