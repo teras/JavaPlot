@@ -105,7 +105,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         bf.append("plot");  // Set error parameter
         /* Add plot definitions */
         for (Plot p:plots) {
-            bf.append(' ').append(p.getPlotDefinition()).append(',');
+            bf.append(' ').append(p.getDefinition()).append(',');
         }
         bf.deleteCharAt(bf.length()-1);
         bf.append(" ; _gnuplot_error=0").append(NL);    // Reset error parameter. if everything OK
@@ -122,5 +122,9 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         
         return bf.toString();
     }
-    
+
+    ArrayList<Plot> getPlots() {
+        return plots;
+    }
+
 }

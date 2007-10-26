@@ -121,6 +121,9 @@ public class GNUPlot {
         if (plot==null) return;
         par.addPlot(plot);
     }
+    public ArrayList<Plot> getPlots() {
+        return par.getPlots();
+    }
     
     public void plot() throws GNUPlotException {
         exec.plot(par, term);

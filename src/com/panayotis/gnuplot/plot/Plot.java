@@ -15,6 +15,6 @@ package com.panayotis.gnuplot.plot;
  */
 public interface Plot {
     
-    public abstract String getPlotDefinition();
+    public abstract String getDefinition();
     public abstract String getData();
 }

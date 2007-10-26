@@ -39,19 +39,17 @@ public class JavaPlot extends GNUPlot {
         set("title", "'"+title+"'");
     }
     
-    /**
-     * Set the size of the drawing points
-     * @param size Size of the point
-     */
-    public void setPointSize(double size) {
-        set("pointsize", String.valueOf(size));
-    }
-    
-    public void setKey(Key position) {
-        set("key", position.name().replace('_',' ').toLowerCase());
-    }
     
     public static enum Key {OFF, TOP_RIGHT, BOTTOM_RIGHT, TOP_LEFT, BOTTOM_LEFT, BELOW, OUTSIDE};
+    
+    
+    public void setKey(Key position) {
+        if (position==null)
+            set("key", null);
+        else
+            set("key", position.name().replace('_',' ').toLowerCase());
+    }
+    
     
     
     public void addPlot(double[][] points) { addPlot(new DataSetPlot(points)); }
