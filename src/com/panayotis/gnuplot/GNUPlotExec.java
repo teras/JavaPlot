@@ -19,7 +19,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
- *
+ * Object representing the low level gnuplot executable. This object is used in the plot() method of GNUPlot.
  * @author teras
  */
 class GNUPlotExec {
@@ -27,16 +27,30 @@ class GNUPlotExec {
     private static final transient String DEFAULT_PATH = FileUtils.findPathExec("gnuplot");
     private transient File gnuplotexec;
     
-    /** Creates a new instance of GNUPlotExec */
+    /**
+     * Create a new GNUPlotExec object with  defaultΩ gnuplot path. Under POSIX environment,
+     * it is able to automatically find gnuplot executable in the $PATH
+     * @throws java.io.IOException if something went wrong and it is impossible to continue without further notive
+     */
     GNUPlotExec() throws IOException {
         this(null);
     }
+    /**
+     * Create a new GNUPlotExec object with a specific gnuplot path.
+     * @param path Path of gnuplot executable
+     * @throws java.io.IOException if the gnuplot executable is not found
+     */
     GNUPlotExec(String path) throws IOException {
         if (path==null) path = DEFAULT_PATH;
         setGNUPlotPath(path);
     }
     
     
+    /**
+     * Set the desired path for gnuplot executable.
+     * @param path Filename of gnuplot executable
+     * @throws java.io.IOException gnuplot is not found, or not valid
+     */
     void setGNUPlotPath(String path) throws IOException {
         File file = FileUtils.getExec(path);
         if (file!=null)
@@ -44,11 +58,21 @@ class GNUPlotExec {
         else
             throw new IOException("GnuPlot executable \""+path+"\" not found.");
     }
+    /**
+     * Retrieve the file path of gnuplot
+     * @return The gnuplot file path
+     */
     String getGNUPlotPath() {
         return gnuplotexec.getPath();
     }
     
     
+    /**
+     * Plot using specific parameters and seelcted terminal.
+     * @param par The parameters to use
+     * @param terminal The terminal to use
+     * @throws com.panayotis.gnuplot.GNUPlotException throw if something goes wrong
+     */
     void plot(GNUPlotParameters par, GNUPlotTerminal terminal) throws GNUPlotException {
         try {
             final GNUPlotTerminal term = terminal;  // Use this thread-aware variable instead of "terminal"
@@ -116,7 +140,7 @@ class GNUPlotExec {
                 out_thread.join();  // wait for output (terminal related) thread to finish
                 err_thread.join();  // wait for error (messages) output to finish
             } catch (InterruptedException ex) {
-                throw new GNUPlotException ("Interrupted execution of gnuplot");
+                throw new GNUPlotException("Interrupted execution of gnuplot");
             }
             
             /* Find the error message, if any, with precendence to the error thread */

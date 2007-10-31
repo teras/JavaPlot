@@ -13,22 +13,34 @@ import com.panayotis.gnuplot.PropertiesHolder;
 import java.util.HashMap;
 
 /**
- *
+ * This class represents the various axes of the plot. It is used to set various
+ * axis-related parameters
  * @author teras
  */
 public class Axis extends PropertiesHolder {
     
     private String name;
     
-    /** Creates a new instance of Axis */
+    /**
+     * Creates a new instance of Axis.
+     * @param name The name of the axis
+     */
     Axis(String name) {
         this.name = name;
     }
     
+    /**
+     * Get the name of this axis as a String.
+     * @return The name of the axis. Usually it is "x" or "y".
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Set whether this axis is in logarithmic scale or not
+     * @param log Set, if this axis is in logarithmic scale
+     */
     public void setLogScale(boolean log) {
         if (log)
             set("logscale", getName());
@@ -37,6 +49,11 @@ public class Axis extends PropertiesHolder {
     }
     
     
+    /**
+     * Set the label of this axis.
+     * @param label THe label of this axis
+     * @see #setLabel(String,String,int)
+     */
     public void setLabel(String label) {
         setLabel(label, null, -1);
     }

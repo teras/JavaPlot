@@ -46,14 +46,27 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     
     
     
+    /**
+     * 
+     * @param axisname 
+     * @return 
+     */
     public Axis getAxis(String axisname) {
         if (axisname==null) return null;
         return axis.get(axisname.toLowerCase());
     }
     
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<String> getPreInit() {
         return preinit;
     }
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<String> getPostInit() {
         return postinit;
     }
@@ -71,6 +84,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     
     
     
+    /**
+     * 
+     * @param term 
+     * @return 
+     */
     String getPlotCommands(GNUPlotTerminal term) {
         StringBuffer bf = new StringBuffer();
         
@@ -123,6 +141,10 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         return bf.toString();
     }
 
+    /**
+     * 
+     * @return 
+     */
     ArrayList<Plot> getPlots() {
         return plots;
     }

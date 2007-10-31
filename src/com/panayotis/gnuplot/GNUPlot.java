@@ -27,10 +27,19 @@ import java.util.ArrayList;
  */
 public class GNUPlot {
     
-    protected GNUPlotParameters par;
+    /**
+     * GNUPlot parameters. Here we store all gnuplot information.
+     */
+    private GNUPlotParameters param;
     
-    protected transient GNUPlotTerminal term;
-    protected transient GNUPlotExec exec;
+    /**
+     * The GNUPlot parameter to use
+     */
+    private transient GNUPlotTerminal term;
+    /**
+     * The GNUPlotExc to use.
+     */
+    private transient GNUPlotExec exec;
     
     private static transient Debug dbg = new Debug();
     
@@ -47,11 +56,11 @@ public class GNUPlot {
     
     /**
      * Create a new instance of gnuplot, with a given set of parameters.
-     * @param par GNUPlot parameters to use. These parameters encapsulate the whole gnuplot variables, including data sets.
-     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
-     * this case there is need to use a constructor which defines the gnuplot path.
      * @see #GNUPlot(String)
      * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal)
+     * @param par Use this set of parameters, instead of a default one.
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
+     * this case there is need to use a constructor which defines the gnuplot path.
      */
     public GNUPlot(GNUPlotParameters par) throws GNUPlotException {
         this(par, null, null);
@@ -82,7 +91,7 @@ public class GNUPlot {
      */
     public GNUPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term) throws GNUPlotException {
         if (par==null) par = new GNUPlotParameters();
-        this.par = par;
+        this.param = par;
         
         if (term==null) term = new DefaultTerminal();
         this.term = term;
@@ -100,11 +109,11 @@ public class GNUPlot {
     /**
      * Set various GNUPlot parameters. All parameters added here will be used
      * in the form of "set key value"
-     * @param key
-     * @param value
+     * @param key The key to use for this gnuplot
+     * @param value The value of this key
      */
     public void set(String key, String value) {
-        par.set(key, value);
+        param.set(key, value);
     }
     
     /**
@@ -114,61 +123,119 @@ public class GNUPlot {
      * @return The requested Axis, or null if axis is not found
      */
     public Axis getAxis(String axisname) {
-        return par.getAxis(axisname);
+        return param.getAxis(axisname);
     }
     
+    /**
+     * Add a new Plot
+     * @param plot The plot to add to the list of plots.
+     * @see com.panayotis.gnuplot.plot.Plot
+     */
     public void addPlot(Plot plot) {
         if (plot==null) return;
-        par.addPlot(plot);
+        param.addPlot(plot);
     }
+    /**
+     * Get a list of the plots used in this set. This method is a way to enumerate the
+     * plots already inserted, epspecially if a plot is added on the fly.
+     * @return An array of stored plots.
+     */
     public ArrayList<Plot> getPlots() {
-        return par.getPlots();
+        return param.getPlots();
     }
     
+    /**
+     * Perform the actual action of plotting. Use the current parameters and terminal,
+     * and perform a plot. If an error occured, an exception is thrown
+     * @throws com.panayotis.gnuplot.GNUPlotException This exception is thrown if an error occured. Use the Debug object to dump information
+     * about this error.
+     */
     public void plot() throws GNUPlotException {
-        exec.plot(par, term);
+        exec.plot(param, term);
     }
 //    public void splot() throws GNUPlotException {
-//        exec.splot(par, term);
+//        exec.splot(param, term);
 //    }
     
     
+    /**
+     * Set the desired path for gnuplot executable.
+     * @param path Filename of gnuplot executable
+     * @throws java.io.IOException gnuplot is not found, or not valid
+     */
     public void setGNUPlotPath(String path) throws IOException {
         exec.setGNUPlotPath(path);
     }
     
+    /**
+     * Retrieve the file path of gnuplot
+     * @return The gnuplot file path
+     */
     public String getGNUPlotPath(){
         return exec.getGNUPlotPath();
     }
     
+    /**
+     * Set gnuplot parameters to another set of parameters.
+     * @param parameters The new GNUPlot parameters.
+     */
     public void setParameters(GNUPlotParameters parameters) {
-        if (par==null) return;
-        par = parameters;
+        if (param==null) return;
+        param = parameters;
     }
     
+    /**
+     * Ge the actual gnuplot parameters. This method is useful if the developer wants
+     * to have access to lower level GNUPlotparameter methods.
+     * @return Object having all information on how to make the plot.
+     */
     public GNUPlotParameters getParameters() {
-        return par;
+        return param;
     }
     
     
+    /**
+     * Change gnuplot terminal. Use this method to make gnuplot draw to another terminal than the default
+     * @param term The terminal to use
+     */
     public void setTerminal(GNUPlotTerminal term) {
         if (term==null) return;
         this.term = term;
     }
     
+    /**
+     * Get the current used terminal
+     * @return The used terminal
+     */
     public GNUPlotTerminal getTerminal() {
         return term;
     }
     
+    /**
+     * Get the specific GNUPlot Debug object
+     * @return The Debug object
+     */
     public static Debug getDebugger() {
         return dbg;
     }
     
+    /**
+     * Execute gnuplot commands before any kind of initialization. This method together
+     * with getPostInit() is useful to add basic commands to gnuplot exetutable, if the
+     * library does not support the desired functionality
+     * @return Array of pre-init commands
+     */
     public ArrayList<String> getPreInit() {
-        return par.getPreInit();
+        return param.getPreInit();
     }
+    /**
+     * Execute gnuplot commands before any kind of initialization. This method together
+     * with getPostInit() is useful to add basic commands to gnuplot exetutable, if the
+     * library does not support the desired functionality
+     * @return Array of pre-init commands
+     */
     public ArrayList<String> getPostInit() {
-        return par.getPostInit();
+        return param.getPostInit();
     }
     
 }
