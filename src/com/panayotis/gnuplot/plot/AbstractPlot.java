@@ -11,6 +11,7 @@ package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.PropertiesHolder;
 import com.panayotis.gnuplot.style.PlotStyle;
+import com.panayotis.gnuplot.style.Smooth;
 
 /**
  *
@@ -21,7 +22,8 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
     private static int last_id = 0;
   
     private String definition = "";
-    private PlotStyle style;
+    private PlotStyle style = null;
+    private Smooth smooth = null;
     
     public AbstractPlot() {
         super(" ", "");
@@ -35,6 +37,7 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
         StringBuffer buf = new StringBuffer();
         buf.append(definition);
         getProperties(buf);
+        if (smooth!=null) buf.append(smooth.toString());
         if (style!=null) style.getProperties(buf);
         return buf.toString();
     }
@@ -46,5 +49,8 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
         if (style==null)
             style = new PlotStyle();
         return style;
+    }
+    public void setSmooth(Smooth smooth) {
+        this.smooth = smooth;
     }
 }

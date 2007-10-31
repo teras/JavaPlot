@@ -5,11 +5,12 @@
  */
 
 import com.panayotis.debug.Debug;
-import com.panayotis.gnuplot.*;
+import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.style.PlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
+import com.panayotis.gnuplot.style.Smooth;
 import com.panayotis.gnuplot.style.Style;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
@@ -56,6 +57,7 @@ public class demo extends javax.swing.JFrame {
         
         double [][] plot = { {1, 1.1 }, {2, 2.2}, {3, 3.3}, {4, 4.3} };
         DataSetPlot s = new DataSetPlot(plot);
+       // s.setSmooth(Smooth.BEZIER);
         p.addPlot(s);
       //  p.addPlot(q);
         //   png.set("large");
@@ -72,7 +74,7 @@ public class demo extends javax.swing.JFrame {
         
         PlotStyle stl = ((AbstractPlot)p.getPlots().get(1)).getPlotStyle();
         stl.setStyle(Style.POINTS);
-        stl.setLineType(PlotColor.BLUE);
+        stl.setLineType(PlotColor.GOLDENROD);
         stl.setPointType(5);
         stl.setPointSize(8);
         
