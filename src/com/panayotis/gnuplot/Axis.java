@@ -9,9 +9,6 @@
 
 package com.panayotis.gnuplot;
 
-import com.panayotis.gnuplot.PropertiesHolder;
-import java.util.HashMap;
-
 /**
  * This class represents the various axes of the plot. It is used to set various
  * axis-related parameters

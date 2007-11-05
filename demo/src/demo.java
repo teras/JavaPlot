@@ -10,7 +10,6 @@ import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.style.PlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
-import com.panayotis.gnuplot.style.Smooth;
 import com.panayotis.gnuplot.style.Style;
 import com.panayotis.gnuplot.terminal.FileTerminal;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
@@ -44,7 +43,7 @@ public class demo extends javax.swing.JFrame {
                 System.getProperty("file.separator")+"output.svg");
         
         JavaPlot p = new JavaPlot(gnuplotpath);
-        p.getDebugger().setLevel(Debug.VERBOSE);
+        JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
         
         p.setTitle("Big Fat Title");
     //    p.getAxis("x").setLogScale(true);

@@ -6,7 +6,6 @@
 
 package com.panayotis.gnuplot.swing;
 
-import com.panayotis.gnuplot.GNUPlot;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.terminal.ImageTerminal;
 import java.awt.Dimension;

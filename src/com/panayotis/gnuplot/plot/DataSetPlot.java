@@ -9,7 +9,6 @@
 
 package com.panayotis.gnuplot.plot;
 
-import com.panayotis.gnuplot.*;
 import com.panayotis.gnuplot.dataset.ArrayDataSet;
 import com.panayotis.gnuplot.dataset.DataSet;
 import com.panayotis.gnuplot.dataset.PointDataSet;
@@ -20,9 +19,6 @@ import com.panayotis.gnuplot.dataset.PointDataSet;
  * @author teras
  */
 public class DataSetPlot extends AbstractPlot {
-    
-    private static final String NL = System.getProperty("line.separator");
-    
     
     private DataSet dataset;
     

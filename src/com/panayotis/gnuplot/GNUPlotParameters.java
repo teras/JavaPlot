@@ -9,13 +9,11 @@
 
 package com.panayotis.gnuplot;
 
-import com.panayotis.gnuplot.PropertiesHolder;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 /**
  *

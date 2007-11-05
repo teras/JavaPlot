@@ -14,7 +14,6 @@ import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**

@@ -9,7 +9,6 @@
 
 package com.panayotis.gnuplot.terminal;
 
-import com.panayotis.gnuplot.GNUPlotException;
 import java.io.InputStream;
 
 /**
