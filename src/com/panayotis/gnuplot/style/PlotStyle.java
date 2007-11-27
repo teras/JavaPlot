@@ -26,12 +26,20 @@ public class PlotStyle extends PropertiesHolder {
     public PlotStyle() {
         this(null);
     }
+    /**
+     * 
+     * @param type
+     */
     public PlotStyle(Style type) {
         super(" ", "");
         this.type = type;
         fill = null;
     }
     
+    /**
+     * 
+     * @param style
+     */
     public void setStyle(Style style) {
         this.type = style;
     }
@@ -45,6 +53,10 @@ public class PlotStyle extends PropertiesHolder {
         }
     }
     
+    /**
+     * 
+     * @param width
+     */
     public void setLineWidth(int width) {
         if (width<0)
             unset("linewidth");
@@ -52,6 +64,10 @@ public class PlotStyle extends PropertiesHolder {
             set("linewidth", String.valueOf(width));
     }
     
+    /**
+     * 
+     * @param width
+     */
     public void setPointSize(int width) {
         if (width<0)
             unset("pointsize");
@@ -59,12 +75,20 @@ public class PlotStyle extends PropertiesHolder {
             set("pointsize", String.valueOf(width));
     }
     
+    /**
+     * 
+     * @param type
+     */
     public void setLineType(int type) {
         if (type<-1)
             unset("linetype");
         else
         set("linetype", String.valueOf(type));
     }
+    /**
+     * 
+     * @param col
+     */
     public void setLineType(PlotColor col) {
         if (col==null) 
             unset("linetype");
@@ -72,6 +96,10 @@ public class PlotStyle extends PropertiesHolder {
             set("linetype", col.toString());
     }
 
+    /**
+     * 
+     * @param type
+     */
     public void setPointType(int type) {
         if (type<-1)
             unset("pointtype");
@@ -79,9 +107,12 @@ public class PlotStyle extends PropertiesHolder {
         set("pointtype", String.valueOf(type));
     }
     
+    /**
+     * 
+     * @param fillstyle
+     */
     public void setFill(FillStyle fillstyle) {
         this.fill = fillstyle;
     }
-    
-    
+
 }

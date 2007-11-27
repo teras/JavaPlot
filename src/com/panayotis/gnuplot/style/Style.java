@@ -45,6 +45,12 @@ public enum Style {
     
     final int columns;   // number of desired columns
     final boolean filled; // could be filled
+    
+    /**
+     * 
+     * @param columns
+     * @param filled
+     */
     Style(int columns, boolean filled) {
         this.columns = columns;
         this.filled = filled;

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
+ * This is a placeholder for the parameters used to create the actual plot.
+ * 
  * @author teras
  */
 public class GNUPlotParameters extends PropertiesHolder implements Serializable {
@@ -30,6 +31,9 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     private ArrayList<String> postinit;
     
     
+    /**
+     *  Create a new plot with the default parameters
+     */
     public GNUPlotParameters() {
         plots = new ArrayList<Plot>();
         
@@ -45,9 +49,9 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     
     
     /**
-     * 
-     * @param axisname 
-     * @return 
+     *  Get one of the available Axis, in orde to set some parameters on it.
+     * @param axisname The name of the Axis. It is usually "x", "y", "z"
+     * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
         if (axisname==null) return null;
@@ -55,15 +59,19 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     }
     
     /**
-     * 
-     * @return 
+     * This list is used to add special commands to gnuplot, before the automatically
+     * generated from this library. It is a convenient method to send unsupported commands
+     * to gnuplot at the beginning of the program.
+     * @return The list of the initialization commands
      */
     public ArrayList<String> getPreInit() {
         return preinit;
     }
     /**
-     * 
-     * @return 
+     * This list is used to add special commands to gnuplot, after the automatically
+     * generated from this library. It is a convenient method to send unsupported commands
+     * to gnuplot at the end of the program, just before the final plot command.
+     * @return he list of the post initialization commands
      */
     public ArrayList<String> getPostInit() {
         return postinit;
@@ -71,7 +79,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     
     
     /**
-     * Add a new plot to the specified GNUPlot.
+     * Add a new plot to the specified GNUPlot object.
      * At least one plot is needed to produce visual results.
      * @param plot The given plot.
      */
@@ -83,9 +91,9 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     
     
     /**
-     * 
-     * @param term 
-     * @return 
+     * Get the actual GNUPlot commands. This method is used to construct the gnuplot program
+     * @param term The terminal to use
+     * @return The GNUPlot program
      */
     String getPlotCommands(GNUPlotTerminal term) {
         StringBuffer bf = new StringBuffer();
@@ -140,8 +148,8 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     }
 
     /**
-     * 
-     * @return 
+     * Get the list of the stored plots
+     * @return List of Plot objects
      */
     ArrayList<Plot> getPlots() {
         return plots;

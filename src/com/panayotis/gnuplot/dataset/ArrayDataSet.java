@@ -18,7 +18,9 @@ import java.io.Serializable;
 public class ArrayDataSet implements DataSet, Serializable {
     double[][] val; 
     
-    /** Creates a new instance of ArrayDataSet */
+    /** Creates a new instance of ArrayDataSet
+     * @param values 
+     */
     public ArrayDataSet(double[][] values) {
         int length = values.length;
         int dimension = values[0].length;
@@ -33,6 +35,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
+    /**
+     * 
+     * @param values
+     */
     public ArrayDataSet(float[][] values) {
         int length = values.length;
         int dimension = values[0].length;
@@ -47,6 +53,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
+    /**
+     * 
+     * @param values
+     */
     public ArrayDataSet(int[][] values) {
         int length = values.length;
         int dimension = values[0].length;
@@ -61,6 +71,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
+    /**
+     * 
+     * @param values
+     */
     public ArrayDataSet(long[][] values) {
         int length = values.length;
         int dimension = values[0].length;
@@ -76,15 +90,29 @@ public class ArrayDataSet implements DataSet, Serializable {
         }
     }
     
+    /**
+     * 
+     * @return
+     */
     public int size() {
         return val.length;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getDimensions() {
         if (val[0]==null) return -1;
         return val[0].length;
     }
 
+    /**
+     * 
+     * @param item
+     * @param dimension
+     * @return
+     */
     public double getPointValue(int item, int dimension) {
         return val[item][dimension];
     }

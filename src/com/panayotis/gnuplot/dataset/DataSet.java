@@ -15,9 +15,23 @@ package com.panayotis.gnuplot.dataset;
  */
 public interface DataSet {
     
+    /**
+     * 
+     * @return
+     */
     public int size();
+    /**
+     * 
+     * @return
+     */
     public int getDimensions();
     
+    /**
+     * 
+     * @param item
+     * @param dimension
+     * @return
+     */
     public double getPointValue(int item, int dimension);
    
 }

@@ -22,6 +22,9 @@ import javax.imageio.ImageIO;
 public class ImageTerminal extends FileTerminal {
     BufferedImage img;
     
+    /**
+     * 
+     */
     public ImageTerminal() {
         super("png");
     }
@@ -36,6 +39,10 @@ public class ImageTerminal extends FileTerminal {
         return null;
     }
     
+    /**
+     * 
+     * @return
+     */
     public BufferedImage getImage() {
         return img;
     }

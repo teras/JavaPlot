@@ -27,20 +27,35 @@ public class JPlot extends JPanel {
         this(new JavaPlot());
     }
     
+    /**
+     * 
+     * @param plot
+     */
     public JPlot(JavaPlot plot) {
         initComponents();
         term = new ImageTerminal();
         setJavaPlot(plot);
     }
 
+    /**
+     * 
+     * @param javaplot
+     */
     public void setJavaPlot(JavaPlot javaplot) {
         plot = javaplot;
         plot.setTerminal(term);
     }
+    /**
+     * 
+     * @return
+     */
     public JavaPlot getJavaPlot() {
         return plot;
     }
     
+    /**
+     * 
+     */
     public void plot() {
         if (plot==null) return;
         plot.plot();

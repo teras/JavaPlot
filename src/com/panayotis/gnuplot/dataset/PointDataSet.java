@@ -16,16 +16,29 @@ import java.util.Collection;
 
 /**
  *
+ * @param N 
  * @author teras
  */
 public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  implements DataSet, Serializable {
     
+    /**
+     * 
+     */
     public PointDataSet() {
         super();
     }
+    /**
+     * 
+     * @param initial
+     */
     public PointDataSet(int initial) {
         super(initial);
     }
+    /**
+     * 
+     * @param pts
+     * @throws java.lang.NumberFormatException
+     */
     public PointDataSet(Collection<? extends Point<N>> pts) throws NumberFormatException {
         super(pts);
         int length = size();
@@ -71,6 +84,10 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  impleme
         return super.set(index, point);
     }
     
+    /**
+     * 
+     * @param coords
+     */
     public void addPoint(N... coords) {
         add(new Point<N>(coords));
     }
@@ -85,6 +102,13 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  impleme
     }
     
     
+    /**
+     * 
+     * @param objclass
+     * @param array
+     * @return
+     * @throws java.lang.ArrayStoreException
+     */
     @SuppressWarnings("unchecked")
     public static final  <N extends Number> PointDataSet<N> constructDataSet(Class <N> objclass, Object array) throws ArrayStoreException {
         int length, dim, cdim;

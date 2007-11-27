@@ -15,15 +15,26 @@ package com.panayotis.gnuplot.terminal;
  */
 public class PostscriptTerminal extends TextFileTerminal {
     
+    /**
+     * 
+     */
     public PostscriptTerminal() {
         this("");
     }
+    /**
+     * 
+     * @param filename
+     */
     public PostscriptTerminal(String filename) {
         super("postscript", filename);
         setColor(true);
         setEPS(true);
     }
     
+    /**
+     * 
+     * @param eps
+     */
     public void setEPS(boolean eps) {
         if (eps)
             set("eps");
@@ -31,6 +42,10 @@ public class PostscriptTerminal extends TextFileTerminal {
             unset("eps");
     }
     
+    /**
+     * 
+     * @param color
+     */
     public void setColor(boolean color) {
         if (color)  {
             set("color");

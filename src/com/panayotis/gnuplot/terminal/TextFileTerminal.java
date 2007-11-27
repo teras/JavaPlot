@@ -19,9 +19,14 @@ import java.io.InputStreamReader;
  * @author teras
  */
 public class TextFileTerminal extends FileTerminal {
+    /**
+     * 
+     */
     protected String output;
     
-    /** Creates a new instance of TextFileTerminal */
+    /** Creates a new instance of TextFileTerminal
+     * @param type 
+     */
     public TextFileTerminal(String type) {
         this(type, "");
     }
@@ -49,6 +54,10 @@ public class TextFileTerminal extends FileTerminal {
         return null;
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getTextOutput() {
         return output;
     }

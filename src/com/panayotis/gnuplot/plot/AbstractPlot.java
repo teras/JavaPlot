@@ -25,14 +25,25 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
     private PlotStyle style = null;
     private Smooth smooth = null;
     
+    /**
+     * 
+     */
     public AbstractPlot() {
         super(" ", "");
         set("title", "'Datafile " + (++last_id)+"'");
     }
     
+    /**
+     * 
+     * @param definition
+     */
     protected void setDefinition(String definition) {
         this.definition = definition;
     }
+    /**
+     * 
+     * @return
+     */
     public String getDefinition() {
         StringBuffer buf = new StringBuffer();
         buf.append(definition);
@@ -42,14 +53,26 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
         return buf.toString();
     }
     
+    /**
+     * 
+     * @param style
+     */
     public void setPlotStyle(PlotStyle style) {
         this.style= style;
     }
+    /**
+     * 
+     * @return
+     */
     public PlotStyle getPlotStyle() {
         if (style==null)
             style = new PlotStyle();
         return style;
     }
+    /**
+     * 
+     * @param smooth
+     */
     public void setSmooth(Smooth smooth) {
         this.smooth = smooth;
     }

@@ -22,28 +22,55 @@ public class DataSetPlot extends AbstractPlot {
     
     private DataSet dataset;
     
+    /**
+     * 
+     */
     public DataSetPlot() {
         this(new PointDataSet());
     }
+    /**
+     * 
+     * @param dataset
+     */
     public DataSetPlot(double[][] dataset) {
         this(new ArrayDataSet(dataset));
     }
+    /**
+     * 
+     * @param dataset
+     */
     public DataSetPlot(float[][] dataset) {
         this(new ArrayDataSet(dataset));
     }
+    /**
+     * 
+     * @param dataset
+     */
     public DataSetPlot(int[][] dataset) {
         this(new ArrayDataSet(dataset));
     }
+    /**
+     * 
+     * @param dataset
+     */
     public DataSetPlot(long[][] dataset) {
         this(new ArrayDataSet(dataset));
     }
     
+    /**
+     * 
+     * @param dataset
+     */
     public DataSetPlot(DataSet dataset) {
         setDataSet(dataset);
         setDefinition("'-'");
     }
     
     
+    /**
+     * 
+     * @return
+     */
     public String getData() {
         StringBuffer bf = new StringBuffer();
         int i, j;
@@ -63,9 +90,17 @@ public class DataSetPlot extends AbstractPlot {
         return bf.toString();
     }
     
+    /**
+     * 
+     * @param set
+     */
     public void setDataSet(DataSet set) {
         dataset = set;
     }
+    /**
+     * 
+     * @return
+     */
     public DataSet getDataSet() {
         return dataset;
     }

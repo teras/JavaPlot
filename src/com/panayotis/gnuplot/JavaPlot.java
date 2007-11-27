@@ -19,15 +19,42 @@ import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 public class JavaPlot extends GNUPlot {
     
     
+    /**
+     * Create a new instance of JavaPlot, with the default parameters
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
+     * this case there is need to use a constructor which defines the gnuplot path.
+     * @see GNUPlot#GNUPlot()
+     */
     public JavaPlot() throws GNUPlotException {
         super();
     }
+    /**
+     * Create a new JavaPlot object with a given gnuplot path
+     * @param gnuplotpath
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown.  It means that the
+     * provided path for gnuplot is not valid.
+     * @see GNUPlot#GNUPlot(String)
+     */
     public JavaPlot(String gnuplotpath) throws GNUPlotException {
         super(gnuplotpath);
     }
+    /**
+     *  Create a new JavaPlot object with given parameters
+     * @param par
+     * @throws com.panayotis.gnuplot.GNUPlotException
+     * @see GNUPlot#GNUPlot(GNUPlotParameters)
+     */
     public JavaPlot(GNUPlotParameters par) throws GNUPlotException {
         super(par);
     }
+    /**
+     * Create a new JavaPlot object with given parameters, gnuplot path and terminal
+     * @param par
+     * @param gnuplotpath
+     * @param term
+     * @throws com.panayotis.gnuplot.GNUPlotException
+     * @see GNUPlot#GNUPlot(GNUPlotParameters,String,GNUPlotTerminal)
+     */
     public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term) throws GNUPlotException {
         super(par, gnuplotpath, term);
     }
@@ -40,9 +67,16 @@ public class JavaPlot extends GNUPlot {
     }
     
     
+    /**
+     * 
+     */
     public static enum Key {OFF, TOP_RIGHT, BOTTOM_RIGHT, TOP_LEFT, BOTTOM_LEFT, BELOW, OUTSIDE};
     
     
+    /**
+     * 
+     * @param position
+     */
     public void setKey(Key position) {
         if (position==null)
             set("key", null);
@@ -52,10 +86,34 @@ public class JavaPlot extends GNUPlot {
     
     
     
+    /**
+     * 
+     * @param points
+     */
     public void addPlot(double[][] points) { addPlot(new DataSetPlot(points)); }
+    /**
+     * 
+     * @param points
+     */
     public void addPlot(float[][] points) { addPlot(new DataSetPlot(points)); }
+    /**
+     * 
+     * @param points
+     */
     public void addPlot(int[][] points) { addPlot(new DataSetPlot(points)); }
+    /**
+     * 
+     * @param points
+     */
     public void addPlot(long[][] points) { addPlot(new DataSetPlot(points)); }
+    /**
+     * 
+     * @param function
+     */
     public void addPlot(String function) { addPlot(new FunctionPlot(function)); }
+    /**
+     * 
+     * @param set
+     */
     public void addPlot(DataSet set) { addPlot(new DataSetPlot(set)); }
 }

@@ -28,6 +28,10 @@ public class SVGTerminal extends TextFileTerminal {
         this("");
     }
     
+    /**
+     * 
+     * @param filename
+     */
     public SVGTerminal(String filename) {
         super("svg", filename);
     }
@@ -40,8 +44,15 @@ public class SVGTerminal extends TextFileTerminal {
         return out_status;
     }
     
-    /* Use reflection API to create the representation in SVG format */
+    /**
+     * 
+     * @param width
+     * @param height
+     * @return
+     * @throws java.lang.ClassNotFoundException
+     */
     public JPanel getPanel(int width, int height) throws ClassNotFoundException {
+        /* Use reflection API to create the representation in SVG format */
         Object svgDisplayPanel = null;
         try {
             svgDisplayPanel = Class.forName("com.kitfox.svg.SVGDisplayPanel").newInstance();

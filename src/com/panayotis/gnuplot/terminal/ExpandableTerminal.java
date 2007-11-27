@@ -19,6 +19,10 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
     
     private String type;
     
+    /**
+     * 
+     * @param type
+     */
     public ExpandableTerminal(String type) {
         super(" ", "");
         if (type==null) type ="unknown";

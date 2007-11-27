@@ -22,7 +22,12 @@ import java.util.StringTokenizer;
  */
 public class FileDataSet extends PointDataSet<Double> {
     
-    /** Creates a new instance of FileDataSet */
+    /** Creates a new instance of FileDataSet
+     * @param datafile
+     * @throws java.io.IOException 
+     * @throws com.panayotis.gnuplot.GNUPlotException
+     * @throws java.lang.NumberFormatException 
+     */
     public FileDataSet(File datafile) throws IOException, GNUPlotException, NumberFormatException {
         super();
         

@@ -19,6 +19,7 @@ public class FunctionPlot extends AbstractPlot{
     
     /**
      * Creates a new instance of FunctionPlot
+     * @param function 
      */
     public FunctionPlot(String function) {
         if (function==null) function = "0";
@@ -27,6 +28,10 @@ public class FunctionPlot extends AbstractPlot{
         setDefinition(function);
     }
 
+    /**
+     * 
+     * @return
+     */
     public String getData() { return ""; }
 
 }

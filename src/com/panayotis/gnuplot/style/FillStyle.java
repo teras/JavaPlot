@@ -16,38 +16,67 @@ import com.panayotis.gnuplot.PropertiesHolder;
  * @author teras
  */
 public class FillStyle extends PropertiesHolder {
+    /**
+     * 
+     */
     public enum Fill {EMPTY, SOLID, PATTERN};
     
     private Fill style;
     private String params;
     
+    /**
+     * 
+     */
     public FillStyle() {
         this(null);
     }
+    /**
+     * 
+     * @param style
+     */
     public FillStyle(Fill style) {
         super(" ", "");
         if (style==null) style = Fill.EMPTY;
         this.style = style;
     }
     
+    /**
+     * 
+     * @param type
+     */
     public void setBorder(int type) {
         unset("noborder");
         set("border", String.valueOf(type));
     }
+    /**
+     * 
+     */
     public void removeBorder() {
         unset("border");
         set("noborder");
     }
     
+    /**
+     * 
+     * @param density
+     */
     public void setDensity(float density) {
         setStyle(Fill.SOLID);
         params = String.valueOf(density);
     }
     
+    /**
+     * 
+     * @param pattern
+     */
     public void setPattern(int pattern) {
         setStyle(Fill.PATTERN);
         params = String.valueOf(pattern);
     }
+    /**
+     * 
+     * @param style
+     */
     public void setStyle(Fill style) {
         this.style = style;
         if (style==Fill.EMPTY)

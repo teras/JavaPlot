@@ -25,7 +25,8 @@ import java.util.ArrayList;
  * @see #addPlot(Plot)
  */
 public class GNUPlot {
-    
+    private static final long serialVersionUID = GNUPlot.serialVersionUID;
+            
     /**
      * GNUPlot parameters. Here we store all gnuplot information.
      */
