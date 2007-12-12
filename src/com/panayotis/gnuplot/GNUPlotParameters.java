@@ -105,11 +105,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         
         /* Set various axis parameters */
         for (Axis ax : axis.values()) {
-            ax.getProperties(bf);
+            ax.appendProperties(bf);
         }
         
         /* Gather various "set" parameters */
-        getProperties(bf);
+        appendProperties(bf);
         
         /* Set Terminal (and it's parameters) */
         if (!term.getType().equals(""))
@@ -129,13 +129,15 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         bf.append("plot");  // Set error parameter
         /* Add plot definitions */
         for (Plot p:plots) {
-            bf.append(' ').append(p.getDefinition()).append(',');
+            bf.append(' ');
+            p.retrieveDefinition(bf);
+            bf.append(',');
         }
         bf.deleteCharAt(bf.length()-1);
         bf.append(" ; _gnuplot_error=0").append(NL);    // Reset error parameter. if everything OK
         /* Add plot data (if any) */
         for(Plot p:plots)
-            bf.append(p.getData());
+            p.retrieveData(bf);
         
         /* Print error check */
         bf.append("if (_gnuplot_error == 1) print '").append(ERRORTAG).append('\'').append(NL);

@@ -9,7 +9,7 @@
 
 package com.panayotis.gnuplot;
 
-import com.panayotis.debug.Debug;
+import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import com.panayotis.io.FileUtils;
 import java.io.BufferedReader;

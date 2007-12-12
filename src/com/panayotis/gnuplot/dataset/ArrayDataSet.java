@@ -12,14 +12,15 @@ package com.panayotis.gnuplot.dataset;
 import java.io.Serializable;
 
 /**
- *
+ * Store data sets in a static primitive 2D array
  * @author teras
  */
 public class ArrayDataSet implements DataSet, Serializable {
-    double[][] val; 
+    private double[][] val; 
     
-    /** Creates a new instance of ArrayDataSet
-     * @param values 
+    /** 
+     * Creates a new instance of ArrayDataSet from a double precision 2D array
+     * @param values the 2D array in double precision to retrieve data from
      */
     public ArrayDataSet(double[][] values) {
         int length = values.length;
@@ -35,9 +36,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
-    /**
-     * 
-     * @param values
+
+    /** 
+     * Creates a new instance of ArrayDataSet from a float precision 2D array
+     * @param values the 2D array in float precision to retrieve data from
      */
     public ArrayDataSet(float[][] values) {
         int length = values.length;
@@ -53,9 +55,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
-    /**
-     * 
-     * @param values
+ 
+    /** 
+     * Creates a new instance of ArrayDataSet from a int precision 2D array
+     * @param values the 2D array in int precision to retrieve data from
      */
     public ArrayDataSet(int[][] values) {
         int length = values.length;
@@ -71,9 +74,10 @@ public class ArrayDataSet implements DataSet, Serializable {
                 val[i][j] = values[i][j];
         }
     }
-    /**
-     * 
-     * @param values
+
+    /** 
+     * Creates a new instance of ArrayDataSet from a long precision 2D array
+     * @param values the 2D array in long precision to retrieve data from
      */
     public ArrayDataSet(long[][] values) {
         int length = values.length;
@@ -91,16 +95,17 @@ public class ArrayDataSet implements DataSet, Serializable {
     }
     
     /**
-     * 
-     * @return
-     */
+     * Retrieve how many points this data set has.
+     * @return the number of points
+      */
     public int size() {
         return val.length;
     }
 
     /**
-     * 
-     * @return
+     * Retrieve how many dimensions this dataset refers to.
+     * @return the number of dimensions
+     * @see DataSet#getDimensions()
      */
     public int getDimensions() {
         if (val[0]==null) return -1;
@@ -108,13 +113,14 @@ public class ArrayDataSet implements DataSet, Serializable {
     }
 
     /**
-     * 
-     * @param item
-     * @param dimension
-     * @return
+     * Retrieve data information from a point.
+     * @param point The point number
+     * @param dimension The point dimension (or "column") to request data from
+     * @return the point data for this dimension
+     * @see DataSet#getPointValue(int,int)
      */
-    public double getPointValue(int item, int dimension) {
-        return val[item][dimension];
+    public double getPointValue(int point, int dimension) {
+        return val[point][dimension];
     }
     
     

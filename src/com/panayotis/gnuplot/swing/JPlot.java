@@ -14,7 +14,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- *
+ * This Object uses an ImageTerminal as a backend, in order to draw the selected
+ * plot
  * @author  teras
  */
 public class JPlot extends JPanel {
@@ -22,14 +23,16 @@ public class JPlot extends JPanel {
     private JavaPlot plot;
     private ImageTerminal term;
     
-    /** Creates new form JPlot */
+    /**
+     * Creates new form JPlot with a blank JavaPlot
+     */
     public JPlot() {
         this(new JavaPlot());
     }
     
     /**
-     * 
-     * @param plot
+     * Create a new form JPlot with a specified JavaPlot
+     * @param plot the JavaPlot to use
      */
     public JPlot(JavaPlot plot) {
         initComponents();
@@ -38,23 +41,23 @@ public class JPlot extends JPanel {
     }
 
     /**
-     * 
-     * @param javaplot
+     * Change the current JavaPlot
+     * @param javaplot the JavaPlot to use
      */
     public void setJavaPlot(JavaPlot javaplot) {
         plot = javaplot;
         plot.setTerminal(term);
     }
     /**
-     * 
-     * @return
+     * Retrieve the JavaPlot of this JPlot.
+     * @return the JavaPlot being used
      */
     public JavaPlot getJavaPlot() {
         return plot;
     }
     
     /**
-     * 
+     * Perform a plot on this object
      */
     public void plot() {
         if (plot==null) return;
@@ -63,6 +66,10 @@ public class JPlot extends JPanel {
         setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));
     }
     
+    /**
+     * Paint this component
+     * @param g Graphics handler for this component
+     */
     public void paint(Graphics g) {
         BufferedImage img = term.getImage();
         if (img==null) return;

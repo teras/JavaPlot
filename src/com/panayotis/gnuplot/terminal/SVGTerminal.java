@@ -18,24 +18,33 @@ import javax.swing.JPanel;
 
 
 /**
- *
+ * This Terminal uses SVG graphics to display data on screen. It relies on the
+ * open source project SVGSalamander (http://svgsalamander.dev.java.net/)
  * @author teras
  */
 public class SVGTerminal extends TextFileTerminal {
     
-    /** Creates a new instance of SVGTerminal */
+    /**
+     * Creates a new instance of SVGTerminal 
+     */
     public SVGTerminal() {
         this("");
     }
     
     /**
-     * 
+     * Creates a new instance of SVGTerminal and store output to a specific file
      * @param filename
      */
     public SVGTerminal(String filename) {
         super("svg", filename);
     }
     
+    /**
+     * Process output of this terminal. Typically this is used to overcome a bug
+     * in SVGSalamander
+     * @param stdout The gnuplot output stream
+     * @return Return the error as a String, if an error occured.
+     */ 
     public String processOutput(InputStream stdout) {
         String out_status = super.processOutput(stdout);
         if (output!=null) {
@@ -45,13 +54,12 @@ public class SVGTerminal extends TextFileTerminal {
     }
     
     /**
-     * 
-     * @param width
-     * @param height
-     * @return
-     * @throws java.lang.ClassNotFoundException
+     * Retrieve a JPanel whith the provided SVG drawn on it.
+     * @return The JPanel with the SVG drawing
+     * @throws java.lang.ClassNotFoundException If the SVGSalamander library could
+     * not be found, or if any other error occured.
      */
-    public JPanel getPanel(int width, int height) throws ClassNotFoundException {
+    public JPanel getPanel() throws ClassNotFoundException {
         /* Use reflection API to create the representation in SVG format */
         Object svgDisplayPanel = null;
         try {

@@ -15,30 +15,38 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- *
+ * Base class of all terminals with output in text format.
  * @author teras
  */
 public class TextFileTerminal extends FileTerminal {
     /**
      * 
      */
-    protected String output;
+    protected String output = "";
     
-    /** Creates a new instance of TextFileTerminal
-     * @param type 
+    /** Creates a new instance of TextFileTerminal.
+     * The output will be parsed by JavaPlot and stored in a String, since it is
+     * expected to be a text and not binary data.
+     * @param type the terminal type
      */
     public TextFileTerminal(String type) {
         this(type, "");
     }
     /**
      * Creates a new instance of TextFileTerminal and output to a specific file
-     * @param type
-     * @param filename
+     * @param type the terminal type
+     * @param filename the file to save output to
      */
     public TextFileTerminal(String type, String filename) {
         super(type, filename);
     }
     
+    /**
+     * Process output of this terminal. Since this is a text terminal, the output
+     * will be stored in a String
+     * @param stdout The gnuplot output stream
+     * @return Return the error as a String, if an error occured.
+     */
     public String processOutput(InputStream stdout) {
         StringBuffer out = new StringBuffer();
         BufferedReader in = new BufferedReader(new InputStreamReader(stdout));
@@ -55,8 +63,8 @@ public class TextFileTerminal extends FileTerminal {
     }
     
     /**
-     * 
-     * @return
+     * Retrieve the String with the output of the last gnuplot command
+     * @return The String with gnuplot output
      */
     public String getTextOutput() {
         return output;

@@ -6,26 +6,26 @@
  */
 package com.panayotis.gnuplot.terminal;
 
-import java.io.InputStream;
-
 /**
- *
+ * This Terminal supports file operations.
+ * The results of the gnuplot commands can be stored in a file, if desired.
  * @author teras
  */
 public class FileTerminal extends ExpandableTerminal {
     
     private String filename;
     /**
-     * Creates a new instance of FileTerminal and output to STDOUT
-     * @param type
+     * Creates a new instance of FileTerminal and output to stadard out
+     * @param type The terminal type
      */
     public FileTerminal(String type) {
         this(type, "");
     }
     /**
      * Creates a new instance of FileTerminal and output to a specific file
-     * @param type
-     * @param filename
+     * @param type The terminal type
+     * @param filename e filaname to use as an output for this terminal
+     * @see #getOutputFile()
      */
     public FileTerminal(String type, String filename) {
         super(type);
@@ -34,8 +34,10 @@ public class FileTerminal extends ExpandableTerminal {
     }
     
     /**
-     *
-     * @return The output filename
+     * Retrieve the filaname to use as an output for this terminal.
+     * If the filename empty, then the output will be dumped to standard output,
+     * and retrieved by JavaPlot
+     * @return If this parameter is not empty, the output filename
      */
     public String getOutputFile() {
         return filename;

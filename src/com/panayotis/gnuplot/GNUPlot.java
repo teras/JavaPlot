@@ -9,7 +9,7 @@
 
 package com.panayotis.gnuplot;
 
-import com.panayotis.debug.Debug;
+import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;

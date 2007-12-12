@@ -17,16 +17,18 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- *
+ * This object uses data sets already stored in files. 
  * @author teras
  */
 public class FileDataSet extends PointDataSet<Double> {
     
-    /** Creates a new instance of FileDataSet
-     * @param datafile
-     * @throws java.io.IOException 
-     * @throws com.panayotis.gnuplot.GNUPlotException
-     * @throws java.lang.NumberFormatException 
+    /**
+     * Creates a new instance of a data set, stored in a file.
+     * When this object is initialized, the file is read into memory.
+     * @param datafile The file containing the data set
+     * @throws java.io.IOException when a I/O error is found
+     * @throws com.panayotis.gnuplot.GNUPlotException when the file is not in the correct format
+     * @throws java.lang.NumberFormatException when the numbers inside the file are not parsable
      */
     public FileDataSet(File datafile) throws IOException, GNUPlotException, NumberFormatException {
         super();

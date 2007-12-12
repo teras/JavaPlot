@@ -10,28 +10,35 @@
 package com.panayotis.gnuplot.dataset;
 
 /**
- *
+ * This is the generic interface which every data set object should provide. By
+ * implementing this interface the author can create his own data objects which 
+ * can be used in JavaPlot
  * @author teras
  */
 public interface DataSet {
     
     /**
-     * 
-     * @return
+~     * Retrieve how many points this data set has.
+     * @return the number of points
      */
     public int size();
-    /**
-     * 
-     * @return
+    /** 
+     * Retrieve how many dimensions this dataset refers to.
+     * Typically, for every point, this method informs JavaPlot how many "columns"
+     * of data this point has. Make sure that every point has at least as many
+     * dimensions as what is reported here .
+     * @return the number of dimensions
      */
     public int getDimensions();
     
     /**
-     * 
-     * @param item
-     * @param dimension
-     * @return
+     * Retrieve data information from a point.
+     * To retrieve information for each point, a continious call to this method will be
+     * executed, keeping the item number constant and increasing the dimension.
+     * @param point The point number
+     * @param dimension The point dimension (or "column") to request data from
+     * @return the point data for this dimension
      */
-    public double getPointValue(int item, int dimension);
+    public double getPointValue(int point, int dimension);
    
 }

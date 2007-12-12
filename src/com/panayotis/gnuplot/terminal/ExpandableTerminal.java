@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- *
+ * This is the base class of all special terminals found in JavaPlot. It provides 
+ * support for terminal types and consumes unwanted gnuplot output.
  * @author teras
  */
 public abstract class ExpandableTerminal extends PropertiesHolder implements GNUPlotTerminal {
@@ -20,8 +21,8 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
     private String type;
     
     /**
-     * 
-     * @param type
+     * Create a new Terminal with a given type
+     * @param type The terminal to use
      */
     public ExpandableTerminal(String type) {
         super(" ", "");
@@ -30,13 +31,13 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
     }
     
     /**
-     *
-     * @return The type of this terminal
+     * Get the type of this terminal
+     * @return String representation of this terminal type
      */
     public String getType() {
         StringBuffer buf = new StringBuffer();
         buf.append(type);
-        getProperties(buf);
+        appendProperties(buf);
         return buf.toString();
     }
     
@@ -45,6 +46,7 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
      * prevent a possible thread lockup.
      * @param stdout The output of GNUPlot. It will be consumed.
      */
+    @SuppressWarnings("empty-statement")
     public String processOutput(InputStream stdout) {
         byte[] buffer = new byte[1000];
         BufferedInputStream in = new BufferedInputStream(stdout);

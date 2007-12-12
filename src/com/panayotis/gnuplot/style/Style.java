@@ -10,7 +10,7 @@
 package com.panayotis.gnuplot.style;
 
 /**
- *
+ * Possible styles to use in gnuplot
  * @author teras
  */
 public enum Style {
@@ -47,9 +47,9 @@ public enum Style {
     final boolean filled; // could be filled
     
     /**
-     * 
-     * @param columns
-     * @param filled
+     * Create a new Style enumeration
+     * @param columns how many dimensions is required
+     * @param filled whether can be filled or not
      */
     Style(int columns, boolean filled) {
         this.columns = columns;

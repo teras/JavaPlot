@@ -5,10 +5,10 @@
 
 package com.panayotis.gnuplot;
 
-import com.panayotis.debug.Debug;
+import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
-import com.panayotis.gnuplot.style.PlotColor;
+import com.panayotis.gnuplot.style.NamedPlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Style;
 import com.panayotis.gnuplot.terminal.FileTerminal;
@@ -98,7 +98,7 @@ public class GNUPlotTest {
         
         PlotStyle stl = ((AbstractPlot)p.getPlots().get(1)).getPlotStyle();
         stl.setStyle(Style.POINTS);
-        stl.setLineType(PlotColor.GOLDENROD);
+        stl.setLineType(NamedPlotColor.GOLDENROD);
         stl.setPointType(5);
         stl.setPointSize(8);
         

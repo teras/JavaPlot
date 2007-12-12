@@ -14,7 +14,8 @@ import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Smooth;
 
 /**
- *
+ * This is the base class of all plot objects. It is used to define the basic
+ * caracteristics of plot handling, such as definition and styles 
  * @author teras
  */
 public abstract class AbstractPlot extends PropertiesHolder implements Plot {
@@ -26,7 +27,7 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
     private Smooth smooth = null;
     
     /**
-     * 
+     * General purpose contructor of a generic plot object
      */
     public AbstractPlot() {
         super(" ", "");
@@ -34,35 +35,38 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
     }
     
     /**
-     * 
-     * @param definition
+     * Set the plot definition for this plot object. It is the part that the plot
+     * command parses.
+     * @param definition The string representing the plot definition.
      */
     protected void setDefinition(String definition) {
         this.definition = definition;
     }
     /**
-     * 
-     * @return
+     * Retrieve the definition of this Plot object.
+     * If styles or smoothing engines
+     * were used, the appropriate arguments are appended
+     * @param buf The buffer to store the data set.
      */
-    public String getDefinition() {
-        StringBuffer buf = new StringBuffer();
+    public void retrieveDefinition(StringBuffer buf) {
         buf.append(definition);
-        getProperties(buf);
+        appendProperties(buf);
         if (smooth!=null) buf.append(smooth.toString());
-        if (style!=null) style.getProperties(buf);
-        return buf.toString();
+        if (style!=null) style.appendProperties(buf);
     }
     
     /**
-     * 
-     * @param style
+     * Set how this plot will be presented.
+     * Provide information about colors and sizes, in accordance with the selected terminal.
+     * Give "null" if you want to turn off this deafure.
+     * @param style The style to use
      */
     public void setPlotStyle(PlotStyle style) {
         this.style= style;
     }
     /**
-     * 
-     * @return
+     * Retrieve the style of this Plot command
+     * @return The style being used
      */
     public PlotStyle getPlotStyle() {
         if (style==null)
@@ -70,8 +74,8 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
         return style;
     }
     /**
-     * 
-     * @param smooth
+     * Define if this plot should be smoothed.
+     * @param smooth The smooth definition. Give "null" if you want to turn off this deafure.
      */
     public void setSmooth(Smooth smooth) {
         this.smooth = smooth;
