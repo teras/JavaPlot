@@ -22,6 +22,7 @@ If you want to go deeper into the library, it is important to understand "Proepr
 
 There are some things that are not supported yet. These are mainly the multiplot environment and splot-family commands. Still, using methods like getPreInit() and getPostInit() you might be able to simulate them.
 
+If you want to use SVG output in Java, you need a library to handle SVG files. Such a library is SVGSalamander provided with this package. There is a bug in this library, though, which ignores color values. Thus all colors in SVG graphs are black.
 
 
 Feedback
