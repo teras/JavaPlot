@@ -70,4 +70,18 @@
 
     -->
 
+	<target name="tar" depends="clean,javadoc">
+		<delete dir="build"/>
+		<exec executable="tar" dir="..">
+			<arg line="--exclude=.svn -jcvf JavaPlot-0.1.0.tar.bz2 JavaPlot"/>
+		</exec>
+		<move file="../JavaPlot-0.1.0.tar.bz2" todir="."/>
+	</target>
+
+
+	<target name="-post-clean">
+		<delete file="JavaPlot-0.1.0.tar.bz2"/>
+	</target>
+	
+
 </project>
