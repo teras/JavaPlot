@@ -31,6 +31,6 @@ Feedback
 Any problems, suggestions, corrections, ideas e.t.c. are strongly welcome. Note that this library is still alpha quality, in the sense that the library API is not fixed yet and it will change in the next version. The reason that it is downloadable, is because I believe that it is already very useful and more or less complete already (and of course I need some feedback).
 
 To contact me, write to:
-panayotis@panayotis.com
+panayotis (a) panayotis.com
 
 Thank you for trying this software.
