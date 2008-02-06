@@ -31,7 +31,7 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
      */
     public AbstractPlot() {
         super(" ", "");
-        set("title", "'Datafile " + (++last_id)+"'");
+        setTitle("Datafile " + (++last_id));
     }
     
     /**
@@ -80,4 +80,12 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
     public void setSmooth(Smooth smooth) {
         this.smooth = smooth;
     }
+    
+    /**
+     * A convinient method to set the title of this plot
+     * @param title The title to use for this plot
+     */
+     public void setTitle (String title) {
+        set("title", "'"+title+"'"); 
+     }
 }
