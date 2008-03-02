@@ -102,6 +102,7 @@ public class GNUPlotTest {
         stl.setPointType(5);
         stl.setPointSize(8);
         
+        //p.setPersist(false);
         //p.setTerminal(eps);
         p.plot();
         

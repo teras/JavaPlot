@@ -27,6 +27,11 @@ class GNUPlotExec {
     private static final transient String DEFAULT_PATH = FileUtils.findPathExec("gnuplot");
     private transient File gnuplotexec;
     
+    private boolean ispersist;
+    private final static String [] persistcommand = { "path", "-persist"};
+    private final static String [] nopersist = { "path" };
+    
+    
     /**
      * Create a new GNUPlotExec object with  defaultΩ gnuplot path. Under POSIX environment,
      * it is able to automatically find gnuplot executable in the $PATH
@@ -43,6 +48,7 @@ class GNUPlotExec {
     GNUPlotExec(String path) throws IOException {
         if (path==null) path = DEFAULT_PATH;
         setGNUPlotPath(path);
+        ispersist = true;
     }
     
     
@@ -85,7 +91,10 @@ class GNUPlotExec {
             GNUPlot.getDebugger().msg("** End of plot commands **", Debug.INFO);
             
             /* It's time now to start the actual gnuplot application */
-            String [] command = { getGNUPlotPath(), "-persist" };
+            String [] command;
+            if (ispersist) command = persistcommand;
+            else command = nopersist;
+            command[0] = getGNUPlotPath();
             final Process proc = Runtime.getRuntime().exec(command);
             
             /* Windows buffers DEMAND asynchronus read & write */
@@ -162,6 +171,10 @@ class GNUPlotExec {
             throw new GNUPlotException("IOException while executing \""+getGNUPlotPath()+"\":"+ex.getLocalizedMessage());
         }
         
+    }
+
+    void setPersist(boolean persist) {
+        ispersist = persist;
     }
     
     private class Messages {

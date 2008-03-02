@@ -176,6 +176,15 @@ public class GNUPlot {
     }
     
     /**
+     * Set all terminals to be persistent. Thus, after executing plot command,
+     * the graph window stays open and does not disappear automatically.
+     * @param ispersist whether the terminal window should be persistent
+     */
+    public void setPersist(boolean ispersist) {
+        exec.setPersist(ispersist);
+    }
+    
+    /**
      * Set gnuplot parameters to another set of parameters.
      * @param parameters The new GNUPlot parameters.
      */
