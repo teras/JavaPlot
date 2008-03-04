@@ -54,7 +54,7 @@ public class Debug {
      * Creates a new instance of Debug
      */
     public Debug() {
-        setLevel(INFO);
+        setLevel(WARNING);
         out = new BufferedWriter(new OutputStreamWriter(System.err));
     }
     

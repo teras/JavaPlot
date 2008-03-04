@@ -9,6 +9,7 @@
 
 package com.panayotis.gnuplot.terminal;
 
+import com.sun.tools.corba.se.idl.InvalidArgument;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
@@ -47,7 +48,7 @@ public class SVGTerminal extends TextFileTerminal {
      */ 
     public String processOutput(InputStream stdout) {
         String out_status = super.processOutput(stdout);
-        if (output!=null) {
+        if (output!=null && getOutputFile().equals("") ) {
             output = output.replace("currentColor", "black");
         }
         return out_status;
@@ -62,6 +63,8 @@ public class SVGTerminal extends TextFileTerminal {
     public JPanel getPanel() throws ClassNotFoundException {
         /* Use reflection API to create the representation in SVG format */
         Object svgDisplayPanel = null;
+        if (output==null || output.equals(""))
+            throw new NullPointerException("SVG output is empty; probably SVG terminal is not used or plot() not executed yet.");
         try {
             svgDisplayPanel = Class.forName("com.kitfox.svg.SVGDisplayPanel").newInstance();
             Object universe = Class.forName("com.kitfox.svg.SVGUniverse").newInstance();
@@ -78,6 +81,8 @@ public class SVGTerminal extends TextFileTerminal {
         } catch (IllegalAccessException e) {
             throw new ClassNotFoundException(e.getMessage());
         } catch (InvocationTargetException e) {
+            throw new ClassNotFoundException(e.getMessage());
+        } catch (Exception e) {
             throw new ClassNotFoundException(e.getMessage());
         }
         
