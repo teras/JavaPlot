@@ -66,4 +66,9 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+	<target name="-post-jar">
+		<delete file="dist/README.TXT"/>
+		<delete dir="dist/lib"/>
+	</target>
 </project>

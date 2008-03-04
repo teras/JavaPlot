@@ -25,18 +25,21 @@ import javax.swing.JPanel;
 public class demo {
 
     /**
-     * @param args the command line arguments
+     * @param args the command line arguments. First argument is the path of gnuplot application
      */
     public static void main(String[] args) {
-        // defaultTerminal();
-        // EPSTerminal();
-        // SVGTerminal();
-        ImageTerminal();
+        String path = null;
+        if (args.length>0) path=args[0];
+        
+        //defaultTerminal(path);
+        //EPSTerminal(path);
+        //SVGTerminal(path);
+        ImageTerminal(path);
     }
 
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
-    private static void defaultTerminal() {
-        JavaPlot p = new JavaPlot();
+    private static void defaultTerminal(String gnuplotpath) {
+        JavaPlot p = new JavaPlot(gnuplotpath);
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
 
         p.setTitle("Default Terminal Title");
@@ -59,7 +62,7 @@ public class demo {
     }
 
     /* This demo code creates a EPS file on home directory */
-    private static void EPSTerminal() {
+    private static void EPSTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
 
         PostscriptTerminal epsf = new PostscriptTerminal(System.getProperty("user.home") +
@@ -74,7 +77,7 @@ public class demo {
     }
 
     /* This demo code displays plot on screen using image terminal */
-    private static void ImageTerminal() {
+    private static void ImageTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
         final ImageTerminal img = new ImageTerminal();
         p.setTerminal(img);
@@ -110,7 +113,7 @@ public class demo {
     }
 
     /* This demo code displays plot on screen using SVG commands (only b&w) */
-    private static void SVGTerminal() {
+    private static void SVGTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
 
