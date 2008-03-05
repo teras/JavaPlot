@@ -47,7 +47,6 @@ public class GridGraphLayout implements GraphLayout {
         if (start == LayoutStart.DOWNLEFT || start == LayoutStart.DOWNRIGHT) {
             lin = height - lin -1;
         }
-        System.out.println(index + "=" + col+","+lin);
 
         LayoutMetrics ret = new LayoutMetrics();
         ret.x = dx*col;
@@ -74,5 +73,9 @@ public class GridGraphLayout implements GraphLayout {
 
     public void setOrientation(boolean orientation) {
         this.orientation = orientation;
+    }
+
+    public void updateCapacity(int size) {
+        setLayout(size, 1);
     }
 }

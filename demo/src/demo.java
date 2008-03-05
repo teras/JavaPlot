@@ -60,6 +60,12 @@ public class demo {
         stl.setLineType(NamedPlotColor.GOLDENROD);
         stl.setPointType(5);
         stl.setPointSize(8);
+        p.addPlot("sin(x)");
+        
+        p.newGraph();
+        p.addPlot("sin(x)");
+        
+        p.setMultiTitle("Global test title");
         p.plot();
     }
 

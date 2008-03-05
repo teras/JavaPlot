@@ -4,6 +4,7 @@
  */
 package com.panayotis.gnuplot.plot;
 
+import com.panayotis.gnuplot.GNUPlotParameters;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,7 +56,7 @@ public class Graph extends ArrayList<Plot> {
         }
 
         /* Create data plots */
-        bf.append("_gnuplot_error = 1").append(NL);
+        bf.append(ERROR_VAR).append(" = 1").append(NL);
         bf.append("plot");  // Set error parameter
         /* Add plot definitions */
         for (Plot p : this) {
@@ -64,14 +65,13 @@ public class Graph extends ArrayList<Plot> {
             bf.append(',');
         }
         bf.deleteCharAt(bf.length() - 1);
-        bf.append(" ; _gnuplot_error=0").append(NL);    // Reset error parameter. if everything OK
+        bf.append(GNUPlotParameters.NOERROR_COMMAND).append(NL);    // Reset error parameter. if everything OK
         /* Add plot data (if any) */
         for (Plot p : this) {
             p.retrieveData(bf);
         }
 
         /* Print error check */
-        bf.append("if (_gnuplot_error == 1) print '").append(ERRORTAG).append('\'').append(NL);
-        bf.append("if (_gnuplot_error == 0) print '").append(SUCCESSTAG).append('\'').append(NL);
+        bf.append("if (").append(ERROR_VAR).append(" == 1) print '").append(ERRORTAG).append('\'').append(NL);
     }
 }

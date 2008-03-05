@@ -26,12 +26,12 @@ import java.util.ArrayList;
 public class GNUPlotParameters extends PropertiesHolder implements Serializable {
 
     public final static String ERRORTAG = "_ERROR_";
-    public final static String SUCCESSTAG = "_SUCCESS_";
-
+    public final static String ERROR_VAR = "_gnuplot_error";
+    public final static String NOERROR_COMMAND = " ; " + ERROR_VAR + " = 0";
     private ArrayList<Graph> graphs;
     private String pagetitle;
     private GraphLayout layout;
-    
+    private int defaultgraph;
     private ArrayList<String> preinit;
     private ArrayList<String> postinit;
 
@@ -43,7 +43,8 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         graphs.add(new Graph());
         pagetitle = "";
         layout = new GridGraphLayout(1, 1);
-        
+        defaultgraph = 0;
+
         preinit = new ArrayList<String>();
         postinit = new ArrayList<String>();
     }
@@ -54,7 +55,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
-        return graphs.get(0).getAxis(axisname);
+        return graphs.get(defaultgraph).getAxis(axisname);
     }
 
     /**
@@ -83,9 +84,38 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @param plot The given plot.
      */
     public void addPlot(Plot plot) {
-        graphs.get(0).add(plot);
+        graphs.get(defaultgraph).add(plot);
     }
 
+    /**
+     * Add a new Graph object. This method is used to create a multiplot graph.
+     * Every "plot" command corresponds to a different Graph object. In order to
+     * draw to a new plot gnuplot object, create a new page.
+     */
+    public void newGraph() {
+        addGraph(new Graph());
+    }
+
+    /**
+     * Add a defined graph.
+     * @param gr Graph object to be added
+     * @see #newGraph()
+     */
+    public void addGraph(Graph gr) {
+        graphs.add(gr);
+        defaultgraph = graphs.size() - 1;
+        layout.updateCapacity(graphs.size());
+    }
+
+    /**
+     * Set the title of all graph objects, in multiplot environment.
+     * @param title The title to use
+     */
+    public void setMultiTitle(String title) {
+        if (title==null) title = "";
+        pagetitle = title;
+    }
+    
     /**
      * Get the actual GNUPlot commands. This method is used to construct the gnuplot program
      * @param term The terminal to use
@@ -120,7 +150,10 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         /* Append various plots */
         if (graphs.size() > 1) {
             /* This is a multiplot */
-            bf.append("set multiplot").append(NL);
+            bf.append("set multiplot");
+            if (!pagetitle.equals(""))
+                    bf.append(" title \"").append(pagetitle).append('"');
+            bf.append(NL);
 
             LayoutMetrics metrics;
             for (int i = 0; i < graphs.size(); i++) {
@@ -129,7 +162,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
                 bf.append("set size ").append(metrics.width).append(',').append(metrics.height).append(NL);
                 graphs.get(i).retrieveData(bf);
             }
-            
+
             bf.append("unset multiplot").append(NL);
         } else {
             graphs.get(0).retrieveData(bf);
@@ -143,10 +176,17 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
 
     /**
      * Get the list of the stored graphs
-     * @return List of Plot objects
+     * @return List of Graph objects
      */
-    ArrayList<Graph> getGraphs() {
+    public ArrayList<Graph> getGraphs() {
         return graphs;
     }
-    
+
+    /**
+     * Get the list of the stored plots from default graph
+     * @return List of Plot objects
+     */
+    public ArrayList<Plot> getPlots() {
+        return graphs.get(defaultgraph);
+    }
 }

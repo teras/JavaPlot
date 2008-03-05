@@ -13,4 +13,8 @@ public class AbsoluteGraphLayout implements GraphLayout {
     public LayoutMetrics getMetrics(int index) {
         return null;
     }
+
+    public void updateCapacity(int size) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

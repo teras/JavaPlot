@@ -11,4 +11,6 @@ package com.panayotis.gnuplot.layout;
 public interface GraphLayout {
 
     public abstract LayoutMetrics getMetrics(int index);
+    
+    public abstract void updateCapacity(int size);
 }
