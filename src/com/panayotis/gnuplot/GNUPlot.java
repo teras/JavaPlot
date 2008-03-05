@@ -10,6 +10,7 @@
 package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.plot.Axis;
+import com.panayotis.gnuplot.plot.Graph;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
@@ -137,12 +138,21 @@ public class GNUPlot {
         param.addPlot(plot);
     }
     /**
-     * Get a list of the plots used in this set. This method is a way to enumerate the
+     * Get a list of the (default) plots used in this set. This method is a way to enumerate the
      * plots already inserted, epspecially if a plot is added on the fly.
      * @return An array of stored plots.
      */
     public ArrayList<Plot> getPlots() {
-        return param.getPlots();
+        return param.getGraphs().get(0);
+    }
+    
+    /**
+     * Get a list of all graphs. This method is used to enumarte the graphs
+     * already inserted, especially if a graph is automatically added
+     * @return An array of stored Graphs
+     */
+    public ArrayList<Graph> getGraphs() {
+        return param.getGraphs();
     }
     
     /**

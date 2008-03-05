@@ -25,7 +25,7 @@ Usage
 -----
 
 [Binary package]
-A demo of JavaPlot usage can be found under "demo/dist" directory. To use it type:
+A JavaPlot demo usage can be found under "demo/dist" directory. To use it type:
 cd demo/dist ; java -jar demo.jar
 
 [Source package]
@@ -35,10 +35,11 @@ cd demo ; ant jar ; java -jar dist/demo.jar
 Source of this demo can be found in "demo/src/demo.java" file.
 If you want to see javadoc, you can have a look under "dist/javadoc" directory.
 
-In order to use JavaPlot in your application, first you have to include JavaPlot.jar
-library in your classpath, found under "dist/JavaPlot.jar" (in binary package). Then the
-easiest way to start creating plots, is to create a new instance of JavaPlot object.
-Have a look at "demo/src/demo.java". Here you can find various ways to use this library.
+In order to use JavaPlot in your application, first you have to include
+JavaPlot.jar library in your classpath, found under "dist/JavaPlot.jar" (in
+binary package). Then the easiest way to start creating plots, is to create a
+new instance of JavaPlot object. Have a look at "demo/src/demo.java". Here you
+can find various ways to use this library.
 
 
 Advanced Usage
@@ -50,14 +51,14 @@ This class is able to store pairs of values (such as key-value pairs). Use the
 set() and unset() method of this class to add parameters which will be used when
 creating the gnuplot program. 
 
-There are some things that are not supported yet. These are mainly the multiplot
-environment and splot-family commands. Still, using methods like getPreInit()
-and getPostInit() you might be able to simulate them.
+There are some things that are not supported yet. This is for example the splot-
+family commands. Still, using methods like getPreInit() and getPostInit() you
+might be able to simulate them.
 
 If you want to use SVG output in Java, you need a library to handle SVG files.
-Such a library is SVGSalamander provided with this package under directory "xtra".
-There is a bug in this library, though, which ignores color values. Thus all colors
-in SVG graphs are black.
+Such a library is SVGSalamander provided with this package under directory
+"xtra". There is a bug in this library, though, which ignores color values. Thus
+all colors in SVG graphs are black.
 
 
 Feedback

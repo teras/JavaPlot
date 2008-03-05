@@ -12,8 +12,8 @@ import com.panayotis.gnuplot.layout.GraphLayout;
 import com.panayotis.gnuplot.layout.GridGraphLayout;
 import com.panayotis.gnuplot.layout.LayoutMetrics;
 import com.panayotis.gnuplot.plot.Axis;
-import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.plot.Graph;
+import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,8 +28,10 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     public final static String ERRORTAG = "_ERROR_";
     public final static String SUCCESSTAG = "_SUCCESS_";
 
-    private ArrayList<Graph> plots;
+    private ArrayList<Graph> graphs;
+    private String pagetitle;
     private GraphLayout layout;
+    
     private ArrayList<String> preinit;
     private ArrayList<String> postinit;
 
@@ -37,10 +39,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *  Create a new plot with the default parameters
      */
     public GNUPlotParameters() {
-        plots = new ArrayList<Graph>();
-        plots.add(new Graph());
-        layout = new GridGraphLayout(1,1);
-
+        graphs = new ArrayList<Graph>();
+        graphs.add(new Graph());
+        pagetitle = "";
+        layout = new GridGraphLayout(1, 1);
+        
         preinit = new ArrayList<String>();
         postinit = new ArrayList<String>();
     }
@@ -51,7 +54,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
-        return plots.get(0).getAxis(axisname);
+        return graphs.get(0).getAxis(axisname);
     }
 
     /**
@@ -80,7 +83,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @param plot The given plot.
      */
     public void addPlot(Plot plot) {
-        plots.get(0).add(plot);
+        graphs.get(0).add(plot);
     }
 
     /**
@@ -115,21 +118,21 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         }
 
         /* Append various plots */
-        if (plots.size() > 1) {
+        if (graphs.size() > 1) {
             /* This is a multiplot */
             bf.append("set multiplot").append(NL);
 
             LayoutMetrics metrics;
-            for (int i = 0; i < plots.size(); i++) {
+            for (int i = 0; i < graphs.size(); i++) {
                 metrics = layout.getMetrics(i);
                 bf.append("set origin ").append(metrics.x).append(',').append(metrics.y).append(NL);
                 bf.append("set size ").append(metrics.width).append(',').append(metrics.height).append(NL);
-                plots.get(i).retrieveData(bf);
+                graphs.get(i).retrieveData(bf);
             }
             
             bf.append("unset multiplot").append(NL);
         } else {
-            plots.get(0).retrieveData(bf);
+            graphs.get(0).retrieveData(bf);
         }
 
         /* Finish! */
@@ -139,10 +142,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     }
 
     /**
-     * Get the list of the stored splot
+     * Get the list of the stored graphs
      * @return List of Plot objects
      */
-    ArrayList<Plot> getPlots() {
-        return plots.get(0);
+    ArrayList<Graph> getGraphs() {
+        return graphs;
     }
+    
 }
