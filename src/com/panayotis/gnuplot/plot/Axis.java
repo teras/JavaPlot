@@ -7,7 +7,9 @@
  * and open the template in the editor.
  */
 
-package com.panayotis.gnuplot;
+package com.panayotis.gnuplot.plot;
+
+import com.panayotis.gnuplot.*;
 
 /**
  * This class represents the various axes of the plot. It is used to set various

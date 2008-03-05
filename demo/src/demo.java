@@ -29,12 +29,14 @@ public class demo {
      */
     public static void main(String[] args) {
         String path = null;
-        if (args.length>0) path=args[0];
-        
-        //defaultTerminal(path);
+        if (args.length > 0) {
+            path = args[0];
+        }
+
+        defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
-        ImageTerminal(path);
+        //ImageTerminal(path);
     }
 
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */

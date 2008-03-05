@@ -9,6 +9,7 @@
 
 package com.panayotis.gnuplot;
 
+import com.panayotis.gnuplot.plot.Axis;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
@@ -37,7 +38,7 @@ public class GNUPlot {
      */
     private transient GNUPlotTerminal term;
     /**
-     * The GNUPlotExc to use.
+     * The GNUPlotExec to use.
      */
     private transient GNUPlotExec exec;
     
