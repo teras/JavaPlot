@@ -33,11 +33,11 @@ public class demo {
         if (args.length > 0) {
             path = args[0];
         }
-        
-        //defaultTerminal(path);
+
+        defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
-        ImageTerminal(path);
+        //ImageTerminal(path);
     }
 
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
@@ -66,7 +66,13 @@ public class demo {
         p.newGraph();
         p.addPlot("sin(x)");
         
+        p.newGraph();
+        p.addPlot("cos(x**2)");
+        
+        p.newGraph();   // This will create an empty box, so that graphs will be put in a 2x2 grid
+        
         p.setMultiTitle("Global test title");
+        ((GridGraphLayout)p.getLayout()).setOrientation(GridGraphLayout.VERTICAL);// change the fill orientation of this plot
         p.plot();
     }
 
@@ -92,12 +98,8 @@ public class demo {
         p.setTerminal(img);
 
         p.setTitle("Image Terminal Title");
-        p.addPlot("x+1");
-        p.newGraph();
-        p.addPlot("x+2");
-        p.newGraph();
-        p.addPlot("x+3");
-//        p.newGraph();
+        p.addPlot("sqrt(x)/x");
+        p.addPlot("x*sin(x)");
         p.plot();
 
         JFrame f = new JFrame();

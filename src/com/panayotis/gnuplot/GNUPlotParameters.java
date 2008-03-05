@@ -115,6 +115,14 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         if (title==null) title = "";
         pagetitle = title;
     }
+
+    /**
+     * Get the current layout of this plot object
+     * @return The used layout
+     */
+    GraphLayout getLayout() {
+        return layout;
+    }
     
     /**
      * Get the actual GNUPlot commands. This method is used to construct the gnuplot program

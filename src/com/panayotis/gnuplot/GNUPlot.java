@@ -8,6 +8,7 @@
  */
 package com.panayotis.gnuplot;
 
+import com.panayotis.gnuplot.layout.GraphLayout;
 import com.panayotis.gnuplot.plot.Axis;
 import com.panayotis.gnuplot.plot.Graph;
 import com.panayotis.iodebug.Debug;
@@ -187,6 +188,14 @@ public class GNUPlot {
      */
     public ArrayList<Graph> getGraphs() {
         return param.getGraphs();
+    }
+
+    /**
+     * Get the current layout of this plot object
+     * @return The used layout
+     */
+    public GraphLayout getLayout() {
+        return param.getLayout();
     }
 
     /**
