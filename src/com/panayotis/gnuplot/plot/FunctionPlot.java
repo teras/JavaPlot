@@ -11,7 +11,7 @@ package com.panayotis.gnuplot.plot;
 
 /**
  * This type of Plot is used to provide an interface to the functional plots of 
- * gnuplot. For example plots like sin(x) or x^2+1
+ * gnuplot. For example plots like sin(x) or x**2+1
  * <br>
  * It can also be used as a generic plot command, if the user wishes to manually
  * provide any plot information, without the interference of JavaPlot library.

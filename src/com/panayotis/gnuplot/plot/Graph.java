@@ -12,7 +12,8 @@ import static com.panayotis.gnuplot.GNUPlotParameters.*;
 
 /**
  * Graph objects are parts of a multi-plot drawing. Each graph contains other plots which
- * share the same axis. All gnuplot objects have at least one graph object
+ * share the same axis. All gnuplot objects have at least one graph object.
+ * <p> For single plots, better have a look at Plot objects and GNUPlot.addPlot() command
  * @author teras
  */
 public class Graph extends ArrayList<Plot> {

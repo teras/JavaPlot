@@ -15,10 +15,7 @@ public class GridGraphLayout implements GraphLayout {
     /**
      * Where the first graph will be put
      */
-    public enum LayoutStart {
-        /**
-         * Position of the first graph
-         */
+    public enum Start {
         UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT;
     }
     
@@ -29,7 +26,7 @@ public class GridGraphLayout implements GraphLayout {
     
     private int width,  height;
     private float dx,  dy;
-    private LayoutStart start;
+    private Start start;
     private boolean orientation;
 
     /**
@@ -39,7 +36,7 @@ public class GridGraphLayout implements GraphLayout {
      */
     public GridGraphLayout(int width, int height) {
         setLayout(width, height);
-        start = LayoutStart.UPLEFT;
+        start = Start.UPLEFT;
         orientation = HORIZONTAL;
     }
 
@@ -63,10 +60,10 @@ public class GridGraphLayout implements GraphLayout {
             col = index / height;
         }
 
-        if (start == LayoutStart.UPRIGHT || start == LayoutStart.DOWNRIGHT) {
+        if (start == Start.UPRIGHT || start == Start.DOWNRIGHT) {
             col = width - col - 1;
         }
-        if (start == LayoutStart.UPLEFT || start == LayoutStart.UPRIGHT) { // Positioning (0,0) in GNUPlot is in lower left corner
+        if (start == Start.UPLEFT || start == Start.UPRIGHT) { // Positioning (0,0) in GNUPlot is in lower left corner
             lin = height - lin - 1;
         }
 
@@ -100,7 +97,7 @@ public class GridGraphLayout implements GraphLayout {
      * Set where the first graph will be put
      * @param start Position of the first graph
      */
-    public void setStartPosition(LayoutStart start) {
+    public void setStartPosition(Start start) {
         this.start = start;
     }
 
