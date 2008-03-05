@@ -4,6 +4,7 @@
  */
 
 import com.panayotis.gnuplot.JavaPlot;
+import com.panayotis.gnuplot.layout.GridGraphLayout;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
@@ -32,11 +33,11 @@ public class demo {
         if (args.length > 0) {
             path = args[0];
         }
-
-        defaultTerminal(path);
+        
+        //defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
-        //ImageTerminal(path);
+        ImageTerminal(path);
     }
 
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
@@ -91,8 +92,12 @@ public class demo {
         p.setTerminal(img);
 
         p.setTitle("Image Terminal Title");
-        p.addPlot("sqrt(x)/x");
-        p.addPlot("x*sin(x)");
+        p.addPlot("x+1");
+        p.newGraph();
+        p.addPlot("x+2");
+        p.newGraph();
+        p.addPlot("x+3");
+//        p.newGraph();
         p.plot();
 
         JFrame f = new JFrame();

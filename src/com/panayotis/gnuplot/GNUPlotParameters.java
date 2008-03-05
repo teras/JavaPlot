@@ -151,16 +151,21 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         if (graphs.size() > 1) {
             /* This is a multiplot */
             bf.append("set multiplot");
-            if (!pagetitle.equals(""))
-                    bf.append(" title \"").append(pagetitle).append('"');
+            if (!pagetitle.equals("")) {
+                bf.append(" title \"").append(pagetitle).append('"');
+            }
             bf.append(NL);
 
             LayoutMetrics metrics;
+            Graph gr;
             for (int i = 0; i < graphs.size(); i++) {
-                metrics = layout.getMetrics(i);
-                bf.append("set origin ").append(metrics.x).append(',').append(metrics.y).append(NL);
-                bf.append("set size ").append(metrics.width).append(',').append(metrics.height).append(NL);
-                graphs.get(i).retrieveData(bf);
+                gr = graphs.get(i);
+                if (gr.size() > 0) {
+                    metrics = layout.getMetrics(i);
+                    bf.append("set origin ").append(metrics.x).append(',').append(metrics.y).append(NL);
+                    bf.append("set size ").append(metrics.width).append(',').append(metrics.height).append(NL);
+                    gr.retrieveData(bf);
+                }
             }
 
             bf.append("unset multiplot").append(NL);

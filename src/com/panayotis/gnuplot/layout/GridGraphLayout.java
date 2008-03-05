@@ -44,7 +44,7 @@ public class GridGraphLayout implements GraphLayout {
         if (start == LayoutStart.UPRIGHT || start == LayoutStart.DOWNRIGHT) {
             col = width - col - 1;
         }
-        if (start == LayoutStart.DOWNLEFT || start == LayoutStart.DOWNRIGHT) {
+        if (start == LayoutStart.UPLEFT || start == LayoutStart.UPRIGHT) { // Positioning (0,0) in GNUPlot is in lower left corner
             lin = height - lin -1;
         }
 
@@ -76,6 +76,12 @@ public class GridGraphLayout implements GraphLayout {
     }
 
     public void updateCapacity(int size) {
-        setLayout(size, 1);
+        if (size <= 0 )
+            throw new GNUPlotException("Capacity should be a number greater than zero.");
+        
+        int x, y;
+        y = (int)(Math.floor(Math.sqrt(size)));
+        x = (int)Math.ceil((double)size/y);
+        setLayout(x, y);
     }
 }
