@@ -25,9 +25,19 @@ import java.util.ArrayList;
  */
 public class GNUPlotParameters extends PropertiesHolder implements Serializable {
 
+    /**
+     * Default error string to use while parsing gnuplot output
+     */
     public final static String ERRORTAG = "_ERROR_";
+    /**
+     * The variable to use to store error status
+     */
     public final static String ERROR_VAR = "_gnuplot_error";
+    /**
+     * The command to use to check that the plot command executed without errors
+     */
     public final static String NOERROR_COMMAND = " ; " + ERROR_VAR + " = 0";
+    
     private ArrayList<Graph> graphs;
     private String pagetitle;
     private GraphLayout layout;

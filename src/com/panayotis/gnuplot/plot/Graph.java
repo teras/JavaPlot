@@ -11,7 +11,8 @@ import java.util.HashMap;
 import static com.panayotis.gnuplot.GNUPlotParameters.*;
 
 /**
- *
+ * Graph objects are parts of a multi-plot drawing. Each graph contains other plots which
+ * share the same axis. All gnuplot objects have at least one graph object
  * @author teras
  */
 public class Graph extends ArrayList<Plot> {
@@ -19,6 +20,9 @@ public class Graph extends ArrayList<Plot> {
     protected static final String NL = System.getProperty("line.separator");
     private HashMap<String, Axis> axis;
 
+    /**
+     * Create a new graph object
+     */
     public Graph() {
         axis = new HashMap<String, Axis>();
         axis.put("x", new Axis("x"));
@@ -49,6 +53,11 @@ public class Graph extends ArrayList<Plot> {
         }
     }
 
+    /**
+     * Get gnuplot commands for this graph.
+     * @deprecated
+     * @param bf
+     */
     public void retrieveData(StringBuffer bf) {
         /* Set various axis parameters */
         for (Axis ax : axis.values()) {

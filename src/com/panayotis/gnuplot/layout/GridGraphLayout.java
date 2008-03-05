@@ -7,29 +7,47 @@ package com.panayotis.gnuplot.layout;
 import com.panayotis.gnuplot.GNUPlotException;
 
 /**
- *
+ * Align graphs evenly on the page, in a grid layout
  * @author teras
  */
 public class GridGraphLayout implements GraphLayout {
 
+    /**
+     * Where the first graph will be put
+     */
     public enum LayoutStart {
-
+        /**
+         * Position of the first graph
+         */
         UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT;
     }
     
-    public static final boolean HORIZONTAL = true;
-    public static final boolean VERTICAL = false;
+    /**
+     * Orientation of the graph layout
+     */
+    public static final boolean HORIZONTAL = true, VERTICAL = false;
+    
     private int width,  height;
     private float dx,  dy;
     private LayoutStart start;
     private boolean orientation;
 
+    /**
+     * Create a new grid layout with specific width and height
+     * @param width width of the layout
+     * @param height height of the layout
+     */
     public GridGraphLayout(int width, int height) {
         setLayout(width, height);
         start = LayoutStart.UPLEFT;
         orientation = HORIZONTAL;
     }
 
+     /**
+     * Get metrics of graph with a specified index.
+     * @param index The index of the graph 
+     * @return Metrics of the positioning of the graph
+     */
     public LayoutMetrics getMetrics(int index) {
 
         if (index >= (width * height)) {
@@ -60,6 +78,11 @@ public class GridGraphLayout implements GraphLayout {
         return ret;
     }
 
+    /**
+     * Set the dimensions of this grid
+     * @param width Width of the grid
+     * @param height Height of the grif
+     */
     public void setLayout(int width, int height) {
         if (width <= 0) {
             throw new GNUPlotException("Width should be a number greater than zero.");
@@ -73,14 +96,27 @@ public class GridGraphLayout implements GraphLayout {
         dy = 1f / height;
     }
 
+    /**
+     * Set where the first graph will be put
+     * @param start Position of the first graph
+     */
     public void setStartPosition(LayoutStart start) {
         this.start = start;
     }
 
+    /**
+     * Sey the orientation of the graphs, as being put
+     * @param orientation Selected orientation
+     */
     public void setOrientation(boolean orientation) {
         this.orientation = orientation;
     }
 
+    /**
+     * Update the capacity of this layout. This manager tries to create  grid, 
+     * as much square as possible
+     * @param size The number of the graphs which will be requested to insert in this grid
+     */
     public void updateCapacity(int size) {
         if (size <= 0) {
             throw new GNUPlotException("Capacity should be a number greater than zero.");

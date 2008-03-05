@@ -5,11 +5,14 @@
 package com.panayotis.gnuplot.layout;
 
 /**
- *
+ * Container of the metrics for a specific graph
  * @author teras
  */
 public class LayoutMetrics {
 
+    /**
+     * Metric values of this graph
+     */
     public float x,  y,  width,  height;
    
 }
