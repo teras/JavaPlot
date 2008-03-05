@@ -4,11 +4,13 @@
  */
 package com.panayotis.gnuplot.layout;
 
+import java.io.Serializable;
+
 /**
  * Position graphs in absolute coordinates. Note: this layout is not supported yet.
  * @author teras
  */
-public class AbsoluteGraphLayout implements GraphLayout {
+public class AbsoluteGraphLayout implements GraphLayout, Serializable {
 
     /**
      * Get metrics of graph with a specified index.

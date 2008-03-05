@@ -14,6 +14,8 @@ import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 /**
  * A friendly wrapper of GNUPlot, able to set common plot parameters. If easy of use
  * is required, it is recommended to use this class instead of GNUPlot.
+ *  * <p>
+ * This object is not serializable, use GNUPlotParameters instead.
  * @author teras
  */
 public class JavaPlot extends GNUPlot {

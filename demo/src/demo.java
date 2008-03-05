@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 
+import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.layout.GridGraphLayout;
 import com.panayotis.iodebug.Debug;
@@ -16,6 +17,13 @@ import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import com.panayotis.gnuplot.terminal.SVGTerminal;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -38,10 +46,37 @@ public class demo {
         //EPSTerminal(path);
         //SVGTerminal(path);
         //ImageTerminal(path);
+
+
+        //serializationTest(defaultTerminal(path));
+
+    }
+
+    private static void serializationTest(JavaPlot p) {
+        ObjectOutputStream out = null;
+        ObjectInputStream in = null;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream("koko.lala"));
+            out.writeObject(p.getParameters());
+
+            in = new ObjectInputStream(new FileInputStream("koko.lala"));
+            JavaPlot q = new JavaPlot ( (GNUPlotParameters) in.readObject());
+            q.plot();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
-    private static void defaultTerminal(String gnuplotpath) {
+    private static JavaPlot defaultTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot(gnuplotpath);
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
 
@@ -62,22 +97,24 @@ public class demo {
         stl.setPointType(5);
         stl.setPointSize(8);
         p.addPlot("sin(x)");
-        
+
         p.newGraph();
         p.addPlot("sin(x)");
-        
+
         p.newGraph();
         p.addPlot("cos(x**2)");
-        
+
         p.newGraph();   // This will create an empty box, so that graphs will be put in a 2x2 grid
-        
+
         p.setMultiTitle("Global test title");
-        ((GridGraphLayout)p.getLayout()).setOrientation(GridGraphLayout.VERTICAL);// change the fill orientation of this plot
+        ((GridGraphLayout) p.getLayout()).setOrientation(GridGraphLayout.VERTICAL);// change the fill orientation of this plot
         p.plot();
+        
+        return p;
     }
 
     /* This demo code creates a EPS file on home directory */
-    private static void EPSTerminal(String gnuplotpath) {
+    private static JavaPlot EPSTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
 
         PostscriptTerminal epsf = new PostscriptTerminal(System.getProperty("user.home") +
@@ -89,10 +126,11 @@ public class demo {
         p.addPlot("sin (x)");
         p.addPlot("sin(x)*cos(x)");
         p.plot();
+        return p;
     }
 
     /* This demo code displays plot on screen using image terminal */
-    private static void ImageTerminal(String gnuplotpath) {
+    private static JavaPlot ImageTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
         final ImageTerminal img = new ImageTerminal();
         p.setTerminal(img);
@@ -124,11 +162,12 @@ public class demo {
         f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-
+        
+        return p;
     }
 
     /* This demo code displays plot on screen using SVG commands (only b&w) */
-    private static void SVGTerminal(String gnuplotpath) {
+    private static JavaPlot SVGTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
 
@@ -149,5 +188,7 @@ public class demo {
         } catch (ClassNotFoundException ex) {
             System.err.println("Error: Library SVGSalamander not properly installed?");
         }
+        
+        return p;
     }
 }

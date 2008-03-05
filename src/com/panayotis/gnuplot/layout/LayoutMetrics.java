@@ -4,11 +4,13 @@
  */
 package com.panayotis.gnuplot.layout;
 
+import java.io.Serializable;
+
 /**
  * Container of the metrics for a specific graph
  * @author teras
  */
-public class LayoutMetrics {
+public class LayoutMetrics implements Serializable {
 
     /**
      * Metric values of this graph

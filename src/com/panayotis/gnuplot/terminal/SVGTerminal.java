@@ -9,7 +9,6 @@
 
 package com.panayotis.gnuplot.terminal;
 
-import com.sun.tools.corba.se.idl.InvalidArgument;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;

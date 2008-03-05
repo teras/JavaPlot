@@ -7,6 +7,7 @@
 package com.panayotis.gnuplot.terminal;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 /**
  * The default GNUPlot terminal. This terminal has no output file, or specific terminal type.
@@ -15,7 +16,7 @@ import java.io.InputStream;
  * visible. Please use a specific terminal yourself.
  * @author teras
  */
-public class DefaultTerminal implements GNUPlotTerminal {
+public class DefaultTerminal implements GNUPlotTerminal, Serializable {
     
     /**
      * This Terminal has no type.

@@ -23,6 +23,8 @@ import java.util.ArrayList;
  * Typically the user needs to create a new instance of this object and add the
  * desired plots.<p>
  * It also provides some convinient methods in order to set various parameters.
+ * <p>
+ * This object is not serializable, use GNUPlotParameters instead.
  * @author teras
  * @see #addPlot(Plot)
  */

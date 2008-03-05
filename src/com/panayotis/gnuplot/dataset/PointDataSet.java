@@ -9,7 +9,6 @@
 
 package com.panayotis.gnuplot.dataset;
 
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,7 +20,7 @@ import java.util.Collection;
  * @param N The precision of each point
  * @author teras
  */
-public class PointDataSet<N extends Number> extends ArrayList<Point<N>>  implements DataSet, Serializable {
+public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implements DataSet {
     
     /**
      * Create an empty PointDataSet

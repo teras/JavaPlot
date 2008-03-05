@@ -5,12 +5,13 @@
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.GNUPlotException;
+import java.io.Serializable;
 
 /**
  * Align graphs evenly on the page, in a grid layout
  * @author teras
  */
-public class GridGraphLayout implements GraphLayout {
+public class GridGraphLayout implements GraphLayout, Serializable {
 
     /**
      * Where the first graph will be put
