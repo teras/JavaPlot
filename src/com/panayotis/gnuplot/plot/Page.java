@@ -14,10 +14,9 @@ import java.util.ArrayList;
  * The data representation of a whole graph page
  * @author teras
  */
-public class Page implements Serializable {
+public class Page extends ArrayList<Graph> {
     protected static final String NL = System.getProperty("line.separator");
 
-    private ArrayList<Graph> graphs;
     private String pagetitle;
     private GraphLayout layout;
 
@@ -25,44 +24,9 @@ public class Page implements Serializable {
      * COntruct a new blank page with one graph inside
      */
     public Page() {
-        graphs = new ArrayList<Graph>();
-        graphs.add(new Graph());
+        add(new Graph());
         pagetitle = "";
         layout = new GridGraphLayout();
-    }
-
-    /**
-     * Add a new graph into this page
-     * @param gr The graph to be added
-     */
-    public void addGraph(Graph gr) {
-        graphs.add(gr);
-        layout.updateMetrics(this);
-    }
-
-    /** 
-     * Get a specific graph from it's ID
-     * @param idx the graph inded
-     * @return The graph object with the desired id
-     */
-    public Graph getGraph(int idx) {
-        return graphs.get(idx);
-    }
-
-    /**
-     * Count how many graphs are inside this page
-     * @return the number of graphs
-     */
-    public int countGraphs() {
-        return graphs.size();
-    }
-
-    /**
-     * Get a reference for all graphs inside this page
-     * @return Refernece to all graph objects
-     */
-    public ArrayList<Graph> getGraphs() {
-        return graphs;
     }
 
     /**
@@ -96,8 +60,12 @@ public class Page implements Serializable {
      * @param bf Buffer to store the gnuplot program
      */
     public void getGNUPlotPage(StringBuffer bf) {
-        if (countGraphs() > 1) {
+        if (size() > 1) {
             /* This is a multiplot */
+
+            /* First lay out the position of all elements */
+            layout.updateMetrics(this);
+            
             bf.append("set multiplot");
             if (!pagetitle.equals("")) {
                 bf.append(" title \"").append(pagetitle).append('"');
@@ -105,7 +73,7 @@ public class Page implements Serializable {
             bf.append(NL);
 
             LayoutMetrics metrics;
-            for (Graph gr : graphs) {
+            for (Graph gr : this) {
                 metrics = gr.getMetrics();
                 bf.append("set origin ").append(metrics.getX()).append(',').append(metrics.getY()).append(NL);
                 bf.append("set size ").append(metrics.getWidth()).append(',').append(metrics.getHeight()).append(NL);
@@ -114,7 +82,7 @@ public class Page implements Serializable {
 
             bf.append("unset multiplot").append(NL);
         } else {
-            getGraph(0).retrieveData(bf);
+            get(0).retrieveData(bf);
         }
 
     }

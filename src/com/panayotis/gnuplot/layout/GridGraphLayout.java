@@ -4,12 +4,13 @@
  */
 package com.panayotis.gnuplot.layout;
 
-import com.panayotis.gnuplot.GNUPlotException;
 import com.panayotis.gnuplot.plot.Page;
 import java.io.Serializable;
 
 /**
  * Align graphs evenly on the page, in a grid layout
+ * <p>
+ * If you manually set metrics and use this, these metrics will be lost
  * @author teras
  */
 public class GridGraphLayout implements GraphLayout, Serializable {
@@ -29,9 +30,7 @@ public class GridGraphLayout implements GraphLayout, Serializable {
     private boolean orientation;
 
     /**
-     * Create a new grid layout with specific width and height
-     * @param width width of the layout
-     * @param height height of the layout
+     * Create a new grid layout
      */
     public GridGraphLayout() {
         start = Start.UPLEFT;
@@ -57,11 +56,11 @@ public class GridGraphLayout implements GraphLayout, Serializable {
     /**
      * Update the capacity of this layout. This manager tries to create  grid, 
      * as much square as possible
-     * @param size The number of the graphs which will be requested to insert in this grid
+     * @param page The page with the elements we would like to position
      */
     public void updateMetrics(Page page) {
 
-        int size = page.countGraphs();
+        int size = page.size();
 
         if (size <= 0)
             return;
@@ -87,7 +86,7 @@ public class GridGraphLayout implements GraphLayout, Serializable {
             if (start == Start.UPLEFT || start == Start.UPRIGHT) // Positioning (0,0) in GNUPlot is in lower left corner
                 lin = height - lin - 1;
 
-            page.getGraph(index).setMetrics(dx * col, dy * lin, dx, dy);
+            page.get(index).setMetrics(dx * col, dy * lin, dx, dy);
         }
     }
 }

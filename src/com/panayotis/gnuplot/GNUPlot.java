@@ -11,6 +11,7 @@ package com.panayotis.gnuplot;
 import com.panayotis.gnuplot.layout.GraphLayout;
 import com.panayotis.gnuplot.plot.Axis;
 import com.panayotis.gnuplot.plot.Graph;
+import com.panayotis.gnuplot.plot.Page;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.DefaultTerminal;
@@ -184,12 +185,12 @@ public class GNUPlot {
     }
 
     /**
-     * Get a list of all graphs. This method is used to enumarte the graphs
+     * Get a Page containing all Graphs. This method is used for example in order to get a list of graphs
      * already inserted, especially if a graph is automatically added
      * @return An array of stored Graphs
      */
-    public ArrayList<Graph> getGraphs() {
-        return param.getGraphs();
+    public Page getPage() {
+        return param.getPage();
     }
 
     /**

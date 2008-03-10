@@ -58,7 +58,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
-        return page.getGraph(defaultgraph).getAxis(axisname);
+        return page.get(defaultgraph).getAxis(axisname);
     }
 
     /**
@@ -87,7 +87,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @param plot The given plot.
      */
     public void addPlot(Plot plot) {
-        page.getGraph(defaultgraph).add(plot);
+        page.get(defaultgraph).add(plot);
     }
 
     /**
@@ -105,8 +105,8 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @see #newGraph()
      */
     public void addGraph(Graph gr) {
-        page.addGraph(gr);
-        defaultgraph = page.countGraphs() - 1;
+        page.add(gr);
+        defaultgraph = page.size() - 1;
     }
 
     /**
@@ -134,19 +134,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     }
 
     /**
-     * Get the list of the stored graphs
-     * @return List of Graph objects
-     */
-    public ArrayList<Graph> getGraphs() {
-        return page.getGraphs();
-    }
-
-    /**
      * Get the list of the stored plots from default graph
      * @return List of Plot objects
      */
     public ArrayList<Plot> getPlots() {
-        return page.getGraph(defaultgraph);
+        return page.get(defaultgraph);
     }
     
     
