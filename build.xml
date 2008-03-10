@@ -70,15 +70,7 @@
 
     -->
 
-	<target name="distsrc" depends="distclean,javadoc">
-		<property name="version" value="0.2.0"/>
-		<exec executable="tar" dir="..">
-			<arg line="--exclude=.svn -jcvf JavaPlot_src_${version}.tar.bz2 JavaPlot"/>
-		</exec>
-		<move file="../JavaPlot_src_${version}.tar.bz2" todir="."/>
-	</target>
-
-	<target name="distbin" depends="distclean,javadoc">
+	<target name="dist" depends="distclean,javadoc">
 		<property name="version" value="0.2.0"/>
 		<exec executable="ant" dir="demo">
 			<arg line="jar"/>
@@ -86,15 +78,14 @@
 		<delete dir="build"/>
 		<delete dir="demo/build"/>
 		<exec executable="tar" dir="..">
-			<arg line="--exclude=.svn -jcvf JavaPlot_bin_${version}.tar.bz2 JavaPlot"/>
+			<arg line="--exclude=.svn --exclude=nbproject/private -jcvf JavaPlot-${version}.tar.bz2 JavaPlot"/>
 		</exec>
-		<move file="../JavaPlot_bin_${version}.tar.bz2" todir="."/>
+		<move file="../JavaPlot-${version}.tar.bz2" todir="."/>
 	</target>
 
 	<target name="-post-clean">
 		<property name="version" value="0.2.0"/>
-		<delete file="JavaPlot_src_${version}.tar.bz2"/>
-		<delete file="JavaPlot_bin_${version}.tar.bz2"/>
+		<delete file="JavaPlot-${version}.tar.bz2"/>
 	</target>
 
 	<target name="distclean">

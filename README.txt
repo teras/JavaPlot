@@ -24,22 +24,17 @@ parameters needed.
 Usage
 -----
 
-[Binary package]
 A JavaPlot demo usage can be found under "demo/dist" directory. To use it type:
 cd demo/dist ; java -jar demo.jar
-
-[Source package]
-If you have downloaded the source package type:
-cd demo ; ant jar ; java -jar dist/demo.jar
 
 Source of this demo can be found in "demo/src/demo.java" file.
 If you want to see javadoc, you can have a look under "dist/javadoc" directory.
 
 In order to use JavaPlot in your application, first you have to include
-JavaPlot.jar library in your classpath, found under "dist/JavaPlot.jar" (in
-binary package). Then the easiest way to start creating plots, is to create a
-new instance of JavaPlot object. Have a look at "demo/src/demo.java". Here you
-can find various ways to use this library.
+JavaPlot.jar library in your classpath, found under "dist/JavaPlot.jar"
+Then the easiest way to start creating plots, is to create a new instance of
+JavaPlot object. Have a look at "demo/src/demo.java". Here you can find
+various ways to use this library.
 
 
 Advanced Usage
