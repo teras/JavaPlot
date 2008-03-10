@@ -5,6 +5,7 @@
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.GNUPlotParameters;
+import com.panayotis.gnuplot.layout.LayoutMetrics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -20,6 +21,7 @@ public class Graph extends ArrayList<Plot> {
 
     protected static final String NL = System.getProperty("line.separator");
     private HashMap<String, Axis> axis;
+    private LayoutMetrics metrics;
 
     /**
      * Create a new graph object
@@ -29,6 +31,7 @@ public class Graph extends ArrayList<Plot> {
         axis.put("x", new Axis("x"));
         axis.put("y", new Axis("y"));
         axis.put("z", new Axis("z"));
+        metrics = new LayoutMetrics();
     }
 
     /**
@@ -56,10 +59,13 @@ public class Graph extends ArrayList<Plot> {
 
     /**
      * Get gnuplot commands for this graph.
-     * @deprecated
      * @param bf
      */
-    public void retrieveData(StringBuffer bf) {
+    void retrieveData(StringBuffer bf) {
+        /* Do not append anything, if this graph is empty */
+        if (size() == 0)
+            return;
+
         /* Set various axis parameters */
         for (Axis ax : axis.values()) {
             ax.appendProperties(bf);
@@ -83,5 +89,24 @@ public class Graph extends ArrayList<Plot> {
 
         /* Print error check */
         bf.append("if (").append(ERROR_VAR).append(" == 1) print '").append(ERRORTAG).append('\'').append(NL);
+    }
+
+    /**
+     * Set the position and size of thie graph object, relative to a 0,0-1,1 page
+     * @param x horizontal position
+     * @param y vertical position
+     * @param width width of this graph
+     * @param height of this graph
+     */
+    public void setMetrics(float x, float y, float width, float height) {
+        metrics = new LayoutMetrics(x, y, width, height);
+    }
+
+    /**
+     * Get the positioning and size of thie graph object
+     * @return The metrics of this object
+     */
+    public LayoutMetrics getMetrics() {
+        return metrics;
     }
 }

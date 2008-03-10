@@ -22,8 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -42,39 +40,24 @@ public class demo {
             path = args[0];
         }
 
-        defaultTerminal(path);
+        simple();
+        //defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
         //ImageTerminal(path);
-
-
-        //serializationTest(defaultTerminal(path));
+        //serialization(defaultTerminal(path));
 
     }
 
-    private static void serializationTest(JavaPlot p) {
-        ObjectOutputStream out = null;
-        ObjectInputStream in = null;
-        try {
-            out = new ObjectOutputStream(new FileOutputStream("koko.lala"));
-            out.writeObject(p.getParameters());
-
-            in = new ObjectInputStream(new FileInputStream("koko.lala"));
-            JavaPlot q = new JavaPlot ( (GNUPlotParameters) in.readObject());
-            q.plot();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
+    
+    /* This is a very simple plot to demonstrate JavaPlot graphs */
+    private static void simple() {
+        JavaPlot p = new JavaPlot();
+        p.addPlot("sin(x)");
+        p.plot();
     }
-
+    
+    
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
     private static JavaPlot defaultTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot(gnuplotpath);
@@ -191,4 +174,30 @@ public class demo {
         
         return p;
     }
+
+
+   private static void serialization(JavaPlot p) {
+        ObjectOutputStream out = null;
+        ObjectInputStream in = null;
+        try {
+            out = new ObjectOutputStream(new FileOutputStream("koko.lala"));
+            out.writeObject(p.getParameters());
+
+            in = new ObjectInputStream(new FileInputStream("koko.lala"));
+            JavaPlot q = new JavaPlot ( (GNUPlotParameters) in.readObject());
+            q.plot();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                out.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+ 
 }

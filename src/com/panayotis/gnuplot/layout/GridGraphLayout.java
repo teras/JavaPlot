@@ -5,6 +5,7 @@
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.GNUPlotException;
+import com.panayotis.gnuplot.plot.Page;
 import java.io.Serializable;
 
 /**
@@ -17,16 +18,13 @@ public class GridGraphLayout implements GraphLayout, Serializable {
      * Where the first graph will be put
      */
     public enum Start {
+
         UPLEFT, UPRIGHT, DOWNLEFT, DOWNRIGHT;
     }
-    
     /**
      * Orientation of the graph layout
      */
-    public static final boolean HORIZONTAL = true, VERTICAL = false;
-    
-    private int width,  height;
-    private float dx,  dy;
+    public static final boolean HORIZONTAL = true,  VERTICAL = false;
     private Start start;
     private boolean orientation;
 
@@ -35,63 +33,9 @@ public class GridGraphLayout implements GraphLayout, Serializable {
      * @param width width of the layout
      * @param height height of the layout
      */
-    public GridGraphLayout(int width, int height) {
-        setLayout(width, height);
+    public GridGraphLayout() {
         start = Start.UPLEFT;
         orientation = HORIZONTAL;
-    }
-
-     /**
-     * Get metrics of graph with a specified index.
-     * @param index The index of the graph 
-     * @return Metrics of the positioning of the graph
-     */
-    public LayoutMetrics getMetrics(int index) {
-
-        if (index >= (width * height)) {
-            throw new GNUPlotException("Index greater than grid capacity");
-        }
-
-        int col, lin;
-        if (orientation) {
-            col = index % width;
-            lin = index / width;
-        } else {
-            lin = index % height;
-            col = index / height;
-        }
-
-        if (start == Start.UPRIGHT || start == Start.DOWNRIGHT) {
-            col = width - col - 1;
-        }
-        if (start == Start.UPLEFT || start == Start.UPRIGHT) { // Positioning (0,0) in GNUPlot is in lower left corner
-            lin = height - lin - 1;
-        }
-
-        LayoutMetrics ret = new LayoutMetrics();
-        ret.x = dx * col;
-        ret.y = dy * lin;
-        ret.width = dx;
-        ret.height = dy;
-        return ret;
-    }
-
-    /**
-     * Set the dimensions of this grid
-     * @param width Width of the grid
-     * @param height Height of the grif
-     */
-    public void setLayout(int width, int height) {
-        if (width <= 0) {
-            throw new GNUPlotException("Width should be a number greater than zero.");
-        }
-        if (height <= 0) {
-            throw new GNUPlotException("Height should be a number greater than zero.");
-        }
-        this.width = width;
-        this.height = height;
-        dx = 1f / width;
-        dy = 1f / height;
     }
 
     /**
@@ -115,14 +59,35 @@ public class GridGraphLayout implements GraphLayout, Serializable {
      * as much square as possible
      * @param size The number of the graphs which will be requested to insert in this grid
      */
-    public void updateCapacity(int size) {
-        if (size <= 0) {
-            throw new GNUPlotException("Capacity should be a number greater than zero.");
-        }
+    public void updateMetrics(Page page) {
 
-        int x, y;
-        y = (int) (Math.floor(Math.sqrt(size)));
-        x = (int) Math.ceil((double) size / y);
-        setLayout(x, y);
+        int size = page.countGraphs();
+
+        if (size <= 0)
+            return;
+
+        int width, height;
+        height = (int) (Math.floor(Math.sqrt(size)));
+        width = (int) Math.ceil((double) size / height);
+
+        float dx = 1f / width;
+        float dy = 1f / height;
+        int col, lin;
+        for (int index = 0; index < size; index++) {
+            if (orientation) {
+                col = index % width;
+                lin = index / width;
+            } else {
+                lin = index % height;
+                col = index / height;
+            }
+
+            if (start == Start.UPRIGHT || start == Start.DOWNRIGHT)
+                col = width - col - 1;
+            if (start == Start.UPLEFT || start == Start.UPRIGHT) // Positioning (0,0) in GNUPlot is in lower left corner
+                lin = height - lin - 1;
+
+            page.getGraph(index).setMetrics(dx * col, dy * lin, dx, dy);
+        }
     }
 }

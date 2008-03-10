@@ -9,10 +9,9 @@
 package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.layout.GraphLayout;
-import com.panayotis.gnuplot.layout.GridGraphLayout;
-import com.panayotis.gnuplot.layout.LayoutMetrics;
 import com.panayotis.gnuplot.plot.Axis;
 import com.panayotis.gnuplot.plot.Graph;
+import com.panayotis.gnuplot.plot.Page;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.Serializable;
@@ -37,10 +36,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * The command to use to check that the plot command executed without errors
      */
     public final static String NOERROR_COMMAND = " ; " + ERROR_VAR + " = 0";
-    
-    private ArrayList<Graph> graphs;
-    private String pagetitle;
-    private GraphLayout layout;
+    private Page page;
     private int defaultgraph;
     private ArrayList<String> preinit;
     private ArrayList<String> postinit;
@@ -49,10 +45,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *  Create a new plot with the default parameters
      */
     public GNUPlotParameters() {
-        graphs = new ArrayList<Graph>();
-        graphs.add(new Graph());
-        pagetitle = "";
-        layout = new GridGraphLayout(1, 1);
+        page = new Page();
         defaultgraph = 0;
 
         preinit = new ArrayList<String>();
@@ -65,7 +58,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
-        return graphs.get(defaultgraph).getAxis(axisname);
+        return page.getGraph(defaultgraph).getAxis(axisname);
     }
 
     /**
@@ -94,7 +87,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @param plot The given plot.
      */
     public void addPlot(Plot plot) {
-        graphs.get(defaultgraph).add(plot);
+        page.getGraph(defaultgraph).add(plot);
     }
 
     /**
@@ -112,9 +105,8 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @see #newGraph()
      */
     public void addGraph(Graph gr) {
-        graphs.add(gr);
-        defaultgraph = graphs.size() - 1;
-        layout.updateCapacity(graphs.size());
+        page.addGraph(gr);
+        defaultgraph = page.countGraphs() - 1;
     }
 
     /**
@@ -122,8 +114,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @param title The title to use
      */
     public void setMultiTitle(String title) {
-        if (title==null) title = "";
-        pagetitle = title;
+        page.setTitle(title);
     }
 
     /**
@@ -131,9 +122,35 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * @return The used layout
      */
     GraphLayout getLayout() {
-        return layout;
+        return page.getLayout();
+    }
+
+    /**
+     * Retrieve the whole page object, defining the various graph plots
+     * @return the Page object which holds all plots
+     */
+    public Page getPage() {
+        return page;
+    }
+
+    /**
+     * Get the list of the stored graphs
+     * @return List of Graph objects
+     */
+    public ArrayList<Graph> getGraphs() {
+        return page.getGraphs();
+    }
+
+    /**
+     * Get the list of the stored plots from default graph
+     * @return List of Plot objects
+     */
+    public ArrayList<Plot> getPlots() {
+        return page.getGraph(defaultgraph);
     }
     
+    
+
     /**
      * Get the actual GNUPlot commands. This method is used to construct the gnuplot program
      * @param term The terminal to use
@@ -146,7 +163,6 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         for (String com : preinit) {
             bf.append(com).append(NL);
         }
-
 
         /* Gather various "set" parameters */
         appendProperties(bf);
@@ -166,50 +182,11 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
         }
 
         /* Append various plots */
-        if (graphs.size() > 1) {
-            /* This is a multiplot */
-            bf.append("set multiplot");
-            if (!pagetitle.equals("")) {
-                bf.append(" title \"").append(pagetitle).append('"');
-            }
-            bf.append(NL);
-
-            LayoutMetrics metrics;
-            Graph gr;
-            for (int i = 0; i < graphs.size(); i++) {
-                gr = graphs.get(i);
-                if (gr.size() > 0) {
-                    metrics = layout.getMetrics(i);
-                    bf.append("set origin ").append(metrics.x).append(',').append(metrics.y).append(NL);
-                    bf.append("set size ").append(metrics.width).append(',').append(metrics.height).append(NL);
-                    gr.retrieveData(bf);
-                }
-            }
-
-            bf.append("unset multiplot").append(NL);
-        } else {
-            graphs.get(0).retrieveData(bf);
-        }
+        page.getGNUPlotPage(bf);
 
         /* Finish! */
         bf.append("quit").append(NL);
 
         return bf.toString();
-    }
-
-    /**
-     * Get the list of the stored graphs
-     * @return List of Graph objects
-     */
-    public ArrayList<Graph> getGraphs() {
-        return graphs;
-    }
-
-    /**
-     * Get the list of the stored plots from default graph
-     * @return List of Plot objects
-     */
-    public ArrayList<Plot> getPlots() {
-        return graphs.get(defaultgraph);
     }
 }
