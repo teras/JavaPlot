@@ -12,18 +12,15 @@ import com.panayotis.gnuplot.plot.DataSetPlot;
 import com.panayotis.gnuplot.style.NamedPlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Style;
-import com.panayotis.gnuplot.terminal.ImageTerminal;
+import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import com.panayotis.gnuplot.terminal.SVGTerminal;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  * This Object is used to demonstrate JavaPlot library
@@ -44,7 +41,7 @@ public class demo {
         //defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
-        //ImageTerminal(path);
+        //JPlotTerminal(path);
         //serialization(defaultTerminal(path));
 
     }
@@ -113,40 +110,20 @@ public class demo {
     }
 
     /* This demo code displays plot on screen using image terminal */
-    private static JavaPlot ImageTerminal(String gnuplotpath) {
-        JavaPlot p = new JavaPlot();
-        final ImageTerminal img = new ImageTerminal();
-        p.setTerminal(img);
-
-        p.setTitle("Image Terminal Title");
-        p.addPlot("sqrt(x)/x");
-        p.addPlot("x*sin(x)");
-        p.plot();
-
+    private static JavaPlot JPlotTerminal(String gnuplotpath) {
+        JPlot plot = new JPlot();
+        plot.getJavaPlot().addPlot("sqrt(x)/x");
+        plot.getJavaPlot().addPlot("x*sin(x)");
+        plot.plot();
+        
         JFrame f = new JFrame();
-        JPanel panel = new JPanel() {
-
-            Dimension dim = new Dimension(img.getImage().getWidth(), img.getImage().getHeight());
-
-            public void paint(Graphics g) {
-                g.drawImage(img.getImage(), 0, 0, null);
-            }
-
-            public Dimension getMinimumSize() {
-                return dim;
-            }
-
-            public Dimension getPreferredSize() {
-                return dim;
-            }
-        };
-        f.getContentPane().add(panel);
+        f.getContentPane().add(plot);
         f.pack();
         f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
         
-        return p;
+        return plot.getJavaPlot();
     }
 
     /* This demo code displays plot on screen using SVG commands (only b&w) */
