@@ -74,7 +74,8 @@ class GNUPlotExec {
     }
 
     /**
-     * Plot using specific parameters and seelcted terminal.
+     * Plot using specific parameters and selected terminal.
+     *
      * @param par The parameters to use
      * @param terminal The terminal to use
      * @throws com.panayotis.gnuplot.GNUPlotException throw if something goes wrong
@@ -98,6 +99,13 @@ class GNUPlotExec {
                 command = nopersist;
             }
             command[0] = getGNUPlotPath();
+            {
+                String cmdStr = "";
+                for (String cmd : command) {
+                    cmdStr += cmd + " ";
+                }
+                GNUPlot.getDebugger().msg("exec(" + cmdStr + ")", Debug.INFO);
+            }
             final Process proc = Runtime.getRuntime().exec(command);
 
             /* Windows buffers DEMAND asynchronus read & write */

@@ -7,7 +7,6 @@ package com.panayotis.gnuplot.plot;
 import com.panayotis.gnuplot.layout.GraphLayout;
 import com.panayotis.gnuplot.layout.GridGraphLayout;
 import com.panayotis.gnuplot.layout.LayoutMetrics;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +14,8 @@ import java.util.ArrayList;
  * @author teras
  */
 public class Page extends ArrayList<Graph> {
+    private static final long serialVersionUID = 6485013309125515984L;
+
     protected static final String NL = System.getProperty("line.separator");
 
     private String pagetitle;
@@ -35,6 +36,10 @@ public class Page extends ArrayList<Graph> {
      */
     public GraphLayout getLayout() {
         return layout;
+    }
+
+    public void setLayout(GraphLayout layout) {
+        this.layout = layout;
     }
 
     /**

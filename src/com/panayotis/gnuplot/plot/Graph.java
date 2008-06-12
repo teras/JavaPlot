@@ -93,6 +93,7 @@ public class Graph extends ArrayList<Plot> {
 
     /**
      * Set the position and size of thie graph object, relative to a 0,0-1,1 page
+     *
      * @param x horizontal position
      * @param y vertical position
      * @param width width of this graph
@@ -103,7 +104,7 @@ public class Graph extends ArrayList<Plot> {
     }
 
     /**
-     * Get the positioning and size of thie graph object
+     * Get the positioning and size of this graph object
      * @return The metrics of this object
      */
     public LayoutMetrics getMetrics() {

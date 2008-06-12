@@ -53,7 +53,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
     }
 
     /**
-     *  Get one of the available Axis from default Graph, in orde to set some parameters on it.
+     *  Get one of the available Axis from default Graph, in order to set some parameters on it.
      * @param axisname The name of the Axis. It is usually "x", "y", "z"
      * @return The desired Axis
      */
