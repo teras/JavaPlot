@@ -210,6 +210,17 @@ public class GNUPlot {
     public void plot() throws GNUPlotException {
         exec.plot(param, term);
     }
+
+    /**
+     * Retrieves the command which will actually send to gnuplot, if we perform a plot
+     * with the already defined parameters to the selected terminal. <br>
+     * This method is used for debugging purposes.
+     * @return The commands to send to the gnuplot executable
+     */
+    public String getCommands() {
+        return exec.getCommands(param, term);
+    }
+
 //    public void splot() throws GNUPlotException {
 //        exec.splot(param, term);
 //    }

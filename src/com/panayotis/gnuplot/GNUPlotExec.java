@@ -74,6 +74,17 @@ class GNUPlotExec {
     }
 
     /**
+     * Retrieves the command which will actually send to gnuplot, if we perform a plot
+     * with the given parameters to the selected terminal. <br>
+     * This method is used for debugging purposes.
+     * @return The commands to send to the gnuplot executable
+     */
+    public String getCommands(GNUPlotParameters par, GNUPlotTerminal terminal) {
+        // Could cache these commands..
+        return par.getPlotCommands(terminal);
+    }
+
+    /**
      * Plot using specific parameters and selected terminal.
      *
      * @param par The parameters to use
@@ -83,7 +94,7 @@ class GNUPlotExec {
     void plot(GNUPlotParameters par, GNUPlotTerminal terminal) throws GNUPlotException {
         try {
             final GNUPlotTerminal term = terminal;  // Use this thread-aware variable instead of "terminal"
-            final String comms = par.getPlotCommands(term); // Get the commands to send to gnuplot
+            final String comms = getCommands(par, term); // Get the commands to send to gnuplot
             final Messages msg = new Messages();    // Where to store messages from output threads
 
             /* Display plot commands to send to gnuplot */
