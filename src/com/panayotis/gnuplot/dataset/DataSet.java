@@ -39,6 +39,6 @@ public interface DataSet {
      * @param dimension The point dimension (or "column") to request data from
      * @return the point data for this dimension
      */
-    public double getPointValue(int point, int dimension);
+    public String getPointValue(int point, int dimension);
    
 }

@@ -119,8 +119,8 @@ public class ArrayDataSet implements DataSet, Serializable {
      * @return the point data for this dimension
      * @see DataSet#getPointValue(int,int)
      */
-    public double getPointValue(int point, int dimension) {
-        return val[point][dimension];
+    public String getPointValue(int point, int dimension) {
+        return Double.toString(val[point][dimension]);
     }
     
     

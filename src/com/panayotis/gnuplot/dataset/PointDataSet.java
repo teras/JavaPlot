@@ -143,8 +143,8 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @return the point data for this dimension
      * @see DataSet#getPointValue(int,int)
      */
-    public double getPointValue(int point, int dimension) {
-        return get(point).get(dimension).doubleValue();
+    public String getPointValue(int point, int dimension) {
+        return get(point).get(dimension).toString();
     }
     
     
