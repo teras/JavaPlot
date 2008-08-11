@@ -8,17 +8,17 @@ import com.panayotis.gnuplot.plot.Page;
 import java.io.Serializable;
 
 /**
- * Position graphs in absolute coordinates. This is actually a dummy layout.
- * All information is stored inside the Graph object
+ * Position graphs in absolute coordinates. This is actually a dummy layout - no layout information is used.
  * @author teras
  */
 public class ManualGraphLayout implements GraphLayout, Serializable {
 
-    /** 
-     * This layout manager does nothing with the actual graph layout
-     * @param page The page containing the various graph objects, to be lay out.
+    /**
+     * This is a dummy layout manager, which actually does nothing
+     * @param page The Page which layout we want to calculate
+     * @param buffer The definition part of the multiplot layout
      */
-    public void updateMetrics(Page page) {
+    public void setDefinition(Page page, StringBuffer buffer) {
     }
 
 }

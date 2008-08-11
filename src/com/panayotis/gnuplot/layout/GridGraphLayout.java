@@ -10,8 +10,10 @@ import java.io.Serializable;
 /**
  * Align graphs evenly on the page, in a grid layout
  * <p>
- * If you manually set metrics and use this, these metrics will be lost
+ * If you manually set metrics and use this, these metrics will be lost.
+ * Do not use this layout, se AutoGraphLayout instead.
  * @author teras
+ * @obsolete
  */
 public class GridGraphLayout implements GraphLayout, Serializable {
 
@@ -54,11 +56,12 @@ public class GridGraphLayout implements GraphLayout, Serializable {
     }
 
     /**
-     * Update the capacity of this layout. This manager tries to create  grid, 
+     * Update the capacity of this layout. This manager tries to create  grid,
      * as much square as possible
      * @param page The page with the elements we would like to position
+     * @param buffer Where to send commands - not used.
      */
-    public void updateMetrics(Page page) {
+    public void setDefinition(Page page, StringBuffer buffer) {
 
         int size = page.size();
 

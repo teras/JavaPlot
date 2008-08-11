@@ -5,7 +5,7 @@
 
 import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.JavaPlot;
-import com.panayotis.gnuplot.layout.GridGraphLayout;
+import com.panayotis.gnuplot.layout.StripeLayout;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
@@ -37,8 +37,8 @@ public class demo {
             path = args[0];
         }
 
-        simple();
-        //defaultTerminal(path);
+        //simple();
+        defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
         //JPlotTerminal(path);
@@ -84,10 +84,10 @@ public class demo {
         p.newGraph();
         p.addPlot("cos(x**2)");
 
-        p.newGraph();   // This will create an empty box, so that graphs will be put in a 2x2 grid
-
         p.setMultiTitle("Global test title");
-        ((GridGraphLayout) p.getLayout()).setOrientation(GridGraphLayout.VERTICAL);// change the fill orientation of this plot
+        StripeLayout lo = new StripeLayout();
+        lo.setColumns(9999);
+        p.getPage().setLayout(lo);
         p.plot();
         
         return p;
@@ -105,6 +105,10 @@ public class demo {
         p.setTitle("Postscript Terminal Title");
         p.addPlot("sin (x)");
         p.addPlot("sin(x)*cos(x)");
+        p.newGraph();
+        p.addPlot("cos(x)");
+        p.setTitle("Trigonometric functions -1");
+        p.setMultiTitle("Trigonometric functions");
         p.plot();
         return p;
     }

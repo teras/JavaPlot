@@ -31,7 +31,7 @@ public class Graph extends ArrayList<Plot> {
         axis.put("x", new Axis("x"));
         axis.put("y", new Axis("y"));
         axis.put("z", new Axis("z"));
-        metrics = new LayoutMetrics();
+        metrics = null;
     }
 
     /**

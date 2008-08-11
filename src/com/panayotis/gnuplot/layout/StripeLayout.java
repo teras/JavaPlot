@@ -1,42 +1,57 @@
 package com.panayotis.gnuplot.layout;
 
-import com.panayotis.gnuplot.plot.Page;
-import java.io.Serializable;
-
 /**
- * Align graphs evenly on the page, in a stripe layout.
- * 
- * The stripes start from the bottom and go up.
- * <p>
- * If you manually set metrics and use this, these metrics will be lost
- * @author dan
+ * Align graphs evenly on the page
+ * This Layout is based on AutoGraphLayout
  */
-// TODO(dan): Add a switch for top-down or bottom-up striping
-public class StripeLayout implements GraphLayout, Serializable {
-    private static final long serialVersionUID = 84294413536114483L;
+public class StripeLayout extends AutoGraphLayout {
 
+    /**
+     * Information if rows or columns are added automatically
+     */
+    public static final boolean EXPANDROWS = true, EXPANDCOLUMNS = false;
+
+    /**
+     * Create a new Strip layout. Default behaviour is EXPANDROWS.
+     */
     public StripeLayout() {
+        setType(EXPANDROWS);
     }
 
     /**
-     * Lay out graphs.
-     *
-     * @param page The page with the elements we would like to position
+     * Set the default behaviour
+     * @param type Whether EXPANDROWS or EXPANDCOLUMNS is desired.
+     * @see #EXPANDROWS #EXPANDCOLUMNS
      */
-    public void updateMetrics(Page page) {
-        int size = page.size();
+    public void setType(boolean type) {
+       if (type==EXPANDROWS) {
+           super.setRows(-1);
+           super.setColumns(1);
+       } else {
+           super.setRows(1);
+           super.setColumns(-1);
+       }
+    }
 
-        if (size <= 0)
-            return;
+    /**
+     * Set behaviour, depending on the number of rows. It always creates stripes and it might change to EXPANDCOLUMNS if rows are less than 2.
+     * @param rows Number of desired rows
+     */
+    public void setRows(int rows) {
+        if (rows>1)
+            setType(EXPANDROWS);
+        else
+            setType(EXPANDCOLUMNS);
+    }
 
-        /*
-        int width, height;
-        height = size;
-        width = 1;
-        */
-
-        for (int index = 0; index < size; index++) {
-            page.get(index).setMetrics(0, ((float)index) / size, 1, 1f / size);
-        }
+    /**
+     * Set behaviour, depending on the number of columns. It always creates stripes and it might change to EXPANDROWS if columns are less than 2.
+     * @param cols Number of desired columns
+     */
+    public void setColumns(int cols) {
+        if (cols>1)
+            setType(EXPANDCOLUMNS);
+        else
+            setType(EXPANDROWS);
     }
 }

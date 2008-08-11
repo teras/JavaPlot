@@ -4,8 +4,8 @@
  */
 package com.panayotis.gnuplot.plot;
 
+import com.panayotis.gnuplot.layout.AutoGraphLayout;
 import com.panayotis.gnuplot.layout.GraphLayout;
-import com.panayotis.gnuplot.layout.GridGraphLayout;
 import com.panayotis.gnuplot.layout.LayoutMetrics;
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ public class Page extends ArrayList<Graph> {
     public Page() {
         add(new Graph());
         pagetitle = "";
-        layout = new GridGraphLayout();
+        layout = new AutoGraphLayout();
     }
 
     /**
@@ -68,20 +68,20 @@ public class Page extends ArrayList<Graph> {
         if (size() > 1) {
             /* This is a multiplot */
 
-            /* First lay out the position of all elements */
-            layout.updateMetrics(this);
-            
             bf.append("set multiplot");
             if (!pagetitle.equals("")) {
                 bf.append(" title \"").append(pagetitle).append('"');
             }
+            layout.setDefinition(this, bf);
             bf.append(NL);
 
             LayoutMetrics metrics;
             for (Graph gr : this) {
                 metrics = gr.getMetrics();
-                bf.append("set origin ").append(metrics.getX()).append(',').append(metrics.getY()).append(NL);
-                bf.append("set size ").append(metrics.getWidth()).append(',').append(metrics.getHeight()).append(NL);
+                if (metrics != null) {
+                    bf.append("set origin ").append(metrics.getX()).append(',').append(metrics.getY()).append(NL);
+                    bf.append("set size ").append(metrics.getWidth()).append(',').append(metrics.getHeight()).append(NL);
+                }
                 gr.retrieveData(bf);
             }
 

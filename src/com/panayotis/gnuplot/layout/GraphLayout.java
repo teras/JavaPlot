@@ -13,15 +13,10 @@ import com.panayotis.gnuplot.plot.Page;
 public interface GraphLayout {
 
     /**
-     * Use this method to inform the layout that metrics might need update.
-     * <p>
-     * This method is called automatically, just before the actual gnuplot program will
-     * be produced. It is not called while adding or substructing elements from a page.
-     * Thus, layout metrics are only updated just before they are needed.
-     * <p>
-     * If you manually set metrics and use an automatic layout, these metrics will
-     * be lost
-     * @param page The Page which it's graphs should be lay out.
+     * Sets the required definitions in the "set multiplot" part of gnuplot commands.
+     * It can be also used to set various parameters, such as X/Y position or dimension.
+     * @param page The Page we are referring to
+     * @param buffer Where to send commands, just after the "set multiplot" part. It might not be used.
      */
-    public abstract void updateMetrics(Page page);
+    public abstract void setDefinition (Page page, StringBuffer buffer);
 }
