@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author teras
  */
 public class ArrayDataSet implements DataSet, Serializable {
-    private double[][] val; 
+    private String[][] val;
     
     /** 
      * Creates a new instance of ArrayDataSet from a double precision 2D array
@@ -28,12 +28,12 @@ public class ArrayDataSet implements DataSet, Serializable {
         int i, j;
         
         if (length==0) throw new ArrayStoreException("Array has zero points");
-        val = new double[length][dimension];
+        val = new String[length][dimension];
         for( i = 0 ; i < length ; i++) {
             if (values[i].length!=dimension) 
                 throw new ArrayStoreException("Array has not consistent size, was "+dimension+", found "+values[i].length);
             for(j = 0 ; j < dimension ; j++)
-                val[i][j] = values[i][j];
+                val[i][j] = Double.toString(values[i][j]);
         }
     }
 
@@ -47,12 +47,12 @@ public class ArrayDataSet implements DataSet, Serializable {
         int i, j;
         
         if (length==0) throw new ArrayStoreException("Array has zero points");
-        val = new double[length][dimension];
+        val = new String[length][dimension];
         for( i = 0 ; i < length ; i++) {
             if (values[i].length!=dimension) 
                 throw new ArrayStoreException("Array has not consistent size, was "+dimension+", found "+values[i].length);
             for(j = 0 ; j < dimension ; j++)
-                val[i][j] = values[i][j];
+                val[i][j] = Float.toString(values[i][j]);
         }
     }
  
@@ -66,12 +66,12 @@ public class ArrayDataSet implements DataSet, Serializable {
         int i, j;
         
         if (length==0) throw new ArrayStoreException("Array has zero points");
-        val = new double[length][dimension];
+        val = new String[length][dimension];
         for( i = 0 ; i < length ; i++) {
             if (values[i].length!=dimension) 
                 throw new ArrayStoreException("Array has not consistent size, was "+dimension+", found "+values[i].length);
             for(j = 0 ; j < dimension ; j++)
-                val[i][j] = values[i][j];
+                val[i][j] = Integer.toString(values[i][j]);
         }
     }
 
@@ -85,15 +85,37 @@ public class ArrayDataSet implements DataSet, Serializable {
         int i, j;
         
         if (length==0) throw new ArrayStoreException("Array has zero points");
-        val = new double[length][dimension];
+        val = new String[length][dimension];
         for( i = 0 ; i < length ; i++) {
             if (values[i].length!=dimension) 
                 throw new ArrayStoreException("Array has not consistent size, was "+dimension+", found "+values[i].length);
             for(j = 0 ; j < dimension ; j++)
-                val[i][j] = values[i][j];
+                val[i][j] = Long.toString(values[i][j]);
         }
     }
-    
+
+    /**
+     * Creates a new instance of ArrayDataSet from a String 2D array.
+     * No check on the data format is performed, can store any kind of value.
+     * Do not use this methof
+     * @deprecated
+     * @param values the 2D array in String format to retrieve data from
+     */
+    public ArrayDataSet(String[][] values) {
+        int length = values.length;
+        int dimension = values[0].length;
+        int i, j;
+
+        if (length==0) throw new ArrayStoreException("Array has zero points");
+        val = new String[length][dimension];
+        for( i = 0 ; i < length ; i++) {
+            if (values[i].length!=dimension)
+                throw new ArrayStoreException("Array has not consistent size, was "+dimension+", found "+values[i].length);
+            System.arraycopy(values, 0, val, 0, values.length);
+        }
+    }
+
+
     /**
      * Retrieve how many points this data set has.
      * @return the number of points
@@ -120,7 +142,7 @@ public class ArrayDataSet implements DataSet, Serializable {
      * @see DataSet#getPointValue(int,int)
      */
     public String getPointValue(int point, int dimension) {
-        return Double.toString(val[point][dimension]);
+        return val[point][dimension];
     }
     
     
