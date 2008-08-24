@@ -1,3 +1,7 @@
+0.3.0
+Support of various data formats, i.e. date formats.
+Better plot layout support
+
 0.2.0
 Support of multiplots
 

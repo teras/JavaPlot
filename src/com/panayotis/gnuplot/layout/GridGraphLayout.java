@@ -11,9 +11,9 @@ import java.io.Serializable;
  * Align graphs evenly on the page, in a grid layout
  * <p>
  * If you manually set metrics and use this, these metrics will be lost.
- * Do not use this layout, se AutoGraphLayout instead.
+ * Do not use this layout, use AutoGraphLayout instead.
  * @author teras
- * @obsolete
+ * @deprecated 
  */
 public class GridGraphLayout implements GraphLayout, Serializable {
 

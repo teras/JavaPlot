@@ -27,6 +27,7 @@ import java.util.ArrayList;
  * <p>
  * This object is not serializable, use GNUPlotParameters instead.
  * @author teras
+ * @see com.panayotis.gnuplot.JavaPlot
  * @see #addPlot(Plot)
  */
 public class GNUPlot {

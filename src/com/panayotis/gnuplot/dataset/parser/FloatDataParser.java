@@ -20,7 +20,7 @@ public class FloatDataParser extends NumericDataParser {
 
     /**
      * Create a new Float data parser, with the information that the first column is in date format.
-     * @param approve_first_column Whether the first column is in date format
+     * @param first_column_date Whether the first column is in date format
      */
     public FloatDataParser(boolean first_column_date) {
         super(first_column_date);

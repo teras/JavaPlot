@@ -20,6 +20,9 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
      * Orientation of the graph layout
      */
     public static final boolean DOWNWARDS = true,  UPWARDS = false;
+    /**
+     * Draw rows or columns first
+     */
     public static final boolean ROWSFIRST = true, COLUMNSFIRST = false;
 
     private boolean orientation;
@@ -40,7 +43,9 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
 
     /**
      * Set where the first graph will be put
-     * @param start Position of the first graph
+     * @param drawfirst Position of the first graph
+     * @see #ROWSFIRST
+     * @see #COLUMNSFIRST
      */
     public void setDrawFirst(boolean drawfirst) {
         this.drawfirst = drawfirst;
@@ -49,6 +54,8 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
     /**
      * Sey the orientation of the graphs, as being put
      * @param orientation Selected orientation
+     * @see #DOWNWARDS
+     * @see #UPWARDS
      */
     public void setOrientation(boolean orientation) {
         this.orientation = orientation;

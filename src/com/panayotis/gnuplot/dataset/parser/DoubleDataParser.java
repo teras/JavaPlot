@@ -19,7 +19,7 @@ public class DoubleDataParser extends NumericDataParser {
 
     /**
      * Create a new Double data parser, with the information that the first column is in date format.
-     * @param approve_first_column Whether the first column is in date format
+     * @param first_column_date Whether the first column is in date format
      */
     public DoubleDataParser(boolean first_column_date) {
         super(first_column_date);

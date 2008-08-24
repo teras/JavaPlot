@@ -15,7 +15,7 @@ import java.util.Collection;
  * In this dataset one can use any type of data, while in PointDataSet the data are stricted to numerical data only.
  * Thus, data suck as dates can be used.
  * @see com.panayotis.gnuplot.dataset.parser.DataParser
- * @see com.panayotis.gnuplot.dataset.PointDataSet<N>
+ * @see com.panayotis.gnuplot.dataset.PointDataSet
  * @author teras
  */
 public class GenericDataSet extends ArrayList<ArrayList<String>> implements DataSet {

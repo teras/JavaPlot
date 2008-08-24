@@ -20,7 +20,7 @@ public class IntegerDataParser extends NumericDataParser {
 
     /**
      * Create a new Integer data parser, with the information that the first column is in date format.
-     * @param approve_first_column Whether the first column is in date format
+     * @param first_column_date Whether the first column is in date format
      */
     public IntegerDataParser(boolean first_column_date) {
         super(first_column_date);
