@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Store data sets in a dynamic Generics ArrayList of Points/
+ * Store data sets in a dynamic Generics ArrayList of Points.
  * Prefer this object instead of ArrayDataSet if you plan to alter the points of
- * this data sets afterwards its creation.
+ * this data sets afterwards its creation.<p>
+ * If your data are not only numerical, consider using a GenericDataSet instead.
  * @param N The precision of each point
+ * @see com.panayotis.gnuplot.dataset.GenericDataSet
  * @author teras
  */
 public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implements DataSet {
@@ -48,11 +50,11 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
             old_dim = checkDimension(get(i), old_dim);
     }
     
-    private int checkDimension(Point<N> point, int old_dim) throws NumberFormatException {
+    private int checkDimension(Point<N> point, int old_dim) throws ArrayIndexOutOfBoundsException {
         int new_dim = point.getDimensions();
         if (old_dim<0) old_dim = new_dim;   // if the array is still empty, any size is good size
         if (old_dim!=new_dim)
-            throw new NumberFormatException("Point inserted differs in dimension: found "+new_dim+", requested "+old_dim);
+            throw new ArrayIndexOutOfBoundsException("Point inserted differs in dimension: found "+new_dim+", requested "+old_dim);
         return old_dim;
     }
 

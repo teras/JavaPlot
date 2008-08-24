@@ -5,6 +5,7 @@
 
 import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.JavaPlot;
+import com.panayotis.gnuplot.dataset.FileDataSet;
 import com.panayotis.gnuplot.layout.StripeLayout;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
@@ -15,6 +16,7 @@ import com.panayotis.gnuplot.style.Style;
 import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
 import com.panayotis.gnuplot.terminal.SVGTerminal;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,10 +45,10 @@ public class demo {
         //SVGTerminal(path);
         //JPlotTerminal(path);
         //serialization(defaultTerminal(path));
+        //file();
 
     }
 
-    
     /* This is a very simple plot to demonstrate JavaPlot graphs */
     private static void simple() {
         JavaPlot p = new JavaPlot();
@@ -180,5 +182,15 @@ public class demo {
         }
     }
 
- 
+
+   /* This is a simple plot to demonstrate file datasets */
+    private static void file() {
+        try {
+            JavaPlot p = new JavaPlot();
+            p.addPlot(new FileDataSet(new File("lala")));
+            p.plot();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
