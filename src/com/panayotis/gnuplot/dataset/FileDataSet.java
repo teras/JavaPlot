@@ -27,7 +27,7 @@ public class FileDataSet extends GenericDataSet {
      * When this object is initialized, the file is read into memory.
      * @param datafile The file containing the data set
      * @throws java.io.IOException when a I/O error is found
-     * @throws cava.lang.ArrayIndexOutOfBoundsException when the file has not consistent number of columns
+     * @throws java.lang.ArrayIndexOutOfBoundsException when the file has not consistent number of columns
      * @throws java.lang.NumberFormatException when the numbers inside the file are not parsable
      */
     public FileDataSet(File datafile) throws IOException, NumberFormatException, ArrayIndexOutOfBoundsException {

@@ -13,7 +13,7 @@ import java.util.Collection;
  * Generic data class to store data. This class stores data as a list of Strings, not numbers.
  * Still, the user can check if the data are valid, by using a specific DataParser for this object.<p>
  * In this dataset one can use any type of data, while in PointDataSet the data are stricted to numerical data only.
- * Thus, data suck as dates can be used.
+ * Thus, data such as dates can be used.
  * @see com.panayotis.gnuplot.dataset.parser.DataParser
  * @see com.panayotis.gnuplot.dataset.PointDataSet
  * @author teras
