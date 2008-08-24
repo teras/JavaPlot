@@ -97,7 +97,7 @@ public class ArrayDataSet implements DataSet, Serializable {
     /**
      * Creates a new instance of ArrayDataSet from a String 2D array.
      * No check on the data format is performed, can store any kind of value.
-     * Do not use this methof
+     * Do not use this method.
      * @deprecated
      * @param values the 2D array in String format to retrieve data from
      */

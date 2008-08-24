@@ -18,7 +18,7 @@ package com.panayotis.gnuplot.dataset;
 public interface DataSet {
     
     /**
-~     * Retrieve how many points this data set has.
+     * Retrieve how many points this data set has.
      * @return the number of points
      */
     public int size();
