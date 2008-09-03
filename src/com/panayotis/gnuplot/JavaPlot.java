@@ -30,6 +30,20 @@ public class JavaPlot extends GNUPlot {
     public JavaPlot() throws GNUPlotException {
         super();
     }
+    
+     /**
+     * Create a new instance of JavaPlot, using the default parameters. Use this method if
+     * you want to specifically define that the default plot is Graph3D
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
+     * this case there is need to use a constructor which defines the gnuplot path.
+     * @param isGraph3D true if the default plot is Graph3D
+     * @see #GNUPlot(boolean)
+     */
+    public JavaPlot(boolean isGraph3D) throws GNUPlotException {
+        super(isGraph3D);
+    }
+
+    
     /**
      * Create a new JavaPlot object with a given gnuplot path
      * @param gnuplotpath
@@ -40,6 +54,22 @@ public class JavaPlot extends GNUPlot {
     public JavaPlot(String gnuplotpath) throws GNUPlotException {
         super(gnuplotpath);
     }
+    
+    /**
+     * Create a new instance of gnuplot, with a given path for gnuplot. This constructor
+     * is useful if the automatic path search for gnuplot is not fruitful, or the user
+     * wants to point to a specific gnuplot executable.
+     * @param gnuplotpath The pathname of the gnuplot executable. If this parameter is set to null, use the default path.
+     * @param isGraph3D true if the default plot is Graph3D
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. It means that the
+     * provided path for gnuplot is not valid.
+     * @see GNUPlot#GNUPlot(String,boolean)
+     */
+    public JavaPlot(String gnuplotpath, boolean isGraph3D) throws GNUPlotException {
+        super(gnuplotpath, isGraph3D);
+    }
+
+    
     /**
      *  Create a new JavaPlot object with given parameters
      * @param par
@@ -59,6 +89,19 @@ public class JavaPlot extends GNUPlot {
      */
     public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term) throws GNUPlotException {
         super(par, gnuplotpath, term);
+    }
+
+    /**
+     * Create a new JavaPlot object with given parameters, gnuplot path terminal ans isGraph3D
+     * @param par
+     * @param gnuplotpath
+     * @param term
+     * @param isGraph3D
+     * @throws com.panayotis.gnuplot.GNUPlotException
+     * @see GNUPlot#GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,isGraph3D)
+     */
+    public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term, boolean isGraph3D) throws GNUPlotException {
+        super(par, gnuplotpath, term, isGraph3D);
     }
     /**
      * Set the graph Title

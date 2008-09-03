@@ -10,6 +10,9 @@ import com.panayotis.gnuplot.layout.StripeLayout;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
+import com.panayotis.gnuplot.plot.FunctionPlot;
+import com.panayotis.gnuplot.plot.Graph3D;
+import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.style.NamedPlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Style;
@@ -40,7 +43,8 @@ public class demo {
         }
 
         //simple();
-        defaultTerminal(path);
+        simple3D();
+        //defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
         //JPlotTerminal(path);
@@ -56,6 +60,12 @@ public class demo {
         p.plot();
     }
     
+    /* This is a very simple plot to demonstrate JavaPlot 3d graphs */
+    private static void simple3D() {
+        JavaPlot p = new JavaPlot(true);
+        p.addPlot("sin(x)*y");
+        p.plot();
+    }
     
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
     private static JavaPlot defaultTerminal(String gnuplotpath) {
@@ -85,6 +95,10 @@ public class demo {
 
         p.newGraph();
         p.addPlot("cos(x**2)");
+
+        Graph3D g = new Graph3D();
+        g.add(new FunctionPlot("sin(x)*sin(y)"));
+        p.addGraph(g);
 
         p.setMultiTitle("Global test title");
         StripeLayout lo = new StripeLayout();

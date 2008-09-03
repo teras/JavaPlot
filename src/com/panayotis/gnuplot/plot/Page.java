@@ -22,14 +22,26 @@ public class Page extends ArrayList<Graph> {
     private GraphLayout layout;
 
     /**
-     * COntruct a new blank page with one graph inside
+     * Contruct a new blank page with one graph inside
      */
     public Page() {
-        add(new Graph());
+        this(false);
+    }
+
+    /**
+     * Contruct a new blank page with one graph inside
+     * @param isGraph3D true, if this graph is a 3D plot
+     */
+    public Page(boolean isGraph3D) {
+        if(isGraph3D) {
+            add(new Graph3D());
+        } else {
+            add(new Graph());
+        }
         pagetitle = "";
         layout = new AutoGraphLayout();
     }
-
+    
     /**
      * Get a reference for this page layout
      * @return the layout used in this page

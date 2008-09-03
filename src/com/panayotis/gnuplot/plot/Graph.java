@@ -72,8 +72,8 @@ public class Graph extends ArrayList<Plot> {
         }
 
         /* Create data plots */
-        bf.append(ERROR_VAR).append(" = 1").append(NL);
-        bf.append("plot");  // Set error parameter
+        bf.append(ERROR_VAR).append(" = 1").append(NL);  // Set error parameter
+        bf.append(getPlotCommand());    // Use the corresponding plot command
         /* Add plot definitions */
         for (Plot p : this) {
             bf.append(' ');
@@ -109,5 +109,13 @@ public class Graph extends ArrayList<Plot> {
      */
     public LayoutMetrics getMetrics() {
         return metrics;
+    }
+    
+    /**
+     * Get the actual gnuplot command to initiate the plot.
+     * @return This method always returns "plot"
+     */
+    protected String getPlotCommand() {
+        return "plot";
     }
 }

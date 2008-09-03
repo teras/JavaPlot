@@ -52,22 +52,36 @@ public class GNUPlot {
      * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
      * this case there is need to use a constructor which defines the gnuplot path.
      * @see #GNUPlot(String)
-     * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal)
+     * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,boolean)
      */
     public GNUPlot() throws GNUPlotException {
-        this(null, null, null);
+        this(null, null, null, false);
     }
 
+    
+    /**
+     * Create a new instance of gnuplot, using the default parameters. Use this method if
+     * you want to specifically define that the default plot is Graph3D
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
+     * this case there is need to use a constructor which defines the gnuplot path.
+     * @param isGraph3D true if the default plot is Graph3D
+     * @see #GNUPlot(String)
+     * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,boolean)
+     */
+    public GNUPlot(boolean isGraph3D) throws GNUPlotException {
+        this(null, null, null, isGraph3D);
+    }
+    
     /**
      * Create a new instance of gnuplot, with a given set of parameters.
      * @see #GNUPlot(String)
-     * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal)
+     * @see #GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,boolean)
      * @param par Use this set of parameters, instead of a default one.
      * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
      * this case there is need to use a constructor which defines the gnuplot path.
      */
     public GNUPlot(GNUPlotParameters par) throws GNUPlotException {
-        this(par, null, null);
+        this(par, null, null, false);
     }
 
     /**
@@ -79,7 +93,20 @@ public class GNUPlot {
      * provided path for gnuplot is not valid.
      */
     public GNUPlot(String gnuplotpath) throws GNUPlotException {
-        this(null, gnuplotpath, null);
+        this(null, gnuplotpath, null, false);
+    }
+
+    /**
+     * Create a new instance of gnuplot, with a given path for gnuplot. This constructor
+     * is useful if the automatic path search for gnuplot is not fruitful, or the user
+     * wants to point to a specific gnuplot executable.
+     * @param gnuplotpath The pathname of the gnuplot executable. If this parameter is set to null, use the default path.
+     * @param isGraph3D true if the default plot is Graph3D
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. It means that the
+     * provided path for gnuplot is not valid.
+     */
+    public GNUPlot(String gnuplotpath, boolean isGraph3D) throws GNUPlotException {
+        this(null, gnuplotpath, null, isGraph3D);
     }
 
     /**
@@ -96,8 +123,26 @@ public class GNUPlot {
      * provided path for gnuplot is not valid.
      */
     public GNUPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term) throws GNUPlotException {
+        this(par, gnuplotpath, term, false);
+    }
+    
+    /**
+      * Create a new instance of gnuplot, with given parameters and given path for gnuplot.
+     * <p>
+     * This constructor is useful if the user wants to fine tune eny aspect of GNUPlot
+     * object, and especially if there is need to define a priori the output terminal.
+     * <p>
+     * Any parameters set to null, produce the default parameters.
+     * @param par GNUPlot parameters to use. These parameters encapsulate the whole gnuplot variables, including data sets.
+     * @param gnuplotpath The pathname of the gnuplot executable. If this parameter is set to null, use the default path.
+     * @param term The gnuplot terminal to use
+     * @param isGraph3D true, if this is a Graph3D object
+     * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. It means that the
+     * provided path for gnuplot is not valid.
+     */
+    public GNUPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term, boolean isGraph3D) throws GNUPlotException {
         if (par == null) {
-            par = new GNUPlotParameters();
+            par = new GNUPlotParameters(isGraph3D);
         }
         this.param = par;
 
@@ -115,7 +160,6 @@ public class GNUPlot {
             }
             throw new GNUPlotException(msg);
         }
-
     }
 
     /**
@@ -163,9 +207,20 @@ public class GNUPlot {
      * Add a new Graph object. This method is used to create a multiplot graph.
      * Every "plot" command corresponds to a different Graph object. In order to
      * draw to a new plot gnuplot object, create a new page.
+     * @see newGraph3D
      */
     public void newGraph() {
         param.newGraph();
+    }
+
+    /**
+     * Add a new Graph3D object. This method is used to create a multiplot graph.
+     * Every "splot" command corresponds to a different Graph object. In order to
+     * draw to a new plot gnuplot object, create a new page.
+     * @see newGraph
+     */
+    public void newGraph3d() {
+        param.newGraph3D();
     }
 
     /**

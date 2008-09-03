@@ -11,6 +11,7 @@ package com.panayotis.gnuplot;
 import com.panayotis.gnuplot.layout.GraphLayout;
 import com.panayotis.gnuplot.plot.Axis;
 import com.panayotis.gnuplot.plot.Graph;
+import com.panayotis.gnuplot.plot.Graph3D;
 import com.panayotis.gnuplot.plot.Page;
 import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
@@ -45,7 +46,14 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *  Create a new plot with the default parameters
      */
     public GNUPlotParameters() {
-        page = new Page();
+    }
+    
+    /**
+     * Create a new plot with the default parameters
+     * @param isGraph3D Whether this plot is a Graph3D
+     */
+    public GNUPlotParameters(boolean isGraph3D) {
+        page = new Page(isGraph3D);
         defaultgraph = 0;
 
         preinit = new ArrayList<String>();
@@ -94,9 +102,20 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      * Add a new Graph object. This method is used to create a multiplot graph.
      * Every "plot" command corresponds to a different Graph object. In order to
      * draw to a new plot gnuplot object, create a new page.
+     * @see newGraph3D
      */
     public void newGraph() {
         addGraph(new Graph());
+    }
+
+    /**
+     * Add a new Graph3D object. This method is used to create a multiplot graph.
+     * Every "splot" command corresponds to a different Graph object. In order to
+     * draw to a new plot gnuplot object, create a new page.
+     * @see newGraph
+     */
+    public void newGraph3D() {
+        addGraph(new Graph3D());
     }
 
     /**
