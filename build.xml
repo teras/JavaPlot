@@ -71,7 +71,7 @@
 	-->
 
 	<target name="dist" depends="distclean,javadoc">
-		<property name="version" value="0.3.0"/>
+		<property name="version" value="0.4.0"/>
 		<exec executable="ant" dir="demo">
 			<arg line="jar"/>
 		</exec>
@@ -89,7 +89,7 @@
 	</target>
 
 	<target name="-post-clean">
-		<property name="version" value="0.3.0"/>
+		<property name="version" value="0.4.0"/>
 		<delete file="JavaPlot-${version}.tar.bz2"/>
 	</target>
 
