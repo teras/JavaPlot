@@ -219,7 +219,7 @@ public class GNUPlot {
      * draw to a new plot gnuplot object, create a new page.
      * @see newGraph
      */
-    public void newGraph3d() {
+    public void newGraph3D() {
         param.newGraph3D();
     }
 

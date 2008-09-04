@@ -43,8 +43,8 @@ public class demo {
         }
 
         //simple();
-        simple3D();
-        //defaultTerminal(path);
+        //simple3D();
+        defaultTerminal(path);
         //EPSTerminal(path);
         //SVGTerminal(path);
         //JPlotTerminal(path);
@@ -93,17 +93,18 @@ public class demo {
         p.newGraph();
         p.addPlot("sin(x)");
 
-        p.newGraph();
-        p.addPlot("cos(x**2)");
+        p.newGraph3D();
+        double[][] plot3d = {{1, 1.1,3}, {2, 2.2,3}, {3, 3.3,3.4}, {4, 4.3,5}};
+        p.addPlot(plot3d);
+        
 
-        Graph3D g = new Graph3D();
-        g.add(new FunctionPlot("sin(x)*sin(y)"));
-        p.addGraph(g);
+        p.newGraph3D();
+        p.addPlot("sin(x)*sin(y)");
 
         p.setMultiTitle("Global test title");
-        StripeLayout lo = new StripeLayout();
-        lo.setColumns(9999);
-        p.getPage().setLayout(lo);
+    //    StripeLayout lo = new StripeLayout();
+    //    lo.setColumns(9999);
+    //    p.getPage().setLayout(lo);
         p.plot();
         
         return p;
