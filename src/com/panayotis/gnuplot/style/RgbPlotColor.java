@@ -1,13 +1,12 @@
 package com.panayotis.gnuplot.style;
 
 /**
- * This is an RGB (red-green-blue) color.
+ * This is an RGB (red-green-blue) color. For more information see gnuplot documentation for
+ * <a href="http://www.gnuplot.info/docs/node62.html">linetype, colors, and styles</a> as well
+ * as <a href="http://www.gnuplot.info/docs/node63.html">Colorspec definition</a>.
  *
  * @author dan
  * @author teras
- *
- * @see http://www.gnuplot.info/docs/node62.html
- * @see http://www.gnuplot.info/docs/node63.html
  */
 public class RgbPlotColor implements PlotColor {
     private int red;

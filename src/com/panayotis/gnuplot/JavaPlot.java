@@ -37,7 +37,7 @@ public class JavaPlot extends GNUPlot {
      * @throws com.panayotis.gnuplot.GNUPlotException If the gnuplot executable is not found, this exception is thrown. Typically at
      * this case there is need to use a constructor which defines the gnuplot path.
      * @param isGraph3D true if the default plot is Graph3D
-     * @see #GNUPlot(boolean)
+     * @see GNUPlot#GNUPlot(boolean)
      */
     public JavaPlot(boolean isGraph3D) throws GNUPlotException {
         super(isGraph3D);
@@ -98,7 +98,7 @@ public class JavaPlot extends GNUPlot {
      * @param term
      * @param isGraph3D
      * @throws com.panayotis.gnuplot.GNUPlotException
-     * @see GNUPlot#GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,isGraph3D)
+     * @see GNUPlot#GNUPlot(GNUPlotParameters,String,GNUPlotTerminal,boolean)
      */
     public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term, boolean isGraph3D) throws GNUPlotException {
         super(par, gnuplotpath, term, isGraph3D);

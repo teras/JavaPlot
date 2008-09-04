@@ -207,7 +207,7 @@ public class GNUPlot {
      * Add a new Graph object. This method is used to create a multiplot graph.
      * Every "plot" command corresponds to a different Graph object. In order to
      * draw to a new plot gnuplot object, create a new page.
-     * @see newGraph3D
+     * @see #newGraph3D() 
      */
     public void newGraph() {
         param.newGraph();
@@ -217,7 +217,7 @@ public class GNUPlot {
      * Add a new Graph3D object. This method is used to create a multiplot graph.
      * Every "splot" command corresponds to a different Graph object. In order to
      * draw to a new plot gnuplot object, create a new page.
-     * @see newGraph
+     * @see #newGraph()
      */
     public void newGraph3D() {
         param.newGraph3D();

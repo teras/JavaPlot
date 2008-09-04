@@ -10,9 +10,6 @@ import com.panayotis.gnuplot.layout.StripeLayout;
 import com.panayotis.iodebug.Debug;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
-import com.panayotis.gnuplot.plot.FunctionPlot;
-import com.panayotis.gnuplot.plot.Graph3D;
-import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.style.NamedPlotColor;
 import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Style;
@@ -71,7 +68,7 @@ public class demo {
     private static JavaPlot defaultTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot(gnuplotpath);
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
-
+        
         p.setTitle("Default Terminal Title");
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
@@ -102,9 +99,9 @@ public class demo {
         p.addPlot("sin(x)*sin(y)");
 
         p.setMultiTitle("Global test title");
-    //    StripeLayout lo = new StripeLayout();
-    //    lo.setColumns(9999);
-    //    p.getPage().setLayout(lo);
+        StripeLayout lo = new StripeLayout();
+        lo.setColumns(9999);
+        p.getPage().setLayout(lo);
         p.plot();
         
         return p;
