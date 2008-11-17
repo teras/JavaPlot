@@ -103,14 +103,28 @@ public class JavaPlot extends GNUPlot {
     public JavaPlot(GNUPlotParameters par, String gnuplotpath, GNUPlotTerminal term, boolean isGraph3D) throws GNUPlotException {
         super(par, gnuplotpath, term, isGraph3D);
     }
+
     /**
      * Set the graph Title
      * @param title Title of the graph
      */
     public void setTitle(String title) {
-        set("title", "'"+title+"'");
+        setTitle(title, null, -1);
     }
-    
+
+    /**
+     * Set the graph title and the title font
+     * @param title Title of the graph
+     * @param font Font name of this title text
+     * @param size Font size of this title text
+     */    
+    public void setTitle(String title, String font, int size) {
+        String fontname = "";
+        if (font != null) {
+            fontname = " font '" + font + ((size > 1) ? "," + size : "") + "'";
+        }
+        set("title", "'" + title + "'" + fontname);
+    }
     
     /**
      * 

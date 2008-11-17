@@ -50,7 +50,7 @@ public class Axis extends PropertiesHolder {
     
     /**
      * Set the label of this axis.
-     * @param label THe label of this axis
+     * @param label The label of this axis
      * @see #setLabel(String,String,int)
      */
     public void setLabel(String label) {
