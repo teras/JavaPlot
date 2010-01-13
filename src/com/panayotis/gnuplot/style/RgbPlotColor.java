@@ -38,7 +38,7 @@ public class RgbPlotColor implements PlotColor {
      * @param blue value for blue color, in the range of 0..1
      */
     public RgbPlotColor(float red, float green, float blue) {
-        this(Math.round(255*red), Math.round(255*red), Math.round(255*red));
+        this(Math.round(255*red), Math.round(255*green), Math.round(255*blue));
     }
 
     /**
