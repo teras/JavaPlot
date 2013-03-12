@@ -6,7 +6,8 @@
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
- * Parser for Long data 
+ * Parser for Long data
+ *
  * @author teras
  */
 public class LongDataParser extends NumericDataParser {
@@ -19,7 +20,9 @@ public class LongDataParser extends NumericDataParser {
     }
 
     /**
-     * Create a new Long data parser, with the information that the first column is in date format.
+     * Create a new Long data parser, with the information that the first column
+     * is in date format.
+     *
      * @param first_column_date Whether the first column is in date format
      */
     public LongDataParser(boolean first_column_date) {
@@ -28,6 +31,7 @@ public class LongDataParser extends NumericDataParser {
 
     /**
      * Check whether this String represents a Long number
+     *
      * @param format the String containing the Long number
      * @return True, if this is a representation of a Long number
      */

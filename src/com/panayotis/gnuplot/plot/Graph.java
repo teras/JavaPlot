@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.GNUPlotParameters;
@@ -9,12 +10,15 @@ import com.panayotis.gnuplot.layout.LayoutMetrics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.panayotis.gnuplot.GNUPlotParameters.*;
+import static com.panayotis.gnuplot.GNUPlotParameters.ERRORTAG;
+import static com.panayotis.gnuplot.GNUPlotParameters.ERROR_VAR;
 
 /**
- * Graph objects are parts of a multi-plot drawing. Each graph contains other plots which
- * share the same axis. All gnuplot objects have at least one graph object.
- * <p> For single plots, better have a look at Plot objects and GNUPlot.addPlot() command
+ * Graph objects are parts of a multi-plot drawing. Each graph contains other
+ * plots which share the same axis. All gnuplot objects have at least one graph
+ * object. <p> For single plots, better have a look at Plot objects and
+ * GNUPlot.addPlot() command
+ *
  * @author teras
  */
 public class Graph extends ArrayList<Plot> {
@@ -35,46 +39,54 @@ public class Graph extends ArrayList<Plot> {
     }
 
     /**
-     *  Get one of the available Axis, in orde to set some parameters on it.
+     * Get one of the available Axis, in order to set some parameters on it.
+     *
      * @param axisname The name of the Axis. It is usually "x", "y", "z"
      * @return The desired Axis
      */
     public Axis getAxis(String axisname) {
-        if (axisname == null) {
+        if (axisname == null)
             return null;
-        }
         return axis.get(axisname.toLowerCase());
     }
 
     /**
-     * Add a new plot to this plotgroup.
-     * At least one plot is needed to produce visual results.
+     * Add a new plot to this plot group. At least one plot is needed to produce
+     * visual results.
+     *
      * @param plot The given plot.
      */
     public void addPlot(Plot plot) {
-        if (plot != null) {
+        if (plot != null)
             add(plot);
-        }
     }
 
     /**
      * Get gnuplot commands for this graph.
+     *
      * @param bf
      */
-    void retrieveData(StringBuffer bf) {
-        /* Do not append anything, if this graph is empty */
+    void retrieveData(StringBuilder bf) {
+        /*
+         * Do not append anything, if this graph is empty
+         */
         if (size() == 0)
             return;
 
-        /* Set various axis parameters */
-        for (Axis ax : axis.values()) {
+        /*
+         * Set various axis parameters
+         */
+        for (Axis ax : axis.values())
             ax.appendProperties(bf);
-        }
 
-        /* Create data plots */
+        /*
+         * Create data plots
+         */
         bf.append(ERROR_VAR).append(" = 1").append(NL);  // Set error parameter
         bf.append(getPlotCommand());    // Use the corresponding plot command
-        /* Add plot definitions */
+        /*
+         * Add plot definitions
+         */
         for (Plot p : this) {
             bf.append(' ');
             p.retrieveDefinition(bf);
@@ -82,17 +94,21 @@ public class Graph extends ArrayList<Plot> {
         }
         bf.deleteCharAt(bf.length() - 1);
         bf.append(GNUPlotParameters.NOERROR_COMMAND).append(NL);    // Reset error parameter. if everything OK
-        /* Add plot data (if any) */
-        for (Plot p : this) {
+        /*
+         * Add plot data (if any)
+         */
+        for (Plot p : this)
             p.retrieveData(bf);
-        }
 
-        /* Print error check */
+        /*
+         * Print error check
+         */
         bf.append("if (").append(ERROR_VAR).append(" == 1) print '").append(ERRORTAG).append('\'').append(NL);
     }
 
     /**
-     * Set the position and size of thie graph object, relative to a 0,0-1,1 page
+     * Set the position and size of thie graph object, relative to a 0,0-1,1
+     * page
      *
      * @param x horizontal position
      * @param y vertical position
@@ -105,14 +121,16 @@ public class Graph extends ArrayList<Plot> {
 
     /**
      * Get the positioning and size of this graph object
+     *
      * @return The metrics of this object
      */
     public LayoutMetrics getMetrics() {
         return metrics;
     }
-    
+
     /**
      * Get the actual gnuplot command to initiate the plot.
+     *
      * @return This method always returns "plot"
      */
     protected String getPlotCommand() {

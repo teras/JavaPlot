@@ -2,37 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.plot.Page;
 import java.io.Serializable;
 
 /**
- * Align graphs evenly on the page, in a grid layout, based on
- * <p>
- * If you manually set metrics and use this, these metrics will be lost
+ * Align graphs evenly on the page, in a grid layout, based on <p> If you
+ * manually set metrics and use this, these metrics will be lost
+ *
  * @author teras
  */
 public class AutoGraphLayout implements GraphLayout, Serializable {
 
-    
     /**
      * Orientation of the graph layout
      */
-    public static final boolean DOWNWARDS = true,  UPWARDS = false;
+    public static final boolean DOWNWARDS = true, UPWARDS = false;
     /**
      * Draw rows or columns first
      */
     public static final boolean ROWSFIRST = true, COLUMNSFIRST = false;
-
     private boolean orientation;
     private boolean drawfirst;
-
     private int rows, cols;
 
     /**
-     * Create a new automatic grid layout. Default values are ROWSFIRST, DOWNWARDS,
-     * automatic layout of components
+     * Create a new automatic grid layout. Default values are ROWSFIRST,
+     * DOWNWARDS, automatic layout of components
      */
     public AutoGraphLayout() {
         drawfirst = ROWSFIRST;
@@ -43,6 +41,7 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
 
     /**
      * Set where the first graph will be put
+     *
      * @param drawfirst Position of the first graph
      * @see #ROWSFIRST
      * @see #COLUMNSFIRST
@@ -53,6 +52,7 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
 
     /**
      * Sey the orientation of the graphs, as being put
+     *
      * @param orientation Selected orientation
      * @see #DOWNWARDS
      * @see #UPWARDS
@@ -62,37 +62,46 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
     }
 
     /**
-     * Manually set the number of rows. This method overrides the automatic component layout.
-     * @param rows Desired number of rows. Set it to -1 to be automatically computed.
+     * Manually set the number of rows. This method overrides the automatic
+     * component layout.
+     *
+     * @param rows Desired number of rows. Set it to -1 to be automatically
+     * computed.
      */
     public void setRows(int rows) {
         this.rows = rows;
     }
 
     /**
-     * Manually set the number of columns. This method overrides the automatic component layout.
-     * @param cols Desired number of columns. Set it to -1 to be automatically computed.
+     * Manually set the number of columns. This method overrides the automatic
+     * component layout.
+     *
+     * @param cols Desired number of columns. Set it to -1 to be automatically
+     * computed.
      */
     public void setColumns(int cols) {
         this.cols = cols;
     }
 
-    private int getOtherDimension (int size, int dim) {
+    private int getOtherDimension(int size, int dim) {
         return (int) Math.ceil((double) size / dim);
     }
 
     /**
-     * Update the capacity of this layout. This manager creates a grid,
-     * as much square as possible, if automatic layout is wanted.
+     * Update the capacity of this layout. This manager creates a grid, as much
+     * square as possible, if automatic layout is wanted.
+     *
      * @param page The page with the elements we would like to position
-     * @param buffer Where to send commands, just after the "set multiplot" part.
+     * @param buffer Where to send commands, just after the "set multiplot"
+     * part.
      */
-    public void setDefinition(Page page, StringBuffer buffer) {
+    public void setDefinition(Page page, StringBuilder buffer) {
         int size = page.size();
 
-        if (size <= 0) return;
+        if (size <= 0)
+            return;
 
-        int drawcols = cols , drawrows = rows;
+        int drawcols = cols, drawrows = rows;
         if (cols > 0 && rows > 0) {
             drawcols = cols;
             drawrows = rows;
@@ -106,14 +115,18 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
             drawrows = (int) (Math.floor(Math.sqrt(size)));
             drawcols = getOtherDimension(size, drawrows);
         }
-        
+
         buffer.append(" layout ");
         buffer.append(drawrows).append(',').append(drawcols);
 
-        if (drawfirst==ROWSFIRST) buffer.append(" rowsfirst");
-        else buffer.append(" columnsfirst");
+        if (drawfirst == ROWSFIRST)
+            buffer.append(" rowsfirst");
+        else
+            buffer.append(" columnsfirst");
 
-        if (orientation==DOWNWARDS) buffer.append(" downwards");
-        else buffer.append(" upwards");
+        if (orientation == DOWNWARDS)
+            buffer.append(" downwards");
+        else
+            buffer.append(" upwards");
     }
 }

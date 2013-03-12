@@ -18,7 +18,7 @@ public class ManualGraphLayout implements GraphLayout, Serializable {
      * @param page The Page which layout we want to calculate
      * @param buffer The definition part of the multiplot layout
      */
-    public void setDefinition(Page page, StringBuffer buffer) {
+    public void setDefinition(Page page, StringBuilder buffer) {
     }
 
 }

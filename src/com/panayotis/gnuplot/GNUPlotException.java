@@ -11,16 +11,17 @@ package com.panayotis.gnuplot;
 
 /**
  * Runtime exception used whenever a recoverable error occured.
+ *
  * @author teras
  */
 public class GNUPlotException extends RuntimeException {
-    
+
     /**
      * Creates a new instance of GNUPlotException
+     *
      * @param reason Message describing what went wrong
      */
     public GNUPlotException(String reason) {
         super(reason);
     }
-    
 }

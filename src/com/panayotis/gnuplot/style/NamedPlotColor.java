@@ -11,9 +11,11 @@ package com.panayotis.gnuplot.style;
 
 /**
  * This is a list of possible colors which the user is able to use under gnuplot
+ *
  * @author teras
  */
 public enum NamedPlotColor implements PlotColor {
+
     WHITE,
     BLACK,
     GRAY0,
@@ -97,13 +99,13 @@ public enum NamedPlotColor implements PlotColor {
     DARK_VIOLET,
     PLUM,
     PURPLE;
-    
+
     /**
      * Get the representation of this color
+     *
      * @return The color representation
      */
     public String getColor() {
-        return "rgb '"+name().toLowerCase().replace('_','-')+"'";
+        return "rgb '" + name().toLowerCase().replace('_', '-') + "'";
     }
-    
 }

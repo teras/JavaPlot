@@ -6,7 +6,8 @@
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
- * Parser for Float data 
+ * Parser for Float data
+ *
  * @author teras
  */
 public class FloatDataParser extends NumericDataParser {
@@ -19,7 +20,9 @@ public class FloatDataParser extends NumericDataParser {
     }
 
     /**
-     * Create a new Float data parser, with the information that the first column is in date format.
+     * Create a new Float data parser, with the information that the first
+     * column is in date format.
+     *
      * @param first_column_date Whether the first column is in date format
      */
     public FloatDataParser(boolean first_column_date) {
@@ -28,6 +31,7 @@ public class FloatDataParser extends NumericDataParser {
 
     /**
      * Check whether this String represents a Float number
+     *
      * @param format the String containing the Float number
      * @return True, if this is a representation of a Float number
      */

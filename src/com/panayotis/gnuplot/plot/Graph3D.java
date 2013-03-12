@@ -11,10 +11,12 @@ package com.panayotis.gnuplot.plot;
  */
 public class Graph3D extends Graph {
 
-      /**
+    /**
      * Get the actual gnuplot command to initiate the plot.
+     *
      * @return This method always returns "plot"
      */
+    @Override
     protected String getPlotCommand() {
         return "splot";
     }
