@@ -31,7 +31,7 @@ public class FunctionPlot extends AbstractPlot {
         set("title", "'" + function + "'");
         setDefinition(function);
     }
-z
+
     /**
      * This method is unused in this object. It is here only for compatibility
      * reasons with Plot object.
