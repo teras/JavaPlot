@@ -5,7 +5,7 @@
  *
  */
 
-package com.panayotis.iodebug;
+package com.panayotis.gnuplot.utils;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

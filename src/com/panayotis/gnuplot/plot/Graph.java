@@ -5,19 +5,17 @@
 
 package com.panayotis.gnuplot.plot;
 
-import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.layout.LayoutMetrics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.panayotis.gnuplot.GNUPlotParameters.ERRORTAG;
-import static com.panayotis.gnuplot.GNUPlotParameters.ERROR_VAR;
-
 /**
  * Graph objects are parts of a multi-plot drawing. Each graph contains other
  * plots which share the same axis. All gnuplot objects have at least one graph
- * object. <p> For single plots, better have a look at Plot objects and
- * GNUPlot.addPlot() command
+ * object.
+ * <p>
+ * For single plots, better have a look at Plot objects and GNUPlot.addPlot()
+ * command
  *
  * @author teras
  */
@@ -82,7 +80,6 @@ public class Graph extends ArrayList<Plot> {
         /*
          * Create data plots
          */
-        bf.append(ERROR_VAR).append(" = 1").append(NL);  // Set error parameter
         bf.append(getPlotCommand());    // Use the corresponding plot command
         /*
          * Add plot definitions
@@ -92,18 +89,12 @@ public class Graph extends ArrayList<Plot> {
             p.retrieveDefinition(bf);
             bf.append(',');
         }
-        bf.deleteCharAt(bf.length() - 1);
-        bf.append(GNUPlotParameters.NOERROR_COMMAND).append(NL);    // Reset error parameter. if everything OK
+        bf.deleteCharAt(bf.length() - 1).append(NL);
         /*
          * Add plot data (if any)
          */
         for (Plot p : this)
             p.retrieveData(bf);
-
-        /*
-         * Print error check
-         */
-        bf.append("if (").append(ERROR_VAR).append(" == 1) print '").append(ERRORTAG).append('\'').append(NL);
     }
 
     /**

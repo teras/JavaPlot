@@ -16,9 +16,8 @@ usage of various 1.5 technologies, such as Generics and auto-boxing, to help
 manipulation of plot data. It has been tested with gnuplot 4.2. Older versions
 might or might not work.
 
-This library has been checked in Windows XP, Linux (Debian) and Mac OS X (Tiger
-& Leopard). It should work on any other system, if you fine tune the special
-parameters needed.
+This library has been checked in Windows, Linux and Mac OS X. It should work on
+any other system, if you fine tune the special parameters needed.
 
 
 Usage
