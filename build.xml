@@ -71,7 +71,7 @@
 	-->
 
 	<target name="dist" depends="distclean,javadoc">
-		<property name="version" value="0.4.0"/>
+		<property name="version" value="0.5.0"/>
 		<exec executable="ant" dir="demo">
 			<arg line="jar"/>
 		</exec>
