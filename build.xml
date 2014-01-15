@@ -97,6 +97,7 @@
 		<exec executable="ant" dir="demo">
 			<arg line="clean"/>
 		</exec>
+        <delete file=".ant-targets-build.xml"/>
 	</target>
 
 </project>
