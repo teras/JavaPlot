@@ -1,10 +1,19 @@
-/*
- * GNUPlot.java
+/* Copyright (c) 2007-2014 by panayotis.com
+ *
+ * JavaPlot is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, version 2.
+ *
+ * JavaPlot is free in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with CrossMobile; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * Created on 12 Οκτώβριος 2007, 3:07 μμ
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
  */
 
 package com.panayotis.gnuplot;
@@ -23,9 +32,10 @@ import java.util.ArrayList;
 /**
  * This is the main class of JavaPlot. It is the cental point to create a
  * gnuplot. Typically the user needs to create a new instance of this object and
- * add the desired plots.<p> It also provides some convenient methods in order
- * to set various parameters. <p> This object is not serializable, use
- * GNUPlotParameters instead.
+ * add the desired plots.<p>
+ * It also provides some convenient methods in order to set various parameters.
+ * <p>
+ * This object is not serializable, use GNUPlotParameters instead.
  *
  * @author teras
  * @see com.panayotis.gnuplot.JavaPlot
@@ -124,10 +134,13 @@ public class GNUPlot {
 
     /**
      * Create a new instance of gnuplot, with given parameters and given path
-     * for gnuplot. <p> This constructor is useful if the user wants to fine
-     * tune eny aspect of GNUPlot object, and especially if there is need to
-     * define a priori the output terminal. <p> Any parameters set to null,
-     * produce the default parameters.
+     * for gnuplot.
+     * <p>
+     * This constructor is useful if the user wants to fine tune eny aspect of
+     * GNUPlot object, and especially if there is need to define a priori the
+     * output terminal.
+     * <p>
+     * Any parameters set to null, produce the default parameters.
      *
      * @param par GNUPlot parameters to use. These parameters encapsulate the
      * whole gnuplot variables, including data sets.
@@ -144,10 +157,13 @@ public class GNUPlot {
 
     /**
      * Create a new instance of gnuplot, with given parameters and given path
-     * for gnuplot. <p> This constructor is useful if the user wants to fine
-     * tune eny aspect of GNUPlot object, and especially if there is need to
-     * define a priori the output terminal. <p> Any parameters set to null,
-     * produce the default parameters.
+     * for gnuplot.
+     * <p>
+     * This constructor is useful if the user wants to fine tune eny aspect of
+     * GNUPlot object, and especially if there is need to define a priori the
+     * output terminal.
+     * <p>
+     * Any parameters set to null, produce the default parameters.
      *
      * @param par GNUPlot parameters to use. These parameters encapsulate the
      * whole gnuplot variables, including data sets.

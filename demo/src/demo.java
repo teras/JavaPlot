@@ -1,6 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/* Copyright (c) 2007-2014 by panayotis.com
+ *
+ * JavaPlot is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, version 2.
+ *
+ * JavaPlot is free in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with CrossMobile; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
 import com.panayotis.gnuplot.GNUPlotParameters;
@@ -26,18 +37,19 @@ import javax.swing.JFrame;
 
 /**
  * This Object is used to demonstrate JavaPlot library
+ *
  * @author teras
  */
 public class demo {
 
     /**
-     * @param args the command line arguments. First argument is the path of gnuplot application
+     * @param args the command line arguments. First argument is the path of
+     * gnuplot application
      */
     public static void main(String[] args) {
         String path = null;
-        if (args.length > 0) {
+        if (args.length > 0)
             path = args[0];
-        }
 
         //simple();
         //simple3D();
@@ -56,19 +68,19 @@ public class demo {
         p.addPlot("sin(x)");
         p.plot();
     }
-    
+
     /* This is a very simple plot to demonstrate JavaPlot 3d graphs */
     private static void simple3D() {
         JavaPlot p = new JavaPlot(true);
         p.addPlot("sin(x)*y");
         p.plot();
     }
-    
+
     /* This demo code uses default terminal. Use it as reference for other javaplot arguments  */
     private static JavaPlot defaultTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot(gnuplotpath);
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
-        
+
         p.setTitle("Default Terminal Title");
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
@@ -91,9 +103,8 @@ public class demo {
         p.addPlot("sin(x)");
 
         p.newGraph3D();
-        double[][] plot3d = {{1, 1.1,3}, {2, 2.2,3}, {3, 3.3,3.4}, {4, 4.3,5}};
+        double[][] plot3d = {{1, 1.1, 3}, {2, 2.2, 3}, {3, 3.3, 3.4}, {4, 4.3, 5}};
         p.addPlot(plot3d);
-        
 
         p.newGraph3D();
         p.addPlot("sin(x)*sin(y)");
@@ -103,7 +114,7 @@ public class demo {
         lo.setColumns(9999);
         p.getPage().setLayout(lo);
         p.plot();
-        
+
         return p;
     }
 
@@ -111,8 +122,8 @@ public class demo {
     private static JavaPlot EPSTerminal(String gnuplotpath) {
         JavaPlot p = new JavaPlot();
 
-        PostscriptTerminal epsf = new PostscriptTerminal(System.getProperty("user.home") +
-                System.getProperty("file.separator") + "output.eps");
+        PostscriptTerminal epsf = new PostscriptTerminal(System.getProperty("user.home")
+                + System.getProperty("file.separator") + "output.eps");
         epsf.setColor(true);
         p.setTerminal(epsf);
 
@@ -133,14 +144,14 @@ public class demo {
         plot.getJavaPlot().addPlot("sqrt(x)/x");
         plot.getJavaPlot().addPlot("x*sin(x)");
         plot.plot();
-        
+
         JFrame f = new JFrame();
         f.getContentPane().add(plot);
         f.pack();
         f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
-        
+
         return plot.getJavaPlot();
     }
 
@@ -166,12 +177,11 @@ public class demo {
         } catch (ClassNotFoundException ex) {
             System.err.println("Error: Library SVGSalamander not properly installed?");
         }
-        
+
         return p;
     }
 
-
-   private static void serialization(JavaPlot p) {
+    private static void serialization(JavaPlot p) {
         ObjectOutputStream out = null;
         ObjectInputStream in = null;
         try {
@@ -179,7 +189,7 @@ public class demo {
             out.writeObject(p.getParameters());
 
             in = new ObjectInputStream(new FileInputStream("koko.lala"));
-            JavaPlot q = new JavaPlot ( (GNUPlotParameters) in.readObject());
+            JavaPlot q = new JavaPlot((GNUPlotParameters) in.readObject());
             q.plot();
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
@@ -195,7 +205,7 @@ public class demo {
     }
 
 
-   /* This is a simple plot to demonstrate file datasets */
+    /* This is a simple plot to demonstrate file datasets */
     private static void file() {
         try {
             JavaPlot p = new JavaPlot();

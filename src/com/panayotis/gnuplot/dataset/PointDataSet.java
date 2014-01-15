@@ -1,10 +1,19 @@
-/*
- * PointDataSet.java
+/* Copyright (c) 2007-2014 by panayotis.com
+ *
+ * JavaPlot is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, version 2.
+ *
+ * JavaPlot is free in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with CrossMobile; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  * Created on October 15, 2007, 2:10 AM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
  */
 
 package com.panayotis.gnuplot.dataset;
@@ -16,8 +25,8 @@ import java.util.Collection;
 /**
  * Store data sets in a dynamic Generics ArrayList of Points. Prefer this object
  * instead of ArrayDataSet if you plan to alter the points of this data sets
- * afterwards its creation.<p> If your data are not only numerical, consider
- * using a GenericDataSet instead.
+ * afterwards its creation.<p>
+ * If your data are not only numerical, consider using a GenericDataSet instead.
  *
  * @param N The precision of each point
  * @see com.panayotis.gnuplot.dataset.GenericDataSet
