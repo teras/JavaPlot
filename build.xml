@@ -78,13 +78,19 @@
 		<delete dir="build"/>
 		<delete dir="demo/build"/>
 		<delete dir="/tmp/JavaPlot-${version}"/>
+        <delete file="JavaPlot-${version}.tar.bz2"/>
+        <delete file="JavaPlot-${version}.zip"/>
 		<exec executable="cp" failonerror="true">
 			<arg line="-R -p ../JavaPlot /tmp/JavaPlot-${version}" />
 		</exec>
 		<exec executable="tar" dir="/tmp" failonerror="true">
-			<arg line="--exclude=.svn --exclude=nbproject/private -jcvf JavaPlot-${version}.tar.bz2 JavaPlot-${version}"/>
+			<arg line="--exclude=.hg --exclude=.DS_Store --exclude=nbproject/private -jcvf JavaPlot-${version}.tar.bz2 JavaPlot-${version}"/>
 		</exec>
 		<move file="/tmp/JavaPlot-${version}.tar.bz2" todir="."/>
+        <exec executable="zip" dir="/tmp" failonerror="true">
+            <arg line="-9 -r --exclude=*.hg* --exclude=*.DS_Store* --exclude=*nbproject/private* JavaPlot-${version}.zip JavaPlot-${version}"/>
+        </exec>
+        <move file="/tmp/JavaPlot-${version}.zip" todir="."/>
 		<delete dir="/tmp/JavaPlot-${version}"/>
 	</target>
 
