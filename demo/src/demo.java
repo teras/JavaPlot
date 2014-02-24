@@ -81,7 +81,7 @@ public class demo {
         JavaPlot p = new JavaPlot(gnuplotpath);
         JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
 
-        p.setTitle("Default Terminal Title");
+        p.setTitle("Default \"Terminal Title\"");
         p.getAxis("x").setLabel("X axis", "Arial", 20);
         p.getAxis("y").setLabel("Y axis");
 

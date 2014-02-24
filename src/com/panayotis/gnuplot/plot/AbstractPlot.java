@@ -106,6 +106,6 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
      * @param title The title to use for this plot
      */
     public final void setTitle(String title) {
-        set("title", "'" + title + "'");
+        set("title", "\"" + title.replaceAll("[\"]", "\\\\\\\"") + "\"");
     }
 }
