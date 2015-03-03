@@ -15,14 +15,13 @@
  *
  * Created on October 24, 2007, 7:47 PM
  */
-
 package com.panayotis.gnuplot.terminal;
 
+import com.kitfox.svg.SVGDiagram;
+import com.kitfox.svg.SVGDisplayPanel;
+import com.kitfox.svg.SVGUniverse;
 import java.io.InputStream;
-import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
 import javax.swing.JPanel;
 
 /**
@@ -68,36 +67,24 @@ public class SVGTerminal extends TextFileTerminal {
      *
      * @return The JPanel with the SVG drawing
      * @throws java.lang.ClassNotFoundException If the SVGSalamander library
-     * could not be found, or if any other error occured.
+     * could not be found, or if any other error occurred.
      */
     public JPanel getPanel() throws ClassNotFoundException {
         /*
          * Use reflection API to create the representation in SVG format
          */
-        Object svgDisplayPanel = null;
-        if (output == null || output.equals(""))
+        if (output == null || output .equals(""))
             throw new NullPointerException("SVG output is empty; probably SVG terminal is not used or plot() not executed yet.");
         try {
-            svgDisplayPanel = Class.forName("com.kitfox.svg.SVGDisplayPanel").newInstance();
-            Object universe = Class.forName("com.kitfox.svg.SVGUniverse").newInstance();
-            Object diagram = null;
-
-            universe.getClass().getMethod("loadSVG", Reader.class, String.class).invoke(universe, new StringReader(output), "plot");
-            URI uri = (URI) universe.getClass().getMethod("getStreamBuiltURI", String.class).invoke(universe, "plot");
-            diagram = universe.getClass().getMethod("getDiagram", URI.class).invoke(universe, uri);
-            svgDisplayPanel.getClass().getMethod("setDiagram", Class.forName("com.kitfox.svg.SVGDiagram")).invoke(svgDisplayPanel, diagram);
-        } catch (NoSuchMethodException e) {
-            throw new ClassNotFoundException(e.getMessage());
-        } catch (InstantiationException e) {
-            throw new ClassNotFoundException(e.getMessage());
-        } catch (IllegalAccessException e) {
-            throw new ClassNotFoundException(e.getMessage());
-        } catch (InvocationTargetException e) {
-            throw new ClassNotFoundException(e.getMessage());
+            SVGUniverse universe = new SVGUniverse();
+            universe.loadSVG(new StringReader(output), "plot");
+            SVGDiagram diagram = universe.getDiagram(universe.getStreamBuiltURI("plot"));
+            
+            SVGDisplayPanel svgDisplayPanel = new SVGDisplayPanel();
+            svgDisplayPanel.setDiagram(diagram);
+            return svgDisplayPanel;
         } catch (Exception e) {
             throw new ClassNotFoundException(e.getMessage());
         }
-
-        return (JPanel) svgDisplayPanel;
     }
 }

@@ -1,0 +1,37 @@
+apply plugin:'java'
+apply plugin:'application'
+defaultTasks 'run'
+mainClassName='test.Main'
+
+def version = "0.6.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.kitfox.svg:svg-salamander:1.0'
+}
+
+task dist(dependsOn:'jar') << {
+    exec () { executable 'ant'; workingDir 'demo'; args 'jar' }
+    delete 'build', 'demo/build', 'one', "/tmp/JavaPlot-${version}", "JavaPlot-${version}.tar.bz2", "JavaPlot-${version}.tar.bz2"
+    ant.copy(todir: "/tmp/JavaPlot-${version}", preservelastmodified: "true") {
+        fileset(dir: "../JavaPlot", excludes:"**/.DS_Store .hg/** .gradle/** .nb-gradle/**")
+    }
+    exec () { executable 'tar'; workingDir '/tmp'; args "-jcvf", "JavaPlot-${version}.tar.bz2", "JavaPlot-${version}" }
+    exec () { executable 'zip'; workingDir '/tmp'; args "-9", "-r", "JavaPlot-${version}.zip", "JavaPlot-${version}" }
+    copy() { from "/tmp/JavaPlot-${version}.tar.bz2"; into "."}
+    copy() { from "/tmp/JavaPlot-${version}.zip"; into="."}
+    delete "/tmp/JavaPlot-${version}", "/tmp/JavaPlot-${version}.tar.bz2", "/tmp/JavaPlot-${version}.zip"
+}
+
+clean << {
+    exec () {
+        executable 'ant'
+        workingDir 'demo'
+        args 'clean'
+    }
+    delete "JavaPlot-${version}.tar.bz2", "JavaPlot-${version}.zip"
+}
+

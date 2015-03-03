@@ -1,3 +1,6 @@
+0.5.0
+Fix Windows issues: use temporary files instead of pipes.
+
 0.4.0
 Basic support of Graph3D (splot). Implementation of user-defined
 terminals.
