@@ -5,3 +5,4 @@ syntax: regexp
 
 \.gradle/
 \.nb-gradle/
+gradle.properties

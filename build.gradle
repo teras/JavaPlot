@@ -3,7 +3,12 @@ apply plugin:'application'
 defaultTasks 'run'
 mainClassName='test.Main'
 
-def version = "0.6.0"
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def group = "com.panayotis.javaplot"
+def archivesBaseName = "javaplot"
+def version = "0.5.0"
 
 repositories {
     mavenCentral()
@@ -33,5 +38,68 @@ clean << {
         args 'clean'
     }
     delete "JavaPlot-${version}.tar.bz2", "JavaPlot-${version}.zip"
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Example Application'
+                packaging 'jar'
+                // optionally artifactId can be defined here 
+                description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
+                url 'http://www.example.com/example-application'
+
+                scm {
+                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
+                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
+                    url 'http://foo.googlecode.com/svn/trunk/'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'teras'
+                        name 'Panayotis Katsaloulis'
+                        email 'panayotis@panayotis.com'
+                    }
+                }
+            }
+        }
+    }
 }
 
