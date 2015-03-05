@@ -55,6 +55,7 @@ public class SVGTerminal extends TextFileTerminal {
      * @param stdout The gnuplot output stream
      * @return Return the error as a String, if an error occured.
      */
+    @Override
     public String processOutput(InputStream stdout) {
         String out_status = super.processOutput(stdout);
         if (output != null && getOutputFile().equals(""))
@@ -73,13 +74,13 @@ public class SVGTerminal extends TextFileTerminal {
         /*
          * Use reflection API to create the representation in SVG format
          */
-        if (output == null || output .equals(""))
+        if (output == null || output.equals(""))
             throw new NullPointerException("SVG output is empty; probably SVG terminal is not used or plot() not executed yet.");
         try {
             SVGUniverse universe = new SVGUniverse();
             universe.loadSVG(new StringReader(output), "plot");
             SVGDiagram diagram = universe.getDiagram(universe.getStreamBuiltURI("plot"));
-            
+
             SVGDisplayPanel svgDisplayPanel = new SVGDisplayPanel();
             svgDisplayPanel.setDiagram(diagram);
             return svgDisplayPanel;

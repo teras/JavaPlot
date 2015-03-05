@@ -15,7 +15,6 @@
  *
  * Created on October 17, 2007, 3:34 AM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 import java.io.InputStream;
@@ -38,6 +37,7 @@ public class DefaultTerminal implements GNUPlotTerminal, Serializable {
      *
      * @return Always returns "".
      */
+    @Override
     public String getType() {
         return "";
     }
@@ -47,6 +47,7 @@ public class DefaultTerminal implements GNUPlotTerminal, Serializable {
      *
      * @return Always returns "".
      */
+    @Override
     public String getOutputFile() {
         return "";
     }
@@ -56,6 +57,7 @@ public class DefaultTerminal implements GNUPlotTerminal, Serializable {
      *
      * @param stdout The output of GNUPlot. Not processed.
      */
+    @Override
     public String processOutput(InputStream stdout) {
         return null;
     }

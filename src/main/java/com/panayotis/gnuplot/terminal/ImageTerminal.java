@@ -15,7 +15,6 @@
  *
  * Created on October 16, 2007, 1:34 AM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 import java.awt.image.BufferedImage;
@@ -46,6 +45,7 @@ public class ImageTerminal extends FileTerminal {
      * @param stdout The gnuplot output stream
      * @return The error definition, if any
      */
+    @Override
     public String processOutput(InputStream stdout) {
         try {
             img = ImageIO.read(stdout);

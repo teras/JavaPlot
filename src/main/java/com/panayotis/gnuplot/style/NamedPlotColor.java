@@ -15,7 +15,6 @@
  *
  * Created on 26 Οκτώβριος 2007, 4:32 μμ
  */
-
 package com.panayotis.gnuplot.style;
 
 /**
@@ -114,6 +113,7 @@ public enum NamedPlotColor implements PlotColor {
      *
      * @return The color representation
      */
+    @Override
     public String getColor() {
         return "rgb '" + name().toLowerCase().replace('_', '-') + "'";
     }

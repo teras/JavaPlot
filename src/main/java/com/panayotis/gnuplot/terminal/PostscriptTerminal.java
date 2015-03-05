@@ -15,7 +15,6 @@
  *
  * Created on October 16, 2007, 1:34 AM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 /**
@@ -39,6 +38,7 @@ public class PostscriptTerminal extends TextFileTerminal {
      *
      * @param filename The filename of the output postscript file
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public PostscriptTerminal(String filename) {
         super("postscript", filename);
         setColor(true);

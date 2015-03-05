@@ -15,7 +15,6 @@
  *
  * Created on 26 Οκτώβριος 2007, 3:15 μμ
  */
-
 package com.panayotis.gnuplot.style;
 
 /**

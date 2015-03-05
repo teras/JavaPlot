@@ -15,7 +15,6 @@
  *
  * Created on 15 Οκτώβριος 2007, 12:29 μμ
  */
-
 package com.panayotis.gnuplot.dataset;
 
 import java.io.Serializable;
@@ -141,6 +140,7 @@ public class ArrayDataSet implements DataSet, Serializable {
      *
      * @return the number of points
      */
+    @Override
     public int size() {
         return val.length;
     }
@@ -151,6 +151,7 @@ public class ArrayDataSet implements DataSet, Serializable {
      * @return the number of dimensions
      * @see DataSet#getDimensions()
      */
+    @Override
     public int getDimensions() {
         if (val[0] == null)
             return -1;
@@ -165,6 +166,7 @@ public class ArrayDataSet implements DataSet, Serializable {
      * @return the point data for this dimension
      * @see DataSet#getPointValue(int,int)
      */
+    @Override
     public String getPointValue(int point, int dimension) {
         return val[point][dimension];
     }

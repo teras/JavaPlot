@@ -15,7 +15,6 @@
  *
  * Created on October 14, 2007, 10:59 PM
  */
-
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.*;
@@ -28,7 +27,7 @@ import com.panayotis.gnuplot.*;
  */
 public class Axis extends PropertiesHolder {
 
-    private String name;
+    private final String name;
 
     /**
      * Creates a new instance of Axis.

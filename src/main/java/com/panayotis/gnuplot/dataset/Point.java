@@ -15,7 +15,6 @@
  *
  * Created on October 15, 2007, 1:54 AM
  */
-
 package com.panayotis.gnuplot.dataset;
 
 import java.io.Serializable;
@@ -25,12 +24,12 @@ import java.lang.reflect.Array;
  * This object represents a N-dimensional point. It is used in PointDataSet as
  * the actual data object
  *
- * @param N the type of this object. It should be a Number
+ * @param <N> the type of this object. It should be a Number
  * @author teras
  */
 public class Point<N extends Number> implements Serializable {
 
-    private N[] coords;
+    private final N[] coords;
 
     /**
      * Creates a new instance of Point with given coordinates

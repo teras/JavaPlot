@@ -15,7 +15,6 @@
  *
  * Created on October 21, 2007, 6:58 PM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 import com.panayotis.gnuplot.PropertiesHolder;
@@ -31,7 +30,7 @@ import java.io.InputStream;
  */
 public abstract class ExpandableTerminal extends PropertiesHolder implements GNUPlotTerminal {
 
-    private String type;
+    private final String type;
 
     /**
      * Create a new Terminal with a given type
@@ -50,6 +49,7 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
      *
      * @return String representation of this terminal type
      */
+    @Override
     public String getType() {
         StringBuilder buf = new StringBuilder();
         buf.append(type);
@@ -64,6 +64,7 @@ public abstract class ExpandableTerminal extends PropertiesHolder implements GNU
      * @param stdout The output of GNUPlot. It will be consumed.
      */
     @SuppressWarnings("empty-statement")
+    @Override
     public String processOutput(InputStream stdout) {
         byte[] buffer = new byte[1000];
         BufferedInputStream in = new BufferedInputStream(stdout);

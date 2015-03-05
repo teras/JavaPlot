@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
@@ -46,6 +45,7 @@ public class FloatDataParser extends NumericDataParser {
      * @param format the String containing the Float number
      * @return True, if this is a representation of a Float number
      */
+    @Override
     protected boolean checkNumberFormat(String format) {
         try {
             Float.parseFloat(format);

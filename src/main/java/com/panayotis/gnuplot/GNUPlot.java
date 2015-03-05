@@ -15,7 +15,6 @@
  *
  * Created on 12 Οκτώβριος 2007, 3:07 μμ
  */
-
 package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.layout.GraphLayout;

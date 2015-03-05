@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.layout;
 
 import java.io.Serializable;
@@ -25,8 +24,9 @@ import java.io.Serializable;
  */
 public class LayoutMetrics implements Serializable {
 
+    private final static float MINSIZE = 0.001f;
+
     private float x, y, width, height;
-    private float minsize = 0.001f;
 
     /**
      * Set default position, covering the whole screen
@@ -45,9 +45,9 @@ public class LayoutMetrics implements Serializable {
      */
     public LayoutMetrics(float x, float y, float width, float height) {
         if (width < 0)
-            width = minsize;
+            width = MINSIZE;
         if (height < 0)
-            height = minsize;
+            height = MINSIZE;
         if (width > 1)
             width = 1;
         if (height > 1)
@@ -65,12 +65,12 @@ public class LayoutMetrics implements Serializable {
         float x2 = x + width;
         float y2 = y + height;
         if (x2 > 1) {
-            x = 1 - minsize;
-            width = minsize;
+            x = 1 - MINSIZE;
+            width = MINSIZE;
         }
         if (y2 > 1) {
-            y = 1 - minsize;
-            height = minsize;
+            y = 1 - MINSIZE;
+            height = MINSIZE;
         }
 
         this.x = x;

@@ -15,7 +15,6 @@
  *
  * Created on 15 Οκτώβριος 2007, 12:14 μμ
  */
-
 package com.panayotis.gnuplot.dataset;
 
 /**

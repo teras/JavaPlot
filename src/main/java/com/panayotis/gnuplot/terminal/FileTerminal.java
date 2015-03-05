@@ -15,7 +15,6 @@
  *
  * Created on October 17, 2007, 2:51 AM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 /**
@@ -58,6 +57,7 @@ public class FileTerminal extends ExpandableTerminal {
      *
      * @return If this parameter is not empty, the output filename
      */
+    @Override
     public String getOutputFile() {
         return filename;
     }

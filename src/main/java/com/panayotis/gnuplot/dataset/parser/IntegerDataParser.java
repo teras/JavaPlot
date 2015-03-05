@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
@@ -46,6 +45,7 @@ public class IntegerDataParser extends NumericDataParser {
      * @param format the String containing the Integer number
      * @return True, if this is a representation of a Integer number
      */
+    @Override
     protected boolean checkNumberFormat(String format) {
         try {
             Integer.parseInt(format);

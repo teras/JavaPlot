@@ -14,7 +14,6 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * and open the template in the editor.
  */
-
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.plot.Page;
@@ -78,6 +77,7 @@ public class GridGraphLayout implements GraphLayout, Serializable {
      * @param page The page with the elements we would like to position
      * @param buffer Where to send commands - not used.
      */
+    @Override
     public void setDefinition(Page page, StringBuilder buffer) {
 
         int size = page.size();

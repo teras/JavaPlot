@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.layout.LayoutMetrics;
@@ -33,7 +32,7 @@ import java.util.HashMap;
 public class Graph extends ArrayList<Plot> {
 
     protected static final String NL = System.getProperty("line.separator");
-    private HashMap<String, Axis> axis;
+    private final HashMap<String, Axis> axis;
     private LayoutMetrics metrics;
 
     /**

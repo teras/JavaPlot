@@ -15,7 +15,6 @@
  *
  * Created on October 14, 2007, 1:59 PM
  */
-
 package com.panayotis.gnuplot.plot;
 
 /**

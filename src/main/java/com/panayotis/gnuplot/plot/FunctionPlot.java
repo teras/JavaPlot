@@ -15,7 +15,6 @@
  *
  * Created on 12 Οκτώβριος 2007, 5:17 μμ
  */
-
 package com.panayotis.gnuplot.plot;
 
 /**
@@ -47,6 +46,7 @@ public class FunctionPlot extends AbstractPlot {
      *
      * @param buf This parameter is not used
      */
+    @Override
     public void retrieveData(StringBuilder buf) {
     }
 }

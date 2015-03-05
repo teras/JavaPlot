@@ -15,7 +15,6 @@
  *
  * Created on 12 Οκτώβριος 2007, 4:07 μμ
  */
-
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.dataset.ArrayDataSet;
@@ -97,6 +96,7 @@ public class DataSetPlot extends AbstractPlot {
      *
      * @param bf The buffer to store the data set
      */
+    @Override
     public void retrieveData(StringBuilder bf) {
         int i, j;
         int isize, jsize;

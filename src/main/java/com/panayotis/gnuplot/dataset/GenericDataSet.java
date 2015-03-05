@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.dataset;
 
 import com.panayotis.gnuplot.dataset.parser.DataParser;
@@ -34,7 +33,7 @@ import java.util.Collection;
  */
 public class GenericDataSet extends ArrayList<ArrayList<String>> implements DataSet {
 
-    private DataParser parser;
+    private final DataParser parser;
 
     /**
      * Create a new instance of GenericDataSet, with the default DataParser
@@ -75,6 +74,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @return the number of dimensions
      * @see DataSet#getDimensions()
      */
+    @Override
     public int getDimensions() {
         if (size() < 1)
             return -1;
@@ -89,6 +89,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @return the point data for this dimension
      * @see DataSet#getPointValue(int,int)
      */
+    @Override
     public String getPointValue(int point, int dimension) {
         return get(point).get(dimension);
     }
@@ -101,6 +102,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean add(ArrayList<String> point) throws NumberFormatException {
         checkData(point, getDimensions());
         return super.add(point);
@@ -114,6 +116,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public void add(int index, ArrayList<String> point) throws NumberFormatException {
         checkData(point, getDimensions());
         super.add(index, point);
@@ -127,6 +130,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean addAll(Collection<? extends ArrayList<String>> pts) throws NumberFormatException {
         int old_dim = getDimensions();
         for (ArrayList<String> p : pts)
@@ -145,6 +149,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean addAll(int index, Collection<? extends ArrayList<String>> pts) throws NumberFormatException {
         int old_dim = getDimensions();
         for (ArrayList<String> p : pts)
@@ -161,6 +166,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public ArrayList<String> set(int index, ArrayList<String> point) throws NumberFormatException, ArrayIndexOutOfBoundsException {
         checkData(point, getDimensions());
         return super.set(index, point);

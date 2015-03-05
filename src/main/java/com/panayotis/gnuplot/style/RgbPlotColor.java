@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.style;
 
 /**
@@ -73,6 +72,7 @@ public class RgbPlotColor implements PlotColor {
      *
      * @return The color representation
      */
+    @Override
     public String getColor() {
         return "rgb \"#" + String.format("%02x%02x%02x", red, green, blue) + "\"";
     }

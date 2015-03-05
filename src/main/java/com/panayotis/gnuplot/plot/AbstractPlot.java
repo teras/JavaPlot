@@ -15,7 +15,6 @@
  *
  * Created on 12 Οκτώβριος 2007, 4:07 μμ
  */
-
 package com.panayotis.gnuplot.plot;
 
 import com.panayotis.gnuplot.PropertiesHolder;
@@ -59,6 +58,7 @@ public abstract class AbstractPlot extends PropertiesHolder implements Plot {
      *
      * @param buf The buffer to store the data set.
      */
+    @Override
     public void retrieveDefinition(StringBuilder buf) {
         buf.append(definition);
         appendProperties(buf);

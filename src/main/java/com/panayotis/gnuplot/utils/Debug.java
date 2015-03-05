@@ -15,7 +15,6 @@
  *
  * Created on October 17, 2007, 3:01 PM
  */
-
 package com.panayotis.gnuplot.utils;
 
 import java.io.BufferedWriter;

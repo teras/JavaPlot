@@ -15,7 +15,6 @@
  *
  * Created on October 14, 2007, 1:42 PM
  */
-
 package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;

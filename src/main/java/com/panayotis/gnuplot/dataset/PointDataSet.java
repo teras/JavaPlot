@@ -15,7 +15,6 @@
  *
  * Created on October 15, 2007, 2:10 AM
  */
-
 package com.panayotis.gnuplot.dataset;
 
 import java.lang.reflect.Array;
@@ -28,7 +27,7 @@ import java.util.Collection;
  * afterwards its creation.<p>
  * If your data are not only numerical, consider using a GenericDataSet instead.
  *
- * @param N The precision of each point
+ * @param <N> The precision of each point
  * @see com.panayotis.gnuplot.dataset.GenericDataSet
  * @author teras
  */
@@ -82,6 +81,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean add(Point<N> point) throws NumberFormatException {
         checkDimension(point, getDimensions());
         return super.add(point);
@@ -95,6 +95,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public void add(int index, Point<N> point) throws NumberFormatException {
         checkDimension(point, getDimensions());
         super.add(index, point);
@@ -108,6 +109,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean addAll(Collection<? extends Point<N>> pts) throws NumberFormatException {
         int old_dim = getDimensions();
         for (Point<N> p : pts)
@@ -126,6 +128,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public boolean addAll(int index, Collection<? extends Point<N>> pts) throws NumberFormatException {
         int old_dim = getDimensions();
         for (Point<N> p : pts)
@@ -142,6 +145,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
+    @Override
     public Point<N> set(int index, Point<N> point) throws NumberFormatException {
         checkDimension(point, getDimensions());
         return super.set(index, point);
@@ -163,6 +167,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @return the number of dimensions
      * @see DataSet#getDimensions()
      */
+    @Override
     public int getDimensions() {
         if (size() == 0)
             return -1;
@@ -177,6 +182,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * @return the point data for this dimension
      * @see DataSet#getPointValue(int,int)
      */
+    @Override
     public String getPointValue(int point, int dimension) {
         return get(point).get(dimension).toString();
     }
@@ -187,6 +193,7 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      * a static primitive array but you want to take advantage of the
      * flexibility of PointDataSet, instead od ArrayDataSet.
      *
+     * @param <N> The precision of each point
      * @param objclass The class of this PointDataSet. For example for Double
      * precision numbers, this parameter should be Double.class
      * @param array The array containing the primitive data

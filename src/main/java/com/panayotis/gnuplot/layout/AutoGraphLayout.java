@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.plot.Page;
@@ -107,13 +106,14 @@ public class AutoGraphLayout implements GraphLayout, Serializable {
      * @param buffer Where to send commands, just after the "set multiplot"
      * part.
      */
+    @Override
     public void setDefinition(Page page, StringBuilder buffer) {
         int size = page.size();
 
         if (size <= 0)
             return;
 
-        int drawcols = cols, drawrows = rows;
+        int drawcols, drawrows;
         if (cols > 0 && rows > 0) {
             drawcols = cols;
             drawrows = rows;

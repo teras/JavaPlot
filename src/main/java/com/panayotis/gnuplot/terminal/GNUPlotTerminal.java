@@ -15,7 +15,6 @@
  *
  * Created on October 14, 2007, 2:36 PM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 import java.io.InputStream;

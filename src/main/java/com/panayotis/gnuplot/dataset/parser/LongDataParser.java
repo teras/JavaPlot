@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
@@ -46,6 +45,7 @@ public class LongDataParser extends NumericDataParser {
      * @param format the String containing the Long number
      * @return True, if this is a representation of a Long number
      */
+    @Override
     protected boolean checkNumberFormat(String format) {
         try {
             Long.parseLong(format);

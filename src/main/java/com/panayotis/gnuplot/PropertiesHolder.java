@@ -15,7 +15,6 @@
  *
  * Created on October 19, 2007, 2:20 AM
  */
-
 package com.panayotis.gnuplot;
 
 import java.util.HashMap;

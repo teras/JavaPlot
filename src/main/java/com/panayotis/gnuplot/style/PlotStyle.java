@@ -15,7 +15,6 @@
  *
  * Created on 26 Οκτώβριος 2007, 2:58 μμ
  */
-
 package com.panayotis.gnuplot.style;
 
 import com.panayotis.gnuplot.PropertiesHolder;
@@ -43,6 +42,7 @@ public class PlotStyle extends PropertiesHolder {
      *
      * @param style The style to use
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public PlotStyle(Style style) {
         super(" ", "");
         fill = null;
@@ -64,6 +64,7 @@ public class PlotStyle extends PropertiesHolder {
      *
      * @param buf The Srting buffer to store this object's properties.
      */
+    @Override
     public void appendProperties(StringBuilder buf) {
         if (type != null) {
             buf.append(" with ").append(type.name().toLowerCase());

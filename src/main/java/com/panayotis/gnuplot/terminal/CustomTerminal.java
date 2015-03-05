@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.terminal;
 
 /**
@@ -27,7 +26,7 @@ package com.panayotis.gnuplot.terminal;
  */
 public class CustomTerminal extends ExpandableTerminal {
 
-    private String file;
+    private final String file;
 
     /**
      * Create a new custom terminal
@@ -47,6 +46,7 @@ public class CustomTerminal extends ExpandableTerminal {
      *
      * @return The filename which this terminal will direct gnuplot output
      */
+    @Override
     public String getOutputFile() {
         return file;
     }

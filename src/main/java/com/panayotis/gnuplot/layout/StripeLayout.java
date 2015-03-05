@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.layout;
 
 /**
@@ -29,6 +28,7 @@ public class StripeLayout extends AutoGraphLayout {
     /**
      * Create a new Strip layout. Default behavior is EXPANDROWS.
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public StripeLayout() {
         setType(EXPANDROWS);
     }
@@ -55,6 +55,7 @@ public class StripeLayout extends AutoGraphLayout {
      *
      * @param rows Number of desired rows
      */
+    @Override
     public void setRows(int rows) {
         if (rows > 1)
             setType(EXPANDROWS);
@@ -68,6 +69,7 @@ public class StripeLayout extends AutoGraphLayout {
      *
      * @param cols Number of desired columns
      */
+    @Override
     public void setColumns(int cols) {
         if (cols > 1)
             setType(EXPANDCOLUMNS);

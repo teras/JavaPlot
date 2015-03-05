@@ -15,7 +15,6 @@
  *
  * Created on October 31, 2007, 2:29 AM
  */
-
 package com.panayotis.gnuplot.style;
 
 /**
@@ -38,6 +37,7 @@ public enum Smooth {
      *
      * @return the gnuplot argument
      */
+    @Override
     public String toString() {
         return " smooth " + name().toLowerCase();
     }

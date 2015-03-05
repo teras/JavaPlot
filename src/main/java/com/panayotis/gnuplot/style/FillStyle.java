@@ -15,7 +15,6 @@
  *
  * Created on 26 Οκτώβριος 2007, 4:35 μμ
  */
-
 package com.panayotis.gnuplot.style;
 
 import com.panayotis.gnuplot.PropertiesHolder;
@@ -50,6 +49,7 @@ public class FillStyle extends PropertiesHolder {
      * @param style The style to use If it is null, then this graph will not be
      * filled.
      */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public FillStyle(Fill style) {
         super(" ", "");
         setStyle(style);

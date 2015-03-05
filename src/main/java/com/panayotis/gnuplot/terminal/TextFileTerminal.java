@@ -15,7 +15,6 @@
  *
  * Created on October 23, 2007, 10:46 AM
  */
-
 package com.panayotis.gnuplot.terminal;
 
 import java.io.BufferedReader;

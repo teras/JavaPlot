@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.dataset.parser;
 
 /**
@@ -49,6 +48,7 @@ public abstract class NumericDataParser implements DataParser {
      * @param index The index of the specified data
      * @return True, if the data is valid.
      */
+    @Override
     public boolean isValid(String data, int index) {
         if (first_column_date && index == 0)
             return true;

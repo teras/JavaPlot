@@ -15,7 +15,6 @@
  *
  * Created on October 24, 2007, 7:53 PM
  */
-
 package com.panayotis.gnuplot.swing;
 
 import com.panayotis.gnuplot.JavaPlot;

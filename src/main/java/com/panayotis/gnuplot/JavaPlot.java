@@ -15,7 +15,6 @@
  *
  * Created on October 19, 2007, 1:11 AM
  */
-
 package com.panayotis.gnuplot;
 
 import com.panayotis.gnuplot.dataset.DataSet;

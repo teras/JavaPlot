@@ -13,7 +13,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 package com.panayotis.gnuplot.layout;
 
 import com.panayotis.gnuplot.plot.Page;
@@ -33,6 +32,7 @@ public class ManualGraphLayout implements GraphLayout, Serializable {
      * @param page The Page which layout we want to calculate
      * @param buffer The definition part of the multiplot layout
      */
+    @Override
     public void setDefinition(Page page, StringBuilder buffer) {
     }
 

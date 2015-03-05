@@ -6,9 +6,12 @@ mainClassName='test.Main'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def group = "com.panayotis.javaplot"
-def archivesBaseName = "javaplot"
-def version = "0.5.0"
+group = "com.panayotis.javaplot"
+archivesBaseName = "javaplot"
+version = "0.5.0"
+
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
 
 repositories {
     mavenCentral()

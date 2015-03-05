@@ -15,7 +15,6 @@
  *
  * Created on October 24, 2007, 2:00 AM
  */
-
 package com.panayotis.gnuplot.dataset;
 
 import java.io.BufferedReader;
