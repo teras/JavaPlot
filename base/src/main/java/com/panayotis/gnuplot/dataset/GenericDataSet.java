@@ -17,8 +17,9 @@ package com.panayotis.gnuplot.dataset;
 
 import com.panayotis.gnuplot.dataset.parser.DataParser;
 import com.panayotis.gnuplot.dataset.parser.DoubleDataParser;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Generic data class to store data. This class stores data as a list of
@@ -31,9 +32,10 @@ import java.util.Collection;
  * @see com.panayotis.gnuplot.dataset.PointDataSet
  * @author teras
  */
-public class GenericDataSet extends ArrayList<ArrayList<String>> implements DataSet {
+public class GenericDataSet implements DataSet, Serializable {
 
     private final DataParser parser;
+    private List<List<String>> data;
 
     /**
      * Create a new instance of GenericDataSet, with the default DataParser
@@ -42,8 +44,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @see com.panayotis.gnuplot.dataset.parser.DoubleDataParser
      */
     public GenericDataSet() {
-        super();
-        parser = new DoubleDataParser();
+        this(new DoubleDataParser());
     }
 
     /**
@@ -54,8 +55,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @param first_column_date Whether the first column is in date format
      */
     public GenericDataSet(boolean first_column_date) {
-        super();
-        parser = new DoubleDataParser(first_column_date);
+        this(new DoubleDataParser(first_column_date));
     }
 
     /**
@@ -64,8 +64,13 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @param parser The DataParser to use
      */
     public GenericDataSet(DataParser parser) {
-        super();
         this.parser = parser;
+        data = new ArrayList<List<String>>();
+    }
+
+    @Override
+    public int size() {
+        return data.size();
     }
 
     /**
@@ -78,7 +83,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
     public int getDimensions() {
         if (size() < 1)
             return -1;
-        return get(0).size();
+        return data.get(0).size();
     }
 
     /**
@@ -91,7 +96,7 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      */
     @Override
     public String getPointValue(int point, int dimension) {
-        return get(point).get(dimension);
+        return data.get(point).get(dimension);
     }
 
     /**
@@ -102,77 +107,12 @@ public class GenericDataSet extends ArrayList<ArrayList<String>> implements Data
      * @throws java.lang.NumberFormatException If the given collection is not in
      * the correct format
      */
-    @Override
-    public boolean add(ArrayList<String> point) throws NumberFormatException {
+    public boolean add(List<String> point) throws NumberFormatException {
         checkData(point, getDimensions());
-        return super.add(point);
+        return data.add(point);
     }
 
-    /**
-     * Add a new point to this DataSet at a specified position
-     *
-     * @param index Where to add this point
-     * @param point The point to add to this DataSet
-     * @throws java.lang.NumberFormatException If the given collection is not in
-     * the correct format
-     */
-    @Override
-    public void add(int index, ArrayList<String> point) throws NumberFormatException {
-        checkData(point, getDimensions());
-        super.add(index, point);
-    }
-
-    /**
-     * Add a collection of points to this DataSet
-     *
-     * @param pts The points colelction
-     * @return Whether the collection changed with this call
-     * @throws java.lang.NumberFormatException If the given collection is not in
-     * the correct format
-     */
-    @Override
-    public boolean addAll(Collection<? extends ArrayList<String>> pts) throws NumberFormatException {
-        int old_dim = getDimensions();
-        for (ArrayList<String> p : pts)
-            old_dim = checkData(p, old_dim);
-        return super.addAll(pts);
-    }
-
-    /**
-     * Add a collection of points to this DataSet starting at a specified
-     * position if there are data at the specified position, these will be
-     * shifted
-     *
-     * @param index Where to start adding point data.
-     * @param pts The point collection to add
-     * @return Whether the collection changed with this call
-     * @throws java.lang.NumberFormatException If the given collection is not in
-     * the correct format
-     */
-    @Override
-    public boolean addAll(int index, Collection<? extends ArrayList<String>> pts) throws NumberFormatException {
-        int old_dim = getDimensions();
-        for (ArrayList<String> p : pts)
-            old_dim = checkData(p, old_dim);
-        return super.addAll(index, pts);
-    }
-
-    /**
-     * Replace the Point at the specified position with the provided one
-     *
-     * @param index The position of the point to be altered
-     * @param point The point to use
-     * @return The Point previously found in the specified position
-     * @throws java.lang.NumberFormatException If the given collection is not in
-     * the correct format
-     */
-    @Override
-    public ArrayList<String> set(int index, ArrayList<String> point) throws NumberFormatException, ArrayIndexOutOfBoundsException {
-        checkData(point, getDimensions());
-        return super.set(index, point);
-    }
-
-    private int checkData(ArrayList<String> point, int old_dim) throws NumberFormatException {
+    private int checkData(List<String> point, int old_dim) throws NumberFormatException {
         int new_dim = point.size();
         if (old_dim < 0)
             old_dim = new_dim;   // if the array is still empty, any size is good size

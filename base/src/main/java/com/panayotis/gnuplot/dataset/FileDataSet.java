@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -47,7 +48,7 @@ public class FileDataSet extends GenericDataSet {
 
         BufferedReader in = new BufferedReader(new FileReader(datafile));
         String line;
-        ArrayList<String> data;
+        List<String> data;
         while ((line = in.readLine()) != null && (!line.equals(""))) {
             line = line.trim();
             if (!line.startsWith("#")) {

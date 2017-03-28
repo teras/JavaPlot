@@ -26,6 +26,7 @@ import com.panayotis.gnuplot.plot.Plot;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a placeholder for the parameters used to create the actual plot.
@@ -36,8 +37,8 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
 
     private Page page;
     private int defaultgraph;
-    private ArrayList<String> preinit;
-    private ArrayList<String> postinit;
+    private List<String> preinit;
+    private List<String> postinit;
 
     /**
      * Create a new plot with the default parameters
@@ -76,7 +77,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *
      * @return The list of the initialization commands
      */
-    public ArrayList<String> getPreInit() {
+    public List<String> getPreInit() {
         return preinit;
     }
 
@@ -88,7 +89,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *
      * @return he list of the post initialization commands
      */
-    public ArrayList<String> getPostInit() {
+    public List<String> getPostInit() {
         return postinit;
     }
 
@@ -167,7 +168,7 @@ public class GNUPlotParameters extends PropertiesHolder implements Serializable 
      *
      * @return List of Plot objects
      */
-    public ArrayList<Plot> getPlots() {
+    public List<Plot> getPlots() {
         return page.get(defaultgraph);
     }
 

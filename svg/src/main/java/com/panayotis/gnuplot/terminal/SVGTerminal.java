@@ -1,3 +1,5 @@
+package com.panayotis.gnuplot.terminal;
+
 /* Copyright (c) 2007-2014 by panayotis.com
  *
  * JavaPlot is free software; you can redistribute it and/or modify
@@ -15,7 +17,7 @@
  *
  * Created on October 24, 2007, 7:47 PM
  */
-package com.panayotis.gnuplot.terminal;
+
 
 import com.kitfox.svg.SVGDiagram;
 import com.kitfox.svg.SVGDisplayPanel;

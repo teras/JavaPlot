@@ -6,7 +6,7 @@ mainClassName='test.Main'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-group = "com.panayotis.javaplot"
+group = "com.panayotis"
 archivesBaseName = "javaplot"
 version = "0.5.0"
 
@@ -75,22 +75,21 @@ uploadArchives {
             }
 
             pom.project {
-                name 'Example Application'
+                name 'JavaPlot'
                 packaging 'jar'
-                // optionally artifactId can be defined here 
-                description 'A application used as an example on how to set up pushing  its components to the Central Repository.'
-                url 'http://www.example.com/example-application'
+                description 'A pure Java programming interface library for GNUPlot'
+                url 'http://http://javaplot.panayotis.com/'
 
                 scm {
-                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
-                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
-                    url 'http://foo.googlecode.com/svn/trunk/'
+                    connection 'scm:hg:http://hg.code.sf.net/p/gnujavaplot/hg gnujavaplot-hg'
+                    developerConnection 'scm:hg:https://hg.code.sf.net/p/gnujavaplot/hg'
+                    url 'https://sourceforge.net/projects/gnujavaplot/'
                 }
 
                 licenses {
                     license {
-                        name 'The Apache License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        name 'The GNU Lesser General Public License, version 3.0'
+                        url 'https://opensource.org/licenses/lgpl-3.0.html'
                     }
                 }
 

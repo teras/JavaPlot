@@ -1,3 +1,5 @@
+package com.panayotis.gnuplot.demo;
+
 /* Copyright (c) 2007-2014 by panayotis.com
  *
  * JavaPlot is free software; you can redistribute it and/or modify
@@ -13,7 +15,6 @@
  * along with CrossMobile; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-
 import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.dataset.FileDataSet;
@@ -25,7 +26,6 @@ import com.panayotis.gnuplot.style.PlotStyle;
 import com.panayotis.gnuplot.style.Style;
 import com.panayotis.gnuplot.swing.JPlot;
 import com.panayotis.gnuplot.terminal.PostscriptTerminal;
-import com.panayotis.gnuplot.terminal.SVGTerminal;
 import com.panayotis.gnuplot.utils.Debug;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,7 +40,7 @@ import javax.swing.JFrame;
  *
  * @author teras
  */
-public class demo {
+public class BaseDemo {
 
     /**
      * @param args the command line arguments. First argument is the path of
@@ -53,10 +53,10 @@ public class demo {
 
         //simple();
         //simple3D();
-        defaultTerminal(path);
-        //EPSTerminal(path);
-        //SVGTerminal(path);
-        //JPlotTerminal(path);
+//        defaultTerminal(path);
+//        EPSTerminal(path);
+//        SVGTerminal(path);
+        JPlotTerminal(path);
         //serialization(defaultTerminal(path));
         //file();
 
@@ -153,32 +153,6 @@ public class demo {
         f.setVisible(true);
 
         return plot.getJavaPlot();
-    }
-
-    /* This demo code displays plot on screen using SVG commands (only b&w) */
-    private static JavaPlot SVGTerminal(String gnuplotpath) {
-        JavaPlot p = new JavaPlot();
-        JavaPlot.getDebugger().setLevel(Debug.VERBOSE);
-
-        SVGTerminal svg = new SVGTerminal();
-        p.setTerminal(svg);
-
-        p.setTitle("SVG Terminal Title");
-        p.addPlot("x+3");
-        p.plot();
-
-        try {
-            JFrame f = new JFrame();
-            f.getContentPane().add(svg.getPanel());
-            f.pack();
-            f.setLocationRelativeTo(null);
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setVisible(true);
-        } catch (ClassNotFoundException ex) {
-            System.err.println("Error: Library SVGSalamander not properly installed?");
-        }
-
-        return p;
     }
 
     private static void serialization(JavaPlot p) {

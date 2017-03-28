@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Store data sets in a dynamic Generics ArrayList of Points. Prefer this object
+ * Store data sets in a dynamic Generics List of Points. Prefer this object
  * instead of ArrayDataSet if you plan to alter the points of this data sets
  * afterwards its creation.<p>
  * If your data are not only numerical, consider using a GenericDataSet instead.
@@ -58,10 +58,14 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
      */
     public PointDataSet(Collection<? extends Point<N>> pts) throws NumberFormatException {
         super(pts);
-        int length = size();
-        int old_dim = getDimensions();
-        for (int i = 0; i < length; i++)
-            old_dim = checkDimension(get(i), old_dim);
+        if (pts != null) {
+            int lastDimension = -1;
+            for (Point<N> p : pts)
+                if (lastDimension < 0)
+                    lastDimension = p.getDimensions();
+                else
+                    checkDimension(p, lastDimension);
+        }
     }
 
     private int checkDimension(Point<N> point, int old_dim) throws ArrayIndexOutOfBoundsException {
@@ -237,6 +241,10 @@ public class PointDataSet<N extends Number> extends ArrayList<Point<N>> implemen
         return points;
     }
 
+    /**
+     * Use this to override the check mechanism
+     * @param point The point to add
+     */
     private void quickadd(Point<N> point) {
         super.add(point);
     }

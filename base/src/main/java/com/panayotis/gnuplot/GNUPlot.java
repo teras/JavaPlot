@@ -26,7 +26,7 @@ import com.panayotis.gnuplot.terminal.DefaultTerminal;
 import com.panayotis.gnuplot.terminal.GNUPlotTerminal;
 import com.panayotis.gnuplot.utils.Debug;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the main class of JavaPlot. It is the cental point to create a
@@ -275,7 +275,7 @@ public class GNUPlot {
      *
      * @return An array of stored plots.
      */
-    public ArrayList<Plot> getPlots() {
+    public List<Plot> getPlots() {
         return param.getPlots();
     }
 
@@ -412,7 +412,7 @@ public class GNUPlot {
      *
      * @return Array of pre-init commands
      */
-    public ArrayList<String> getPreInit() {
+    public List<String> getPreInit() {
         return param.getPreInit();
     }
 
@@ -423,7 +423,7 @@ public class GNUPlot {
      *
      * @return Array of pre-init commands
      */
-    public ArrayList<String> getPostInit() {
+    public List<String> getPostInit() {
         return param.getPostInit();
     }
 }

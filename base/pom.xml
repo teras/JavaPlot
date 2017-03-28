@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.panayotis.javaplot</groupId>
+    <artifactId>javaplot</artifactId>
+    <version>0.5.0</version>
+    <name>JavaPlot</name>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License, Version 2</name>
+            <url>https://www.gnu.org/licenses/lgpl-2.0.html</url>
+        </license>
+    </licenses>
+    <url>http://javaplot.panayotis.com</url>
+    <description>JavaPlot is a pure Java programming interface library for GNUPlot. It can be used as a way to create gnuplot plots on the fly through pure Java commands.</description>
+</project>
