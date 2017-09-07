@@ -56,10 +56,10 @@ public class BaseDemo {
 //        defaultTerminal(path);
 //        EPSTerminal(path);
 //        SVGTerminal(path);
-        JPlotTerminal(path);
+        //JPlotTerminal(path);
         //serialization(defaultTerminal(path));
         //file();
-
+        interactive();
     }
 
     /* This is a very simple plot to demonstrate JavaPlot graphs */
@@ -188,5 +188,18 @@ public class BaseDemo {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static void interactive() {
+        JavaPlot p = new JavaPlot(true);
+        p.addPlot("sin(x)*y");
+        p.setInteractive(true);
+        p.plot();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        p.close();
     }
 }
