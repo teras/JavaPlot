@@ -18,6 +18,8 @@ package com.panayotis.gnuplot.demo;
 import com.panayotis.gnuplot.GNUPlotParameters;
 import com.panayotis.gnuplot.JavaPlot;
 import com.panayotis.gnuplot.dataset.FileDataSet;
+import com.panayotis.gnuplot.dataset.GenericDataSet;
+import com.panayotis.gnuplot.dataset.parser.DataParser;
 import com.panayotis.gnuplot.layout.StripeLayout;
 import com.panayotis.gnuplot.plot.AbstractPlot;
 import com.panayotis.gnuplot.plot.DataSetPlot;
@@ -33,6 +35,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -56,10 +60,11 @@ public class BaseDemo {
 //        defaultTerminal(path);
 //        EPSTerminal(path);
 //        SVGTerminal(path);
-        JPlotTerminal(path);
+        //JPlotTerminal(path);
         //serialization(defaultTerminal(path));
         //file();
-
+        //interactive();
+        labels();
     }
 
     /* This is a very simple plot to demonstrate JavaPlot graphs */
@@ -188,5 +193,56 @@ public class BaseDemo {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private static void interactive() {
+        JavaPlot p = new JavaPlot(true);
+        p.addPlot("sin(x)*y");
+        p.setInteractive(true);
+        p.plot();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        p.close();
+    }
+
+    /* This is a simple plot to demonstrate plotting labels beside points with different colors */
+    private static void labels(){
+        GenericDataSet dataSet = new GenericDataSet(new DataParser() {
+            public boolean isValid(String s, int i) {
+                return true;
+            }
+        });
+
+        //fill dataset
+        for (int i = 0; i < 100; i++){
+            double x = Math.random() * 1000;
+            double y = Math.random() * 1000;
+            double z = Math.random() * 1000;
+            String label = Character.toString((char)(int)(Math.random() * 26 + 65));
+            int rgbColor = (int)(Math.random() * 0x1000000);
+
+            List<String> items = new ArrayList<String>(5);
+            items.add(String.valueOf(x));
+            items.add(String.valueOf(y));
+            items.add(String.valueOf(z));
+            items.add(label);
+            items.add(String.format("0x%x", rgbColor));
+            dataSet.add(items);
+        }
+
+        JavaPlot p = new JavaPlot(true);
+        p.addPlot(dataSet);
+
+        AbstractPlot plot = (AbstractPlot)p.getPlots().get(0);
+        PlotStyle style = plot.getPlotStyle();
+        style.setStyle(Style.LABELS);
+        style.setLabelPointType(7);
+        style.setLabelOffset(0, 1);
+        style.setLineType(NamedPlotColor.VARIABLE);
+
+        p.plot();
     }
 }

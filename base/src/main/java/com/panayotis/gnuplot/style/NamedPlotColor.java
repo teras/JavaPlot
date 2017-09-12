@@ -106,7 +106,8 @@ public enum NamedPlotColor implements PlotColor {
     VIOLET,
     DARK_VIOLET,
     PLUM,
-    PURPLE;
+    PURPLE,
+    VARIABLE;
 
     /**
      * Get the representation of this color
@@ -115,6 +116,9 @@ public enum NamedPlotColor implements PlotColor {
      */
     @Override
     public String getColor() {
+        if (this.equals(VARIABLE)){
+            return "rgb variable";
+        }
         return "rgb '" + name().toLowerCase().replace('_', '-') + "'";
     }
 }

@@ -29,6 +29,9 @@ public class PlotStyle extends PropertiesHolder {
 
     private Style type;
     private FillStyle fill;
+    private int labelOffsetX;
+    private int labelOffsetY;
+    private int labelPointType = -1;
 
     /**
      * Creates a new instance of PlotStyle with default parameters
@@ -68,8 +71,15 @@ public class PlotStyle extends PropertiesHolder {
     public void appendProperties(StringBuilder buf) {
         if (type != null) {
             buf.append(" with ").append(type.name().toLowerCase());
+            if (type.equals(Style.LABELS)){
+                if (!(labelOffsetX == 0 && labelOffsetY == 0)) {
+                    buf.append(" offset ").append(labelOffsetX).append(',').append(labelOffsetY);
+                }
+                if (labelPointType != -1) {
+                    buf.append(" point pt ").append(labelPointType);
+                }
+            }
             super.appendProperties(buf);
-
             if (fill != null && type.filled)
                 fill.appendProperties(buf);
         }
@@ -150,5 +160,25 @@ public class PlotStyle extends PropertiesHolder {
      */
     public void setFill(FillStyle fillstyle) {
         this.fill = fillstyle;
+    }
+
+    /**
+     * Set the offset of label relative to the point. Used when style is LABELS.
+     *
+     * @param x
+     * @param y
+     */
+    public void setLabelOffset(int x, int y){
+        this.labelOffsetX = x;
+        this.labelOffsetY = y;
+    }
+
+    /**
+     * Set the point type of label. Used instead of setPointType() when style is LABELS.
+     *
+     * @param pointType
+     */
+    public void setLabelPointType(int pointType){
+        this.labelPointType = pointType;
     }
 }
