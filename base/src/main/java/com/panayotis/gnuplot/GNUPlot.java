@@ -357,8 +357,6 @@ public class GNUPlot {
     /**
      * Run gnuplot in interactive mode
      *
-     * @author wesley
-     *
      * @param interactive
      */
     public void setInteractive(boolean interactive) {
@@ -369,8 +367,6 @@ public class GNUPlot {
      * Close an interactive plot.
      * Currently this method can only end the gnuplot process, but is unable to close the graph window. Need your help!
      *
-     * @author wesley
-     */
     public void close(){
         exec.close();
     }

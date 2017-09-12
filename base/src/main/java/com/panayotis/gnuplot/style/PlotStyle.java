@@ -165,8 +165,6 @@ public class PlotStyle extends PropertiesHolder {
     /**
      * Set the offset of label relative to the point. Used when style is LABELS.
      *
-     * @author wesley
-     *
      * @param x
      * @param y
      */
@@ -177,8 +175,6 @@ public class PlotStyle extends PropertiesHolder {
 
     /**
      * Set the point type of label. Used instead of setPointType() when style is LABELS.
-     *
-     * @author wesley
      *
      * @param pointType
      */
