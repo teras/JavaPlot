@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.kitfox.svg:svg-salamander:1.0'
+    compile 'com.kitfox.svg:svg-salamander:1.1.2'
 }
 
 task dist(dependsOn:'jar') << {

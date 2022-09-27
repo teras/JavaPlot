@@ -1,2 +1,4 @@
 /base/target/
 /svg/target/
+
+**/*.iml
