@@ -355,6 +355,23 @@ public class GNUPlot {
     }
 
     /**
+     * Run gnuplot in interactive mode
+     *
+     * @param interactive
+     */
+    public void setInteractive(boolean interactive) {
+        exec.setInteractive(interactive);
+    }
+
+    /**
+     * Close an interactive plot.
+     * Currently this method can only end the gnuplot process, but is unable to close the graph window. Need your help!
+     *
+    public void close(){
+        exec.close();
+    }
+
+    /**
      * Set gnuplot parameters to another set of parameters.
      *
      * @param parameters The new GNUPlot parameters.

@@ -37,8 +37,13 @@ class GNUPlotExec {
     private static final transient String DEFAULT_PATH = FileUtils.findPathExec();
     private transient String gnuplotexec;
     private boolean ispersist;
+    private boolean interactive;
     private final static String[] persistcommand = {"path", "file", "-persist"};
+    private final static String[] persist_interactive = {"path", "file", "-", "-persist"};
     private final static String[] nopersist = {"path", "file"};
+
+    private Process proc;
+    private String tmpfile;
 
     /**
      * Create a new GNUPlotExec object with defaultΩ gnuplot path. Under POSIX
@@ -125,7 +130,7 @@ class GNUPlotExec {
              */
             String[] command;
             if (ispersist)
-                command = persistcommand;
+                command = interactive ? persist_interactive : persistcommand;
             else
                 command = nopersist;
             command[0] = getGNUPlotPath();
@@ -177,6 +182,12 @@ class GNUPlotExec {
             };
             out_thread.start();
 
+            if (interactive){
+                this.proc = proc;
+                this.tmpfile = command[1];
+                return;
+            }
+
             try {
                 proc.waitFor(); // wait for process to finish
                 out_thread.join();  // wait for output (terminal related) thread to finish
@@ -216,6 +227,31 @@ class GNUPlotExec {
 
     void setPersist(boolean persist) {
         ispersist = persist;
+    }
+
+    public void setInteractive(boolean interactive) {
+        this.interactive = interactive;
+    }
+
+    public void close(){
+        if (proc == null){
+            return;
+        }
+        try {
+            proc.getOutputStream().close();
+            proc.getInputStream().close();
+            proc.getErrorStream().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            proc.waitFor(); // wait for process to finish
+        } catch (InterruptedException ex) {
+            throw new GNUPlotException("Interrupted execution of gnuplot");
+        }
+        new File(tmpfile).delete();
+        proc.destroy();
+        proc = null;
     }
 
     private class Messages {
